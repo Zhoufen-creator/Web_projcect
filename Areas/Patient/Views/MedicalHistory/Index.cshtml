@@ -1,0 +1,93 @@
+@model List<DoAnWeb.Areas.Patient.ViewModels.MedicalHistoryViewModel>
+
+@{
+    ViewData["Title"] = "Lịch sử khám";
+}
+
+<div class="container mt-4">
+    <h2>Lịch sử khám bệnh</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">Bạn chưa có lịch sử khám nào.</div>
+    }
+    else
+    {
+        @foreach (var item in Model)
+        {
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <strong>Phiếu khám #@item.ExaminationId</strong> -
+                    @item.ExaminationDate?.ToString("dd/MM/yyyy HH:mm")
+                </div>
+                <div class="card-body">
+                    <p><strong>Bác sĩ:</strong> @item.DoctorName (@item.Specialty)</p>
+                    <p><strong>Triệu chứng:</strong> @item.Symptoms</p>
+                    <p><strong>Chẩn đoán:</strong> @item.Diagnosis</p>
+                    <p><strong>Lời dặn:</strong> @item.DoctorAvoid</p>
+                    <p><strong>Trạng thái:</strong> @item.Status</p>
+
+                    <hr />
+                    <h5>Thuốc được kê</h5>
+                    @if (item.Prescriptions.Any())
+                    {
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Tên thuốc</th>
+                                    <th>Liều dùng</th>
+                                    <th>Số lượng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var med in item.Prescriptions)
+                                {
+                                    <tr>
+                                        <td>@med.MedicineName</td>
+                                        <td>@med.Dosage</td>
+                                        <td>@med.Quantity</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>Không có thuốc được kê.</p>
+                    }
+
+                    <hr />
+                    <h5>Dịch vụ đã sử dụng</h5>
+                    @if (item.Services.Any())
+                    {
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Tên dịch vụ</th>
+                                    <th>Số lượng</th>
+                                    <th>Kết quả</th>
+                                    <th>Hoàn thành lúc</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var service in item.Services)
+                                {
+                                    <tr>
+                                        <td>@service.ServiceName</td>
+                                        <td>@service.Quantity</td>
+                                        <td>@service.Result</td>
+                                        <td>@service.CompletedAt?.ToString("dd/MM/yyyy HH:mm")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>Không có dịch vụ nào được sử dụng.</p>
+                    }
+                </div>
+            </div>
+        }
+    }
+</div>

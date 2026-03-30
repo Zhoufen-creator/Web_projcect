@@ -1,0 +1,47 @@
+@model IEnumerable<DoAnWeb.Models.DoctorSchedule>
+
+@{
+    ViewData["Title"] = "Quản lý ca làm bác sĩ";
+}
+
+<h2 class="mb-3">Quản lý ca làm bác sĩ</h2>
+
+@if (TempData["success"] != null)
+{
+    <div class="alert alert-success">@TempData["success"]</div>
+}
+
+<p>
+    <a asp-area="Employee" asp-controller="DoctorSchedules" asp-action="Create" class="btn btn-primary">
+        + Thêm ca làm
+    </a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Bác sĩ</th>
+            <th>Chuyên khoa</th>
+            <th>Bắt đầu</th>
+            <th>Kết thúc</th>
+            <th>Số BN tối đa</th>
+            <th width="180">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Doctor.User.Name</td>
+                <td>@item.Doctor.Specialty</td>
+                <td>@item.StartTime.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@item.EndTime.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@item.MaxPatient</td>
+                <td>
+                    <a asp-area="Employee" asp-controller="DoctorSchedules" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Sửa</a>
+                    <a asp-area="Employee" asp-controller="DoctorSchedules" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

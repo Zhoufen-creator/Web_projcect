@@ -1,0 +1,42 @@
+@model IEnumerable<DoAnWeb.Models.Notification>
+
+@{
+    ViewData["Title"] = "Thông báo";
+}
+
+<h2 class="mb-3">Danh sách thông báo</h2>
+
+@if (TempData["success"] != null)
+{
+    <div class="alert alert-success">@TempData["success"]</div>
+}
+
+<p>
+    <a asp-area="Employee" asp-controller="Notifications" asp-action="Create" class="btn btn-primary">
+        + Gửi thông báo
+    </a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Người nhận</th>
+            <th>Tiêu đề</th>
+            <th>Nội dung</th>
+            <th>Ngày tạo</th>
+            <th>Đã đọc</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.User.Name</td>
+                <td>@item.Title</td>
+                <td>@item.Message</td>
+                <td>@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@(item.IsRead ? "Đã đọc" : "Chưa đọc")</td>
+            </tr>
+        }
+    </tbody>
+</table>

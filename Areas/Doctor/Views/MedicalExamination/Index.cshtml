@@ -1,0 +1,48 @@
+@model List<DoAnWeb.Models.MedicalExamination>
+
+@{
+    ViewData["Title"] = "Danh sách phiếu khám";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Danh sách phiếu khám</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Ngày khám</th>
+                        <th>Bệnh nhân</th>
+                        <th>Triệu chứng</th>
+                        <th>Chẩn đoán</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.StartTime?.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>@item.Patient.User.Name</td>
+                            <td>@item.Symptoms</td>
+                            <td>@item.Diagnosis</td>
+                            <td>@item.Status</td>
+                            <td>
+                                <a asp-area="Doctor" asp-controller="PatientRecord" asp-action="History" asp-route-patientId="@item.PatientId" class="btn btn-sm btn-info text-white">
+                                    Xem lịch sử
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

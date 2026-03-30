@@ -1,0 +1,55 @@
+@model List<DoAnWeb.Models.MedicalExamination>
+@using DoAnWeb.Models
+
+@{
+    ViewData["Title"] = "Lịch sử khám bệnh";
+    var patient = ViewBag.Patient as Patient;
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Lịch sử khám bệnh</h2>
+
+    @if (patient != null)
+    {
+        <div class="alert alert-info">
+            <strong>Bệnh nhân:</strong> @patient.User.Name
+        </div>
+    }
+
+    @if (Model.Any())
+    {
+        @foreach (var exam in Model)
+        {
+            <div class="card shadow-sm mb-3">
+                <div class="card-header">
+                    <strong>Ngày khám:</strong> @exam.StartTime?.ToString("dd/MM/yyyy HH:mm")
+                </div>
+                <div class="card-body">
+                    <p><strong>Triệu chứng:</strong> @exam.Symptoms</p>
+                    <p><strong>Chẩn đoán:</strong> @exam.Diagnosis</p>
+                    <p><strong>Lời dặn:</strong> @exam.DoctorAvoid</p>
+                    <p><strong>Trạng thái:</strong> @exam.Status</p>
+
+                    <h6>Đơn thuốc</h6>
+                    @if (exam.Prescriptions != null && exam.Prescriptions.Any())
+                    {
+                        <ul>
+                            @foreach (var p in exam.Prescriptions)
+                            {
+                                <li>@p.Medicine.Name - @p.Quantity viên - @p.Dosage</li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted">Không có thuốc được kê.</p>
+                    }
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-muted">Chưa có lịch sử khám.</p>
+    }
+</div>

@@ -1,0 +1,206 @@
+/* =========================
+   HOSPITAL LOGIN PAGE
+   ========================= */
+
+:root {
+    --hospital-primary: #1f7a8c;
+    --hospital-secondary: #3fbac2;
+    --hospital-light: #e8f7fa;
+    --hospital-bg: #f4fbfd;
+    --hospital-dark: #0f3d4a;
+    --hospital-border: #d9eef2;
+    --hospital-shadow: 0 18px 50px rgba(31, 122, 140, 0.12);
+}
+
+body {
+    background: linear-gradient(135deg, #f4fbfd 0%, #eaf7fb 50%, #f8fcfd 100%);
+}
+
+/* Wrapper */
+.login-page-wrapper {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at top left, rgba(63, 186, 194, 0.15), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(31, 122, 140, 0.12), transparent 28%);
+}
+
+/* Card */
+.hospital-login-card {
+    border-radius: 24px;
+    background: #fff;
+    box-shadow: var(--hospital-shadow);
+}
+
+/* Left Panel */
+.hospital-left-panel {
+    background: linear-gradient(160deg, var(--hospital-primary), var(--hospital-secondary));
+    min-height: 620px;
+    position: relative;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+}
+
+.hospital-left-panel::before {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    top: -60px;
+    right: -60px;
+}
+
+.hospital-left-panel::after {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    bottom: -70px;
+    left: -70px;
+}
+
+.hospital-left-content {
+    position: relative;
+    z-index: 2;
+    max-width: 420px;
+}
+
+.hospital-icon-wrap {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.hospital-title {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 1rem;
+}
+
+.hospital-subtitle {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.hospital-feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(4px);
+    font-weight: 500;
+}
+
+.feature-item i {
+    font-size: 1.2rem;
+}
+
+/* Right Side */
+.text-primary-custom {
+    color: var(--hospital-primary) !important;
+}
+
+.login-logo-circle {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--hospital-light), #ffffff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--hospital-primary);
+    border: 2px solid var(--hospital-border);
+    box-shadow: 0 8px 20px rgba(31, 122, 140, 0.08);
+}
+
+/* Inputs */
+.custom-input {
+    border-radius: 14px;
+    border: 1.5px solid var(--hospital-border);
+    padding: 0.85rem 1rem;
+    min-height: 52px;
+    transition: all 0.25s ease;
+    background-color: #fcfeff;
+}
+
+.custom-input:focus {
+    border-color: var(--hospital-secondary);
+    box-shadow: 0 0 0 0.2rem rgba(63, 186, 194, 0.18);
+    background-color: #ffffff;
+}
+
+/* Button */
+.btn-login-hospital {
+    min-height: 52px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--hospital-primary), var(--hospital-secondary));
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.25s ease;
+    box-shadow: 0 10px 20px rgba(31, 122, 140, 0.18);
+}
+
+.btn-login-hospital:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(31, 122, 140, 0.24);
+    color: white;
+}
+
+.btn-login-hospital:active {
+    transform: translateY(0);
+}
+
+/* Validation */
+.validation-summary-errors ul {
+    margin-bottom: 0;
+    padding-left: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+    .hospital-left-panel {
+        min-height: 540px;
+        padding: 2rem;
+    }
+
+    .hospital-title {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .hospital-login-card {
+        border-radius: 20px;
+    }
+
+    .card-body {
+        padding: 2rem 1.5rem !important;
+    }
+}

@@ -17,7 +17,7 @@ namespace DoAnWeb.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.2")
+                .HasAnnotation("ProductVersion", "8.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -40,7 +40,7 @@ namespace DoAnWeb.Migrations
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -127,7 +127,7 @@ namespace DoAnWeb.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsCheckedin")
+                    b.Property<bool>("IsCheckedIn")
                         .HasColumnType("bit");
 
                     b.Property<int>("PatientId")
@@ -139,8 +139,9 @@ namespace DoAnWeb.Migrations
                     b.Property<DateTime>("ScheduledDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -191,14 +192,14 @@ namespace DoAnWeb.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("EndTime")
-                        .HasColumnType("time");
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("MaxPatient")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("StartTime")
-                        .HasColumnType("time");
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -215,6 +216,10 @@ namespace DoAnWeb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("EmailType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -222,19 +227,13 @@ namespace DoAnWeb.Migrations
                     b.Property<DateTime>("SentAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("content")
+                    b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("EmailHistories");
                 });
@@ -317,17 +316,18 @@ namespace DoAnWeb.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("EndTime")
+                    b.Property<DateTime?>("EndTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("StartTime")
+                    b.Property<DateTime?>("StartTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Symptoms")
                         .HasColumnType("nvarchar(max)");
@@ -411,15 +411,13 @@ namespace DoAnWeb.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Notifications");
                 });
@@ -441,8 +439,8 @@ namespace DoAnWeb.Migrations
                     b.Property<string>("HealthInsuranceNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Height")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double?>("Height")
+                        .HasColumnType("float");
 
                     b.Property<string>("MedicalHistory")
                         .HasColumnType("nvarchar(max)");
@@ -451,8 +449,8 @@ namespace DoAnWeb.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Weight")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double?>("Weight")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -503,10 +501,8 @@ namespace DoAnWeb.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("VisitTime")
@@ -514,7 +510,7 @@ namespace DoAnWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("SiteVisits");
                 });
@@ -685,7 +681,7 @@ namespace DoAnWeb.Migrations
             modelBuilder.Entity("DoAnWeb.Models.DoctorSchedule", b =>
                 {
                     b.HasOne("DoAnWeb.Models.Doctor", "Doctor")
-                        .WithMany()
+                        .WithMany("DoctorSchedules")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -697,7 +693,9 @@ namespace DoAnWeb.Migrations
                 {
                     b.HasOne("DoAnWeb.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -716,7 +714,7 @@ namespace DoAnWeb.Migrations
             modelBuilder.Entity("DoAnWeb.Models.ExaminationService", b =>
                 {
                     b.HasOne("DoAnWeb.Models.Appointment", "Appointment")
-                        .WithMany()
+                        .WithMany("ExaminationServices")
                         .HasForeignKey("AppointmentId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -735,19 +733,19 @@ namespace DoAnWeb.Migrations
             modelBuilder.Entity("DoAnWeb.Models.MedicalExamination", b =>
                 {
                     b.HasOne("DoAnWeb.Models.Appointment", "Appointment")
-                        .WithMany()
+                        .WithMany("MedicalExaminations")
                         .HasForeignKey("AppointmentId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("DoAnWeb.Models.Doctor", "Doctor")
-                        .WithMany()
+                        .WithMany("MedicalExaminations")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("DoAnWeb.Models.Patient", "Patient")
-                        .WithMany()
+                        .WithMany("MedicalExaminations")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -763,7 +761,9 @@ namespace DoAnWeb.Migrations
                 {
                     b.HasOne("DoAnWeb.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -782,7 +782,7 @@ namespace DoAnWeb.Migrations
             modelBuilder.Entity("DoAnWeb.Models.Prescription", b =>
                 {
                     b.HasOne("DoAnWeb.Models.MedicalExamination", "MedicalExamination")
-                        .WithMany()
+                        .WithMany("Prescriptions")
                         .HasForeignKey("MedicalExaminationId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -802,7 +802,9 @@ namespace DoAnWeb.Migrations
                 {
                     b.HasOne("DoAnWeb.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -860,19 +862,32 @@ namespace DoAnWeb.Migrations
 
             modelBuilder.Entity("DoAnWeb.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("Doctor")
-                        .IsRequired();
+                    b.Navigation("Doctor");
 
-                    b.Navigation("Employee")
-                        .IsRequired();
+                    b.Navigation("Employee");
 
-                    b.Navigation("Patient")
-                        .IsRequired();
+                    b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("DoAnWeb.Models.Appointment", b =>
+                {
+                    b.Navigation("ExaminationServices");
+
+                    b.Navigation("MedicalExaminations");
                 });
 
             modelBuilder.Entity("DoAnWeb.Models.Doctor", b =>
                 {
                     b.Navigation("Appointments");
+
+                    b.Navigation("DoctorSchedules");
+
+                    b.Navigation("MedicalExaminations");
+                });
+
+            modelBuilder.Entity("DoAnWeb.Models.MedicalExamination", b =>
+                {
+                    b.Navigation("Prescriptions");
                 });
 
             modelBuilder.Entity("DoAnWeb.Models.MedicalService", b =>
@@ -888,6 +903,8 @@ namespace DoAnWeb.Migrations
             modelBuilder.Entity("DoAnWeb.Models.Patient", b =>
                 {
                     b.Navigation("Appointments");
+
+                    b.Navigation("MedicalExaminations");
                 });
 #pragma warning restore 612, 618
         }

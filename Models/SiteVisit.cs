@@ -1,12 +1,14 @@
-namespace DoAnWeb.Models;
-
-public class SiteVisit
+namespace DoAnWeb.Models
 {
-    public int Id { get; set; }
+    public class SiteVisit
+    {
+        public int Id { get; set; }
 
-    public DateTime VisitTime { get; set; } = DateTime.Now;
-    public string IPAddress { get; set; } = string.Empty;
+        public DateTime VisitTime { get; set; } = DateTime.Now;
 
-    public int UserId { get; set; }
-    public ApplicationUser User { get; set; } = null!;
+        public string IPAddress { get; set; } = string.Empty;
+
+        public string UserId { get; set; } = string.Empty;
+        public ApplicationUser User { get; set; } = null!;
+    }
 }

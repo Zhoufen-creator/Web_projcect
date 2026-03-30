@@ -1,0 +1,70 @@
+@model DoAnWeb.Areas.Doctor.ViewModels.DoctorProfileViewModel
+
+@{
+    ViewData["Title"] = "Thông tin bác sĩ";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Thông tin bác sĩ</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    <form asp-action="Index" method="post">
+        <input type="hidden" asp-for="DoctorId" />
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Họ tên</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DateOfBirth" class="form-label">Ngày sinh</label>
+                    <input asp-for="DateOfBirth" type="date" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Gender" class="form-label">Giới tính</label>
+                    <input asp-for="Gender" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Address" class="form-label">Địa chỉ</label>
+                    <textarea asp-for="Address" class="form-control"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="PhoneNumber" class="form-label">Số điện thoại</label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Specialty" class="form-label">Chuyên khoa</label>
+                    <input asp-for="Specialty" class="form-control" />
+                    <span asp-validation-for="Specialty" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="LicenseNumber" class="form-label">Số chứng chỉ</label>
+                    <input asp-for="LicenseNumber" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Qualifications" class="form-label">Bằng cấp</label>
+                    <textarea asp-for="Qualifications" class="form-control"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,45 @@
+@model DoAnWeb.Areas.Employee.ViewModels.DoctorScheduleVM
+
+@{
+    ViewData["Title"] = "Sửa ca làm";
+}
+
+<h2 class="mb-3">Sửa ca làm bác sĩ</h2>
+
+<form asp-area="Employee" asp-controller="DoctorSchedules" asp-action="Edit" method="post">
+    <input asp-for="Id" type="hidden" />
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+    <div class="mb-3">
+        <label class="form-label">Bác sĩ</label>
+        <select asp-for="DoctorId" asp-items="ViewBag.DoctorId" class="form-select">
+            <option value="">-- Chọn bác sĩ --</option>
+        </select>
+        <span asp-validation-for="DoctorId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Thời gian bắt đầu</label>
+        <input asp-for="StartTime" type="datetime-local" class="form-control" />
+        <span asp-validation-for="StartTime" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Thời gian kết thúc</label>
+        <input asp-for="EndTime" type="datetime-local" class="form-control" />
+        <span asp-validation-for="EndTime" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Số bệnh nhân tối đa</label>
+        <input asp-for="MaxPatient" class="form-control" />
+        <span asp-validation-for="MaxPatient" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Cập nhật</button>
+    <a asp-area="Employee" asp-controller="DoctorSchedules" asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,13 +1,20 @@
-namespace DoAnWeb.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public class DoctorSchedule
+namespace DoAnWeb.Models
 {
-    public int Id { get; set; }
-    public TimeSpan StartTime { get; set; }
-    public TimeSpan EndTime { get; set; }
-    public int MaxPatient { get; set; } //Số lượng bệnh nhân tối đa trong khung giờ này
+    public class DoctorSchedule
+    {
+        public int Id { get; set; }
 
-    public int DoctorId { get; set; }
-    public Doctor Doctor { get; set; } = null!;
+        public DateTime StartTime { get; set; }
 
+        public DateTime EndTime { get; set; }
+
+        public int MaxPatient { get; set; }
+
+        public int DoctorId { get; set; }
+
+        [ForeignKey("DoctorId")]
+        public Doctor? Doctor { get; set; }
+    }
 }

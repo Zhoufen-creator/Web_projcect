@@ -1,0 +1,96 @@
+@using DoAnWeb.Models
+@{
+    ViewData["Title"] = "Dashboard Bệnh Nhân";
+
+    var patient = ViewBag.Patient as Patient;
+    var appointments = ViewBag.UpcomingAppointments as List<Appointment>;
+    var totalAppointments = (int)ViewBag.TotalAppointments;
+    var totalExaminations = (int)ViewBag.TotalExaminations;
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Trang bệnh nhân</h2>
+
+    @if (patient != null)
+    {
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                Thông tin cá nhân
+            </div>
+            <div class="card-body">
+                <p><strong>Họ tên:</strong> @patient.User.Name</p>
+                <p><strong>Nhóm máu:</strong> @patient.BloodType</p>
+                <p><strong>Chiều cao:</strong> @patient.Height cm</p>
+                <p><strong>Cân nặng:</strong> @patient.Weight kg</p>
+                <p><strong>BHYT:</strong> @patient.HealthInsuranceNumber</p>
+
+                <a asp-area="Patient" asp-controller="Profile" asp-action="Index" class="btn btn-outline-primary">
+                    Xem / sửa hồ sơ
+                </a>
+            </div>
+        </div>
+    }
+
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Tổng lịch hẹn</h5>
+                    <h2>@totalAppointments</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Tổng lần khám</h5>
+                    <h2>@totalExaminations</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Chức năng nhanh</h5>
+                    <a asp-area="Patient" asp-controller="Appointment" asp-action="Create" class="btn btn-success btn-sm mb-2">Đặt lịch khám</a>
+                    <br />
+                    <a asp-area="Patient" asp-controller="MedicalHistory" asp-action="Index" class="btn btn-info btn-sm text-white">Lịch sử khám</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+            Lịch hẹn sắp tới
+        </div>
+        <div class="card-body">
+            @if (appointments != null && appointments.Any())
+            {
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Ngày khám</th>
+                            <th>Bác sĩ</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in appointments)
+                        {
+                            <tr>
+                                <td>@item.ScheduledDate.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>@item.Doctor.Specialty</td>
+                                <td>@item.Status</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="text-muted">Chưa có lịch hẹn sắp tới.</p>
+            }
+        </div>
+    </div>
+</div>

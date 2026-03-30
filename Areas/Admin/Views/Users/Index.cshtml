@@ -1,0 +1,40 @@
+@model List<DoAnWeb.Areas.Admin.ViewModels.UserViewModel>
+
+@{
+    ViewData["Title"] = "Quản lý tài khoản";
+}
+
+<div class="container mt-4">
+    <h2>Quản lý tài khoản người dùng</h2>
+
+    <a asp-action="Create" class="btn btn-success mb-3">+ Thêm tài khoản</a>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Họ tên</th>
+                <th>Email</th>
+                <th>SĐT</th>
+                <th>Vai trò</th>
+                <th>Spam</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.Role</td>
+                    <td>@(item.IsSpam ? "Có" : "Không")</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Sửa</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

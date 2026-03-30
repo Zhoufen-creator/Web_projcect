@@ -1,0 +1,31 @@
+@model DoAnWeb.Models.DoctorSchedule
+
+@{
+    ViewData["Title"] = "Xóa ca làm";
+}
+
+<h2 class="mb-3 text-danger">Xóa ca làm bác sĩ</h2>
+
+<div class="alert alert-warning">
+    Bạn có chắc chắn muốn xóa ca làm này không?
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Bác sĩ</dt>
+    <dd class="col-sm-9">@Model.Doctor.User.Name</dd>
+
+    <dt class="col-sm-3">Chuyên khoa</dt>
+    <dd class="col-sm-9">@Model.Doctor.Specialty</dd>
+
+    <dt class="col-sm-3">Bắt đầu</dt>
+    <dd class="col-sm-9">@Model.StartTime.ToString("dd/MM/yyyy HH:mm")</dd>
+
+    <dt class="col-sm-3">Kết thúc</dt>
+    <dd class="col-sm-9">@Model.EndTime.ToString("dd/MM/yyyy HH:mm")</dd>
+</dl>
+
+<form asp-area="Employee" asp-controller="DoctorSchedules" asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-area="Employee" asp-controller="DoctorSchedules" asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

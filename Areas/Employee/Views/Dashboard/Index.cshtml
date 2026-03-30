@@ -1,0 +1,18 @@
+@{
+    ViewData["Title"] = "Trang nhân viên";
+}
+
+<h2>Trang nhân viên hành chính</h2>
+<p>Chào mừng bạn đến khu vực quản lý của nhân viên.</p>
+
+<div class="list-group mt-3">
+    <a asp-area="Employee" asp-controller="DoctorSchedule" asp-action="Index" class="list-group-item list-group-item-action">
+        Phân công ca làm cho bác sĩ
+    </a>
+    <a asp-area="Employee" asp-controller="AppointmentManage" asp-action="Index" class="list-group-item list-group-item-action">
+        Duyệt và sắp lịch hẹn khám
+    </a>
+    <a asp-area="Employee" asp-controller="Notification" asp-action="Index" class="list-group-item list-group-item-action">
+        Gửi thông báo cho bệnh nhân
+    </a>
+</div>

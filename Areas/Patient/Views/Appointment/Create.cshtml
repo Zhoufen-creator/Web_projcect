@@ -1,0 +1,43 @@
+@model DoAnWeb.Areas.Patient.ViewModels.AppointmentCreateViewModel
+
+@{
+    ViewData["Title"] = "Đặt lịch hẹn";
+}
+
+<div class="container mt-4">
+    <h2>Đặt lịch hẹn khám</h2>
+
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="DoctorId" class="form-label">Chọn bác sĩ</label>
+            <select asp-for="DoctorId" class="form-control">
+                <option value="">-- Chọn bác sĩ --</option>
+                @foreach (var doctor in Model.Doctors)
+                {
+                    <option value="@doctor.Id">
+                        @doctor.Name - @doctor.Specialty
+                    </option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ScheduledDate" class="form-label">Ngày giờ khám</label>
+            <input asp-for="ScheduledDate" type="datetime-local" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ReasonForVisit" class="form-label">Lý do khám</label>
+            <textarea asp-for="ReasonForVisit" class="form-control" rows="4"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Đặt lịch</button>
+        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

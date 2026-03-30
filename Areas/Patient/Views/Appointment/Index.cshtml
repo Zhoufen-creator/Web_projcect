@@ -1,0 +1,37 @@
+@model List<DoAnWeb.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Lịch hẹn khám";
+}
+
+<div class="container mt-4">
+    <h2>Lịch hẹn khám</h2>
+
+    <a asp-action="Create" class="btn btn-success mb-3">+ Đặt lịch mới</a>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Ngày khám</th>
+                <th>Bác sĩ</th>
+                <th>Chuyên khoa</th>
+                <th>Lý do khám</th>
+                <th>Trạng thái</th>
+                <th>Check-in</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ScheduledDate.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@item.Doctor.User.Name</td>
+                    <td>@item.Doctor.Specialty</td>
+                    <td>@item.ReasonForVisit</td>
+                    <td>@item.Status</td>
+                    <td>@(item.IsCheckedIn ? "Đã check-in" : "Chưa")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
