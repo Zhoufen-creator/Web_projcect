@@ -4,37 +4,142 @@
     ViewData["Title"] = "Quản lý tài khoản";
 }
 
-<div class="container mt-4">
-    <h2>Quản lý tài khoản người dùng</h2>
+<section class="admin-shell">
+    <div class="container-xxl">
+        <div class="admin-container">
+            <div class="admin-page-top">
+                <div>
+                    <span class="admin-badge">
+                        <i class="bi bi-people"></i>
+                        Quản trị tài khoản hệ thống
+                    </span>
 
-    <a asp-action="Create" class="btn btn-success mb-3">+ Thêm tài khoản</a>
+                    <h1 class="admin-title">Quản lý tài khoản người dùng</h1>
+                    <p class="admin-subtitle">
+                        Theo dõi danh sách người dùng, vai trò truy cập và các thao tác quản trị trong hệ thống bệnh viện.
+                    </p>
+                </div>
 
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Họ tên</th>
-                <th>Email</th>
-                <th>SĐT</th>
-                <th>Vai trò</th>
-                <th>Spam</th>
-                <th>Chức năng</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.Name</td>
-                    <td>@item.Email</td>
-                    <td>@item.PhoneNumber</td>
-                    <td>@item.Role</td>
-                    <td>@(item.IsSpam ? "Có" : "Không")</td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Sửa</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Xóa</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+                <div class="admin-top-actions">
+                    <a asp-action="Create" class="admin-btn admin-btn-primary">
+                        <i class="bi bi-plus-circle me-2"></i>Thêm tài khoản
+                    </a>
+                </div>
+            </div>
+
+            <div class="admin-mini-stats">
+                <div class="admin-mini-stat">
+                    <span class="admin-mini-stat-number">@Model.Count</span>
+                    <span class="admin-mini-stat-label">Tổng tài khoản</span>
+                </div>
+
+                <div class="admin-mini-stat">
+                    <span class="admin-mini-stat-number">@Model.Count(x => x.Role == "Admin")</span>
+                    <span class="admin-mini-stat-label">Admin</span>
+                </div>
+
+                <div class="admin-mini-stat">
+                    <span class="admin-mini-stat-number">@Model.Count(x => x.Role == "Doctor")</span>
+                    <span class="admin-mini-stat-label">Bác sĩ</span>
+                </div>
+
+                <div class="admin-mini-stat">
+                    <span class="admin-mini-stat-number">@Model.Count(x => x.IsSpam)</span>
+                    <span class="admin-mini-stat-label">Spam</span>
+                </div>
+            </div>
+
+            <div class="admin-table-wrapper">
+                <div class="admin-table-header">
+                    <div>
+                        <h3>Danh sách tài khoản</h3>
+                        <p>Hiển thị thông tin cơ bản, vai trò và trạng thái của người dùng.</p>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table admin-table mb-0 align-middle">
+                        <thead>
+                            <tr>
+                                <th>Người dùng</th>
+                                <th>Liên hệ</th>
+                                <th>Vai trò</th>
+                                <th>Spam</th>
+                                <th class="text-center">Chức năng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="admin-user-box">
+                                                <div class="admin-avatar">
+                                                    @(string.IsNullOrWhiteSpace(item.Name) ? "U" : item.Name.Substring(0, 1).ToUpper())
+                                                </div>
+
+                                                <div class="admin-user-info">
+                                                    <strong>@item.Name</strong>
+                                                    <span>@item.Email</span>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <span class="admin-contact-text">
+                                                @(string.IsNullOrWhiteSpace(item.PhoneNumber) ? "Chưa cập nhật" : item.PhoneNumber)
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <span class="admin-role-pill role-@item.Role?.ToLower()">
+                                                @item.Role
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            @if (item.IsSpam)
+                                            {
+                                                <span class="admin-status-pill status-danger">Có</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="admin-status-pill status-safe">Không</span>
+                                            }
+                                        </td>
+
+                                        <td class="text-center">
+                                            <div class="admin-table-actions">
+                                                <a asp-action="Edit" asp-route-id="@item.Id" class="admin-action-btn admin-edit-btn">
+                                                    <i class="bi bi-pencil-square me-1"></i>Sửa
+                                                </a>
+
+                                                <a asp-action="Delete" asp-route-id="@item.Id" class="admin-action-btn admin-delete-btn">
+                                                    <i class="bi bi-trash3 me-1"></i>Xóa
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="5">
+                                        <div class="admin-empty-box">
+                                            <i class="bi bi-inbox"></i>
+                                            <h4>Chưa có tài khoản nào</h4>
+                                            <p>Hiện tại chưa có dữ liệu người dùng để hiển thị.</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

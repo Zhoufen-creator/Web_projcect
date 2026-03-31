@@ -1,69 +1,145 @@
 @model DoAnWeb.Areas.Doctor.ViewModels.DoctorProfileViewModel
 
 @{
-    ViewData["Title"] = "Thông tin bác sĩ";
+    ViewData["Title"] = "Hồ sơ bác sĩ";
 }
 
-<div class="container mt-4">
-    <h2 class="mb-4">Thông tin bác sĩ</h2>
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success doctor-alert mb-4">
+        <i class="bi bi-check-circle-fill me-2"></i>@TempData["Success"]
+    </div>
+}
 
-    @if (TempData["Success"] != null)
-    {
-        <div class="alert alert-success">@TempData["Success"]</div>
-    }
+<section class="doctor-hero">
+    <div class="doctor-card doctor-hero-main">
+        <div class="doctor-page-badge">
+            <i class="bi bi-person-vcard-fill"></i>
+            <span>Quản lý hồ sơ cá nhân</span>
+        </div>
 
-    <form asp-action="Index" method="post">
-        <input type="hidden" asp-for="DoctorId" />
+        <h2>Cập nhật thông tin bác sĩ trên một giao diện gọn, rõ và phù hợp với luồng quản trị chuyên môn</h2>
 
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <div class="mb-3">
-                    <label asp-for="Name" class="form-label">Họ tên</label>
-                    <input asp-for="Name" class="form-control" />
+        <p>
+            Hồ sơ bác sĩ cần được duy trì chính xác để phục vụ vận hành hệ thống, quản lý chuyên khoa
+            và đảm bảo dữ liệu hiển thị thống nhất trong toàn bộ phân hệ khám chữa bệnh.
+        </p>
+
+        <div class="doctor-hero-actions">
+            <a asp-area="Doctor" asp-controller="Dashboard" asp-action="Index" class="doctor-btn doctor-btn-primary">
+                <i class="bi bi-grid-1x2-fill"></i>
+                <span>Về tổng quan</span>
+            </a>
+
+            <a asp-area="Doctor" asp-controller="MedicalExamination" asp-action="Index" class="doctor-btn doctor-btn-outline">
+                <i class="bi bi-file-medical"></i>
+                <span>Phiếu khám</span>
+            </a>
+        </div>
+    </div>
+
+    <aside class="doctor-highlight-card">
+        <h3>Lưu ý khi cập nhật</h3>
+        <p>
+            Hãy kiểm tra kỹ thông tin chuyên khoa, số chứng chỉ và dữ liệu liên hệ trước khi lưu.
+        </p>
+
+        <div class="doctor-highlight-list">
+            <div class="doctor-highlight-item">
+                <i class="bi bi-shield-check"></i>
+                <div>
+                    <strong>Dữ liệu đồng bộ</strong>
+                    <span>Thông tin hồ sơ giúp hệ thống hiển thị chính xác trong phân hệ bác sĩ.</span>
+                </div>
+            </div>
+
+            <div class="doctor-highlight-item">
+                <i class="bi bi-heart-pulse"></i>
+                <div>
+                    <strong>Phục vụ vận hành</strong>
+                    <span>Hồ sơ rõ ràng giúp quản lý chuyên môn và theo dõi bác sĩ thuận tiện hơn.</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+</section>
+
+<form asp-action="Index" method="post">
+    <input type="hidden" asp-for="DoctorId" />
+
+    <section class="doctor-form-card">
+        <div class="doctor-form-head">
+            <h3>Thông tin cá nhân và chuyên môn</h3>
+            <p>Cập nhật đầy đủ các trường bên dưới để giữ hồ sơ luôn chính xác và chuyên nghiệp.</p>
+        </div>
+
+        <div class="doctor-form-body">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger doctor-alert mb-4"></div>
+
+            <div class="doctor-form-grid">
+                <div class="doctor-form-group">
+                    <label asp-for="Name" class="doctor-label">Họ tên</label>
+                    <input asp-for="Name" class="doctor-input" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="DateOfBirth" class="form-label">Ngày sinh</label>
-                    <input asp-for="DateOfBirth" type="date" class="form-control" />
+                <div class="doctor-form-group">
+                    <label asp-for="DateOfBirth" class="doctor-label">Ngày sinh</label>
+                    <input asp-for="DateOfBirth" type="date" class="doctor-input" />
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="Gender" class="form-label">Giới tính</label>
-                    <input asp-for="Gender" class="form-control" />
+                <div class="doctor-form-group">
+                    <label asp-for="Gender" class="doctor-label">Giới tính</label>
+                    <input asp-for="Gender" class="doctor-input" />
+                    <span asp-validation-for="Gender" class="text-danger"></span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="Address" class="form-label">Địa chỉ</label>
-                    <textarea asp-for="Address" class="form-control"></textarea>
+                <div class="doctor-form-group">
+                    <label asp-for="PhoneNumber" class="doctor-label">Số điện thoại</label>
+                    <input asp-for="PhoneNumber" class="doctor-input" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="PhoneNumber" class="form-label">Số điện thoại</label>
-                    <input asp-for="PhoneNumber" class="form-control" />
+                <div class="doctor-form-group doctor-form-group-full">
+                    <label asp-for="Address" class="doctor-label">Địa chỉ</label>
+                    <textarea asp-for="Address" class="doctor-textarea"></textarea>
+                    <span asp-validation-for="Address" class="text-danger"></span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="Specialty" class="form-label">Chuyên khoa</label>
-                    <input asp-for="Specialty" class="form-control" />
+                <div class="doctor-form-group">
+                    <label asp-for="Specialty" class="doctor-label">Chuyên khoa</label>
+                    <input asp-for="Specialty" class="doctor-input" />
                     <span asp-validation-for="Specialty" class="text-danger"></span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="LicenseNumber" class="form-label">Số chứng chỉ</label>
-                    <input asp-for="LicenseNumber" class="form-control" />
+                <div class="doctor-form-group">
+                    <label asp-for="LicenseNumber" class="doctor-label">Số chứng chỉ</label>
+                    <input asp-for="LicenseNumber" class="doctor-input" />
+                    <span asp-validation-for="LicenseNumber" class="text-danger"></span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="Qualifications" class="form-label">Bằng cấp</label>
-                    <textarea asp-for="Qualifications" class="form-control"></textarea>
+                <div class="doctor-form-group doctor-form-group-full">
+                    <label asp-for="Qualifications" class="doctor-label">Bằng cấp / chuyên môn</label>
+                    <textarea asp-for="Qualifications" class="doctor-textarea"></textarea>
+                    <span asp-validation-for="Qualifications" class="text-danger"></span>
                 </div>
+            </div>
 
-                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            <div class="doctor-form-actions mt-4">
+                <button type="submit" class="doctor-btn doctor-btn-main">
+                    <i class="bi bi-floppy-fill"></i>
+                    <span>Lưu thay đổi</span>
+                </button>
+
+                <a asp-area="Doctor" asp-controller="Dashboard" asp-action="Index" class="doctor-btn doctor-btn-light">
+                    <i class="bi bi-arrow-left-circle"></i>
+                    <span>Quay lại tổng quan</span>
+                </a>
             </div>
         </div>
-    </form>
-</div>
+    </section>
+</form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

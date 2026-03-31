@@ -2,7 +2,157 @@
     ViewData["Title"] = "Admin Dashboard";
 }
 
-<div class="container mt-4">
-    <h2>Trang quản trị Admin</h2>
-    <p>Chào mừng bạn đến hệ thống quản lý bệnh viện.</p>
-</div>
+<section class="admin-shell">
+    <div class="container-xxl">
+        <div class="admin-container">
+            <div class="admin-hero">
+                <div class="admin-hero-left">
+                    <span class="admin-badge">
+                        <i class="bi bi-shield-lock"></i>
+                        Trung tâm quản trị hệ thống
+                    </span>
+
+                    <h1 class="admin-title">Bảng điều khiển Admin</h1>
+
+                    <p class="admin-subtitle">
+                        Quản lý tài khoản, kiểm soát vai trò truy cập và theo dõi các khu vực vận hành
+                        quan trọng trong hệ thống quản lý bệnh viện.
+                    </p>
+
+                    <div class="admin-hero-actions">
+                        <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="admin-btn admin-btn-primary">
+                            <i class="bi bi-people me-2"></i>Quản lý tài khoản
+                        </a>
+
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="admin-btn admin-btn-light">
+                            <i class="bi bi-house-door me-2"></i>Về trang chủ
+                        </a>
+                    </div>
+                </div>
+
+                <div class="admin-hero-right">
+                    <div class="admin-highlight-card">
+                        <h3>Tổng quan nhanh</h3>
+                        <p>
+                            Khu vực này dành cho quản trị viên theo dõi và xử lý các chức năng nền tảng của hệ thống.
+                        </p>
+
+                        <div class="admin-highlight-list">
+                            <div class="admin-highlight-item">
+                                <i class="bi bi-person-gear"></i>
+                                <span>Kiểm soát tài khoản người dùng</span>
+                            </div>
+                            <div class="admin-highlight-item">
+                                <i class="bi bi-diagram-3"></i>
+                                <span>Phân quyền theo vai trò</span>
+                            </div>
+                            <div class="admin-highlight-item">
+                                <i class="bi bi-shield-check"></i>
+                                <span>Bảo đảm truy cập đúng quyền</span>
+                            </div>
+                            <div class="admin-highlight-item">
+                                <i class="bi bi-hospital"></i>
+                                <span>Hỗ trợ vận hành tập trung</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-stats-row">
+                <div class="admin-stat-card">
+                    <div class="admin-stat-icon"><i class="bi bi-people"></i></div>
+                    <div class="admin-stat-content">
+                        <strong>Quản lý người dùng</strong>
+                        <span>Thêm, sửa và xóa tài khoản trong hệ thống.</span>
+                    </div>
+                </div>
+
+                <div class="admin-stat-card">
+                    <div class="admin-stat-icon"><i class="bi bi-person-badge"></i></div>
+                    <div class="admin-stat-content">
+                        <strong>Kiểm soát vai trò</strong>
+                        <span>Admin, Doctor, Employee và Patient.</span>
+                    </div>
+                </div>
+
+                <div class="admin-stat-card">
+                    <div class="admin-stat-icon"><i class="bi bi-exclamation-octagon"></i></div>
+                    <div class="admin-stat-content">
+                        <strong>Rà soát trạng thái</strong>
+                        <span>Hỗ trợ đánh dấu tài khoản spam để kiểm tra.</span>
+                    </div>
+                </div>
+
+                <div class="admin-stat-card">
+                    <div class="admin-stat-icon"><i class="bi bi-gear-wide-connected"></i></div>
+                    <div class="admin-stat-content">
+                        <strong>Vận hành tập trung</strong>
+                        <span>Toàn bộ quản trị nằm trong một khu vực rõ ràng.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-content-grid">
+                <div class="admin-panel-card">
+                    <div class="admin-panel-head">
+                        <h3>Chức năng quản trị chính</h3>
+                        <p>
+                            Những khu vực quan trọng nhất mà quản trị viên cần sử dụng thường xuyên trong quá trình vận hành.
+                        </p>
+                    </div>
+
+                    <div class="admin-feature-grid">
+                        <div class="admin-feature-card">
+                            <div class="admin-feature-icon"><i class="bi bi-person-plus"></i></div>
+                            <h4>Tạo tài khoản mới</h4>
+                            <p>Khởi tạo tài khoản cho bác sĩ, nhân viên hoặc các nhóm người dùng khác.</p>
+                        </div>
+
+                        <div class="admin-feature-card">
+                            <div class="admin-feature-icon"><i class="bi bi-pencil-square"></i></div>
+                            <h4>Cập nhật thông tin</h4>
+                            <p>Chỉnh sửa hồ sơ, số điện thoại, vai trò và thông tin cơ bản của người dùng.</p>
+                        </div>
+
+                        <div class="admin-feature-card">
+                            <div class="admin-feature-icon"><i class="bi bi-trash3"></i></div>
+                            <h4>Xóa tài khoản</h4>
+                            <p>Loại bỏ các tài khoản không còn sử dụng trong hệ thống.</p>
+                        </div>
+
+                        <div class="admin-feature-card">
+                            <div class="admin-feature-icon"><i class="bi bi-shield-exclamation"></i></div>
+                            <h4>Kiểm tra trạng thái</h4>
+                            <p>Theo dõi và rà soát các tài khoản cần cảnh báo hoặc kiểm tra lại.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-side-card">
+                    <h3>Điều hướng nhanh</h3>
+
+                    <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="admin-side-link">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Dashboard Admin</span>
+                    </a>
+
+                    <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="admin-side-link">
+                        <i class="bi bi-people"></i>
+                        <span>Danh sách tài khoản</span>
+                    </a>
+
+                    <a asp-area="Admin" asp-controller="Users" asp-action="Create" class="admin-side-link">
+                        <i class="bi bi-person-plus"></i>
+                        <span>Thêm tài khoản mới</span>
+                    </a>
+
+                    <a asp-area="" asp-controller="Home" asp-action="Privacy" class="admin-side-link">
+                        <i class="bi bi-building"></i>
+                        <span>Giới thiệu bệnh viện</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

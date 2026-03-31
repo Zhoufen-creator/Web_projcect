@@ -1,26 +1,75 @@
-@model DoAnWeb.Models.ApplicationUser
+@model DoAnWeb.Areas.Admin.ViewModels.UserViewModel
 
 @{
     ViewData["Title"] = "Xóa tài khoản";
 }
 
-<div class="container mt-4">
-    <h2>Xóa tài khoản</h2>
+<section class="admin-page-section">
+    <div class="container-xxl">
+        <div class="admin-page-header">
+            <div>
+                <span class="admin-page-badge danger-badge">Admin Panel</span>
+                <h1>Xóa tài khoản</h1>
+                <p>Kiểm tra lại thông tin trước khi xóa tài khoản khỏi hệ thống.</p>
+            </div>
 
-    <h4>Bạn có chắc muốn xóa tài khoản này không?</h4>
-    <hr />
+            <a asp-action="Index" class="admin-outline-btn">
+                <i class="bi bi-arrow-left"></i>
+                Quay lại danh sách
+            </a>
+        </div>
 
-    <dl class="row">
-        <dt class="col-sm-3">Họ tên</dt>
-        <dd class="col-sm-9">@Model.Name</dd>
+        <div class="admin-delete-card">
+            <div class="admin-delete-icon">
+                <i class="bi bi-trash3"></i>
+            </div>
 
-        <dt class="col-sm-3">Email</dt>
-        <dd class="col-sm-9">@Model.Email</dd>
-    </dl>
+            <h3>Bạn có chắc muốn xóa tài khoản này?</h3>
+            <p>
+                Hành động này sẽ xóa tài khoản khỏi hệ thống. Hãy kiểm tra kỹ thông tin trước khi xác nhận.
+            </p>
 
-    <form asp-action="Delete" method="post">
-        <input type="hidden" asp-for="Id" />
-        <button type="submit" class="btn btn-danger">Xóa</button>
-        <a asp-action="Index" class="btn btn-secondary">Hủy</a>
-    </form>
-</div>
+            <div class="admin-delete-info">
+                <div class="admin-delete-row">
+                    <span>Họ và tên</span>
+                    <strong>@Model.Name</strong>
+                </div>
+
+                <div class="admin-delete-row">
+                    <span>Email</span>
+                    <strong>@Model.Email</strong>
+                </div>
+
+                <div class="admin-delete-row">
+                    <span>Số điện thoại</span>
+                    <strong>@(string.IsNullOrWhiteSpace(Model.PhoneNumber) ? "Chưa cập nhật" : Model.PhoneNumber)</strong>
+                </div>
+
+                <div class="admin-delete-row">
+                    <span>Vai trò</span>
+                    <strong>@Model.Role</strong>
+                </div>
+
+                <div class="admin-delete-row">
+                    <span>Trạng thái spam</span>
+                    <strong>@(Model.IsSpam ? "Có" : "Không")</strong>
+                </div>
+            </div>
+
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="admin-delete-actions">
+                    <button type="submit" class="admin-danger-btn">
+                        <i class="bi bi-trash3"></i>
+                        Xác nhận xóa
+                    </button>
+
+                    <a asp-action="Index" class="admin-secondary-btn">
+                        Hủy
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

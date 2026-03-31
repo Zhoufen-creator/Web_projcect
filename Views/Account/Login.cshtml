@@ -2,103 +2,80 @@
 
 @{
     ViewData["Title"] = "Đăng nhập";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
 
-<link rel="stylesheet" href="~/css/login-hospital.css" />
-
-<div class="login-page-wrapper">
-    <div class="container">
-        <div class="row justify-content-center align-items-center min-vh-100 py-5">
-            <div class="col-lg-10 col-xl-9">
-                <div class="card border-0 shadow-lg overflow-hidden hospital-login-card">
-                    <div class="row g-0">
-                        
-                        <!-- Left side -->
-                        <div class="col-md-6 hospital-left-panel d-none d-md-flex">
-                            <div class="hospital-left-content">
-                                <div class="hospital-icon-wrap mb-4">
-                                    <i class="bi bi-heart-pulse-fill"></i>
-                                </div>
-                                <h2 class="hospital-title">Chăm sóc sức khỏe<br />tận tâm</h2>
-                                <p class="hospital-subtitle">
-                                    Hệ thống bệnh viện hỗ trợ quản lý thông tin bệnh nhân, lịch hẹn và dịch vụ y tế một cách an toàn, nhanh chóng và chuyên nghiệp.
-                                </p>
-
-                                <div class="hospital-feature-list mt-4">
-                                    <div class="feature-item">
-                                        <i class="bi bi-shield-check"></i>
-                                        <span>Bảo mật thông tin</span>
-                                    </div>
-                                    <div class="feature-item">
-                                        <i class="bi bi-calendar2-check"></i>
-                                        <span>Quản lý lịch hẹn</span>
-                                    </div>
-                                    <div class="feature-item">
-                                        <i class="bi bi-hospital"></i>
-                                        <span>Môi trường y tế hiện đại</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Right side -->
-                        <div class="col-md-6 bg-white">
-                            <div class="card-body p-4 p-md-5">
-                                <div class="text-center mb-4">
-                                    <div class="login-logo-circle mx-auto mb-3">
-                                        <i class="bi bi-person-circle"></i>
-                                    </div>
-                                    <h3 class="fw-bold text-primary-custom mb-1">Đăng nhập</h3>
-                                    <p class="text-muted mb-0">
-                                        Vui lòng đăng nhập để truy cập hệ thống
-                                    </p>
-                                </div>
-
-                                <form asp-action="Login" method="post">
-                                    <div asp-validation-summary="All" class="alert alert-danger py-2 small mb-3"></div>
-
-                                    <div class="mb-3">
-                                        <label asp-for="Email" class="form-label fw-semibold">
-                                            <i class="bi bi-envelope-fill me-2 text-primary-custom"></i>Email
-                                        </label>
-                                        <input asp-for="Email" class="form-control custom-input" placeholder="Nhập email của bạn" />
-                                        <span asp-validation-for="Email" class="text-danger small"></span>
-                                    </div>
-
-                                    <div class="mb-4">
-                                        <label asp-for="Password" class="form-label fw-semibold">
-                                            <i class="bi bi-lock-fill me-2 text-primary-custom"></i>Mật khẩu
-                                        </label>
-                                        <input asp-for="Password" class="form-control custom-input" placeholder="Nhập mật khẩu" />
-                                        <span asp-validation-for="Password" class="text-danger small"></span>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-login-hospital w-100 mb-3">
-                                        <i class="bi bi-box-arrow-in-right me-2"></i>Đăng nhập
-                                    </button>
-
-                                    <div class="text-center">
-                                        <small class="text-muted">
-                                            Hệ thống quản lý bệnh viện
-                                        </small>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                    </div>
+<div class="auth-page">
+    <section class="auth-hero">
+        <div class="container auth-hero-inner">
+            <div class="auth-brand">
+                <div class="auth-brand-logo">
+                    <i class="bi bi-hospital"></i>
                 </div>
-
-                <!-- mobile intro -->
-                <div class="d-md-none text-center mt-4 text-muted small">
-                    <i class="bi bi-heart-pulse-fill text-primary-custom me-1"></i>
-                    Hệ thống bệnh viện - An toàn - Chuyên nghiệp - Hiện đại
+                <div class="auth-brand-text">
+                    <h1>DoAnWeb</h1>
+                    <p>Hospital Management System</p>
                 </div>
             </div>
+
+            <div class="auth-hero-content">
+                <h2>Đăng nhập hệ thống</h2>
+                <p>
+                    Truy cập nền tảng quản lý bệnh viện để theo dõi lịch hẹn,
+                    hồ sơ và các nghiệp vụ vận hành một cách chuyên nghiệp.
+                </p>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section class="auth-form-section">
+        <div class="container">
+            <div class="auth-form-card">
+                <div class="auth-card-topbar">
+                    <a asp-controller="Home" asp-action="Index" class="auth-back-home">
+                        <i class="bi bi-arrow-left-short"></i>
+                        <span>Quay về trang chủ</span>
+                    </a>
+                </div>
+
+                <div class="auth-form-header">
+                    <div class="auth-form-icon">
+                        <i class="bi bi-person-circle"></i>
+                    </div>
+                    <h3>Đăng nhập</h3>
+                    <p>Vui lòng nhập thông tin tài khoản của bạn</p>
+                </div>
+
+                <form asp-action="Login" method="post" class="auth-form">
+                    <div asp-validation-summary="All" class="validation-summary-errors"></div>
+
+                    <div class="form-group-custom">
+                        <label asp-for="Email" class="form-label auth-label"></label>
+                        <input asp-for="Email" class="form-control auth-input" placeholder="Nhập email của bạn" />
+                        <span asp-validation-for="Email" class="text-danger field-error"></span>
+                    </div>
+
+                    <div class="form-group-custom">
+                        <label asp-for="Password" class="form-label auth-label"></label>
+                        <input asp-for="Password" class="form-control auth-input" placeholder="Nhập mật khẩu" />
+                        <span asp-validation-for="Password" class="text-danger field-error"></span>
+                    </div>
+
+                    <button type="submit" class="btn auth-submit-btn">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Đăng nhập
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="auth-footer">
+        <div class="container text-center">
+            Copyright &copy; 2026 DoAnWeb. Nền tảng quản lý bệnh viện chuyên nghiệp.
+        </div>
+    </footer>
 </div>
 
-@section Scripts{
+@section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

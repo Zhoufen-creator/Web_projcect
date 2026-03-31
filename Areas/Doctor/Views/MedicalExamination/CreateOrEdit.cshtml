@@ -4,99 +4,190 @@
     ViewData["Title"] = "Phiếu khám bệnh";
 }
 
-<div class="container mt-4">
-    <h2 class="mb-4">Phiếu khám bệnh</h2>
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success doctor-alert mb-4">
+        <i class="bi bi-check-circle-fill me-2"></i>@TempData["Success"]
+    </div>
+}
 
-    <div class="alert alert-info">
-        <strong>Bệnh nhân:</strong> @ViewBag.PatientName <br />
-        <strong>Lịch hẹn:</strong> @(((DateTime)ViewBag.AppointmentTime).ToString("dd/MM/yyyy HH:mm"))
+<section class="doctor-hero">
+    <div class="doctor-card doctor-hero-main">
+        <div class="doctor-page-badge">
+            <i class="bi bi-file-earmark-medical-fill"></i>
+            <span>Biểu mẫu khám bệnh điện tử</span>
+        </div>
+
+        <h2>Ghi nhận triệu chứng, chẩn đoán, thuốc và dịch vụ trong một giao diện tập trung, rõ ràng</h2>
+
+        <p>
+            Màn hình này giúp bác sĩ xử lý toàn bộ nội dung khám trong một luồng thao tác liền mạch.
+            Dữ liệu được chia theo từng nhóm để dễ nhập, dễ kiểm tra và hạn chế sót thông tin khi khám bệnh.
+        </p>
+
+        <div class="doctor-hero-actions">
+            <a asp-area="Doctor" asp-controller="MedicalExamination" asp-action="Index" class="doctor-btn doctor-btn-primary">
+                <i class="bi bi-clipboard2-pulse"></i>
+                <span>Danh sách phiếu khám</span>
+            </a>
+
+            <a asp-area="Doctor" asp-controller="Appointment" asp-action="Today" class="doctor-btn doctor-btn-outline">
+                <i class="bi bi-calendar-check"></i>
+                <span>Lịch khám hôm nay</span>
+            </a>
+        </div>
     </div>
 
-    <form asp-action="CreateOrEdit" method="post">
-        <input type="hidden" asp-for="Id" />
-        <input type="hidden" asp-for="AppointmentId" />
-        <input type="hidden" asp-for="PatientId" />
-        <input type="hidden" asp-for="DoctorId" />
+    <aside class="doctor-highlight-card">
+        <h3>Thông tin tiếp nhận</h3>
+        <p>
+            Xác nhận nhanh bệnh nhân và thời gian hẹn trước khi hoàn tất nội dung khám chữa bệnh.
+        </p>
 
-        <div class="card shadow-sm mb-4">
-            <div class="card-header bg-primary text-white">
-                Nội dung khám
+        <div class="doctor-highlight-list">
+            <div class="doctor-highlight-item">
+                <i class="bi bi-person-lines-fill"></i>
+                <div>
+                    <strong>Bệnh nhân</strong>
+                    <span>@ViewBag.PatientName</span>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <label asp-for="Symptoms" class="form-label"></label>
-                    <textarea asp-for="Symptoms" class="form-control"></textarea>
-                </div>
 
-                <div class="mb-3">
-                    <label asp-for="Diagnosis" class="form-label"></label>
-                    <textarea asp-for="Diagnosis" class="form-control"></textarea>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="DoctorAvoid" class="form-label"></label>
-                    <textarea asp-for="DoctorAvoid" class="form-control"></textarea>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="Status" class="form-label">Trạng thái</label>
-                    <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<DoAnWeb.Models.ExaminationStatus>()"></select>
+            <div class="doctor-highlight-item">
+                <i class="bi bi-alarm"></i>
+                <div>
+                    <strong>Thời gian hẹn</strong>
+                    <span>@(((DateTime)ViewBag.AppointmentTime).ToString("dd/MM/yyyy HH:mm"))</span>
                 </div>
             </div>
         </div>
+    </aside>
+</section>
 
-        <div class="card shadow-sm mb-4">
-            <div class="card-header bg-success text-white">
-                Kê đơn thuốc
-            </div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <label asp-for="SelectedMedicineId" class="form-label">Thuốc</label>
-                    <select asp-for="SelectedMedicineId" class="form-control" asp-items="Model.Medicines">
-                        <option value="">-- Chọn thuốc --</option>
-                    </select>
+<form asp-action="CreateOrEdit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="AppointmentId" />
+    <input type="hidden" asp-for="PatientId" />
+    <input type="hidden" asp-for="DoctorId" />
+
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger doctor-alert mb-4"></div>
+
+    <section class="doctor-form-card mb-4">
+        <div class="doctor-form-head">
+            <h3>Nội dung khám bệnh</h3>
+            <p>Nhập các thông tin chuyên môn cốt lõi trong buổi khám hiện tại.</p>
+        </div>
+
+        <div class="doctor-form-body">
+            <div class="doctor-form-grid">
+                <div class="doctor-form-group doctor-form-group-full">
+                    <label asp-for="Symptoms" class="doctor-label"></label>
+                    <textarea asp-for="Symptoms" class="doctor-textarea"></textarea>
+                    <span asp-validation-for="Symptoms" class="text-danger"></span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="MedicineQuantity" class="form-label">Số lượng</label>
-                    <input asp-for="MedicineQuantity" class="form-control" />
+                <div class="doctor-form-group doctor-form-group-full">
+                    <label asp-for="Diagnosis" class="doctor-label"></label>
+                    <textarea asp-for="Diagnosis" class="doctor-textarea"></textarea>
+                    <span asp-validation-for="Diagnosis" class="text-danger"></span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="MedicineDosage" class="form-label">Liều dùng</label>
-                    <input asp-for="MedicineDosage" class="form-control" />
+                <div class="doctor-form-group doctor-form-group-full">
+                    <label asp-for="DoctorAvoid" class="doctor-label"></label>
+                    <textarea asp-for="DoctorAvoid" class="doctor-textarea"></textarea>
+                    <span asp-validation-for="DoctorAvoid" class="text-danger"></span>
+                </div>
+
+                <div class="doctor-form-group">
+                    <label asp-for="Status" class="doctor-label">Trạng thái</label>
+                    <select asp-for="Status" class="doctor-select"
+                            asp-items="Html.GetEnumSelectList<DoAnWeb.Models.ExaminationStatus>()"></select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="card shadow-sm mb-4">
-            <div class="card-header bg-warning">
-                Ghi dịch vụ sử dụng
+    <div class="doctor-form-split">
+        <section class="doctor-form-card">
+            <div class="doctor-form-head">
+                <h3>Kê đơn thuốc</h3>
+                <p>Chọn thuốc, số lượng và hướng dẫn sử dụng cho bệnh nhân.</p>
             </div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <label asp-for="SelectedMedicalServiceId" class="form-label">Dịch vụ</label>
-                    <select asp-for="SelectedMedicalServiceId" class="form-control" asp-items="Model.Services">
-                        <option value="">-- Chọn dịch vụ --</option>
-                    </select>
-                </div>
 
-                <div class="mb-3">
-                    <label asp-for="ServiceQuantity" class="form-label">Số lượng</label>
-                    <input asp-for="ServiceQuantity" class="form-control" />
-                </div>
+            <div class="doctor-form-body">
+                <div class="doctor-form-grid">
+                    <div class="doctor-form-group doctor-form-group-full">
+                        <label asp-for="SelectedMedicineId" class="doctor-label">Thuốc</label>
+                        <select asp-for="SelectedMedicineId" class="doctor-select" asp-items="Model.Medicines">
+                            <option value="">-- Chọn thuốc --</option>
+                        </select>
+                        <span asp-validation-for="SelectedMedicineId" class="text-danger"></span>
+                    </div>
 
-                <div class="mb-3">
-                    <label asp-for="ServiceResult" class="form-label">Kết quả dịch vụ</label>
-                    <textarea asp-for="ServiceResult" class="form-control"></textarea>
+                    <div class="doctor-form-group">
+                        <label asp-for="MedicineQuantity" class="doctor-label">Số lượng</label>
+                        <input asp-for="MedicineQuantity" class="doctor-input" />
+                        <span asp-validation-for="MedicineQuantity" class="text-danger"></span>
+                    </div>
+
+                    <div class="doctor-form-group">
+                        <label asp-for="MedicineDosage" class="doctor-label">Liều dùng</label>
+                        <input asp-for="MedicineDosage" class="doctor-input" />
+                        <span asp-validation-for="MedicineDosage" class="text-danger"></span>
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="doctor-form-card">
+            <div class="doctor-form-head">
+                <h3>Ghi nhận dịch vụ sử dụng</h3>
+                <p>Thêm các dịch vụ y tế liên quan trong buổi khám hiện tại.</p>
+            </div>
+
+            <div class="doctor-form-body">
+                <div class="doctor-form-grid">
+                    <div class="doctor-form-group doctor-form-group-full">
+                        <label asp-for="SelectedMedicalServiceId" class="doctor-label">Dịch vụ</label>
+                        <select asp-for="SelectedMedicalServiceId" class="doctor-select" asp-items="Model.Services">
+                            <option value="">-- Chọn dịch vụ --</option>
+                        </select>
+                        <span asp-validation-for="SelectedMedicalServiceId" class="text-danger"></span>
+                    </div>
+
+                    <div class="doctor-form-group">
+                        <label asp-for="ServiceQuantity" class="doctor-label">Số lượng</label>
+                        <input asp-for="ServiceQuantity" class="doctor-input" />
+                        <span asp-validation-for="ServiceQuantity" class="text-danger"></span>
+                    </div>
+
+                    <div class="doctor-form-group doctor-form-group-full">
+                        <label asp-for="ServiceResult" class="doctor-label">Kết quả dịch vụ</label>
+                        <textarea asp-for="ServiceResult" class="doctor-textarea"></textarea>
+                        <span asp-validation-for="ServiceResult" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="doctor-form-card mt-4">
+        <div class="doctor-form-body">
+            <div class="doctor-form-actions">
+                <button type="submit" class="doctor-btn doctor-btn-main">
+                    <i class="bi bi-floppy-fill"></i>
+                    <span>Lưu phiếu khám</span>
+                </button>
+
+                <a asp-area="Doctor" asp-controller="MedicalExamination" asp-action="Index" class="doctor-btn doctor-btn-light">
+                    <i class="bi bi-arrow-left-circle"></i>
+                    <span>Quay lại</span>
+                </a>
             </div>
         </div>
-
-        <button type="submit" class="btn btn-primary">Lưu phiếu khám</button>
-        <a asp-area="Doctor" asp-controller="MedicalExamination" asp-action="Index" class="btn btn-secondary">Quay lại</a>
-    </form>
-</div>
+    </section>
+</form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

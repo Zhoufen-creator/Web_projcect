@@ -4,28 +4,56 @@
     ViewData["Title"] = "Xóa ca làm";
 }
 
-<h2 class="mb-3 text-danger">Xóa ca làm bác sĩ</h2>
-
-<div class="alert alert-warning">
-    Bạn có chắc chắn muốn xóa ca làm này không?
+<div class="employee-page-top">
+    <div>
+        <div class="employee-topbar-badge employee-badge-danger">
+            <i class="bi bi-exclamation-triangle"></i>
+            Xóa ca làm
+        </div>
+        <h1 class="employee-topbar-title">Xác nhận xóa ca làm bác sĩ</h1>
+    </div>
 </div>
 
-<dl class="row">
-    <dt class="col-sm-3">Bác sĩ</dt>
-    <dd class="col-sm-9">@Model.Doctor.User.Name</dd>
+<div class="employee-delete-card">
+    <div class="employee-delete-icon">
+        <i class="bi bi-trash3"></i>
+    </div>
 
-    <dt class="col-sm-3">Chuyên khoa</dt>
-    <dd class="col-sm-9">@Model.Doctor.Specialty</dd>
+    <h3>Bạn chắc chắn muốn xóa ca làm này?</h3>
+    <p>Thao tác này sẽ xóa ca trực khỏi hệ thống quản lý. Hãy kiểm tra kỹ trước khi xác nhận.</p>
 
-    <dt class="col-sm-3">Bắt đầu</dt>
-    <dd class="col-sm-9">@Model.StartTime.ToString("dd/MM/yyyy HH:mm")</dd>
+    <div class="employee-delete-info">
+        <div class="employee-delete-row">
+            <span>Bác sĩ</span>
+            <strong>@Model.Doctor.User.Name</strong>
+        </div>
 
-    <dt class="col-sm-3">Kết thúc</dt>
-    <dd class="col-sm-9">@Model.EndTime.ToString("dd/MM/yyyy HH:mm")</dd>
-</dl>
+        <div class="employee-delete-row">
+            <span>Chuyên khoa</span>
+            <strong>@Model.Doctor.Specialty</strong>
+        </div>
 
-<form asp-area="Employee" asp-controller="DoctorSchedules" asp-action="Delete" method="post">
-    <input type="hidden" asp-for="Id" />
-    <button type="submit" class="btn btn-danger">Xóa</button>
-    <a asp-area="Employee" asp-controller="DoctorSchedules" asp-action="Index" class="btn btn-secondary">Hủy</a>
-</form>
+        <div class="employee-delete-row">
+            <span>Bắt đầu</span>
+            <strong>@Model.StartTime.ToString("dd/MM/yyyy HH:mm")</strong>
+        </div>
+
+        <div class="employee-delete-row">
+            <span>Kết thúc</span>
+            <strong>@Model.EndTime.ToString("dd/MM/yyyy HH:mm")</strong>
+        </div>
+    </div>
+
+    <form asp-area="Employee" asp-controller="DoctorSchedules" asp-action="Delete" method="post" class="employee-delete-actions">
+        <input type="hidden" asp-for="Id" />
+
+        <button type="submit" class="employee-danger-btn">
+            <i class="bi bi-trash3"></i>
+            Xóa ca làm
+        </button>
+
+        <a asp-area="Employee" asp-controller="DoctorSchedules" asp-action="Index" class="employee-secondary-btn">
+            Hủy
+        </a>
+    </form>
+</div>

@@ -4,34 +4,184 @@
     ViewData["Title"] = "Lịch hẹn khám";
 }
 
-<div class="container mt-4">
-    <h2>Lịch hẹn khám</h2>
+@section Styles {
+    <style>
+        .patient-page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+        }
 
-    <a asp-action="Create" class="btn btn-success mb-3">+ Đặt lịch mới</a>
+        .patient-page-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #143b73;
+            margin: 0 0 8px;
+        }
 
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Ngày khám</th>
-                <th>Bác sĩ</th>
-                <th>Chuyên khoa</th>
-                <th>Lý do khám</th>
-                <th>Trạng thái</th>
-                <th>Check-in</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+        .patient-page-header p {
+            margin: 0;
+            color: #71839a;
+        }
+
+        .patient-page-btn {
+            min-height: 48px;
+            padding: 0 18px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #0f4c97 0%, #2f7fe6 100%);
+            color: #fff;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 700;
+        }
+
+        .patient-page-btn:hover {
+            color: #fff;
+        }
+
+        .patient-table-card {
+            background: #fff;
+            border: 1px solid #e8eef6;
+            border-radius: 24px;
+            box-shadow: 0 12px 30px rgba(15, 76, 151, 0.06);
+            overflow: hidden;
+        }
+
+        .patient-table-head {
+            padding: 22px 24px 16px;
+            border-bottom: 1px solid #eef3f8;
+        }
+
+        .patient-table-head h3 {
+            margin: 0 0 6px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #163b72;
+        }
+
+        .patient-table-head p {
+            margin: 0;
+            color: #72839a;
+            font-size: 0.94rem;
+        }
+
+        .patient-table-modern {
+            margin-bottom: 0;
+        }
+
+        .patient-table-modern thead th {
+            background: #f3f8fd;
+            color: #2d4e78;
+            font-size: 0.92rem;
+            font-weight: 800;
+            border: none;
+            padding: 15px 16px;
+            white-space: nowrap;
+        }
+
+        .patient-table-modern tbody td {
+            border-color: #eef3f8;
+            padding: 16px;
+            vertical-align: middle;
+            color: #334e72;
+        }
+
+        .patient-status-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 34px;
+            padding: 0 12px;
+            border-radius: 999px;
+            background: #edf5ff;
+            color: #0f4c97;
+            font-size: 0.85rem;
+            font-weight: 800;
+        }
+
+        .patient-checkin-done {
+            background: #e9f9f0;
+            color: #16864f;
+        }
+
+        .patient-checkin-wait {
+            background: #fff4e9;
+            color: #c97a12;
+        }
+    </style>
+}
+
+<div class="patient-page-header">
+    <div>
+        <h2>Danh sách lịch hẹn</h2>
+        <p>Theo dõi toàn bộ lịch khám đã đăng ký trong hệ thống bệnh viện.</p>
+    </div>
+
+    <a href="/Patient/Appointment/Create" class="patient-page-btn">
+        <i class="fa-solid fa-calendar-plus"></i>
+        Đặt lịch mới
+    </a>
+</div>
+
+<div class="patient-table-card">
+    <div class="patient-table-head">
+        <h3>Lịch hẹn khám</h3>
+        <p>Thông tin lịch hẹn, trạng thái xử lý và tình trạng check-in.</p>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table patient-table-modern align-middle">
+            <thead>
                 <tr>
-                    <td>@item.ScheduledDate.ToString("dd/MM/yyyy HH:mm")</td>
-                    <td>@item.Doctor.User.Name</td>
-                    <td>@item.Doctor.Specialty</td>
-                    <td>@item.ReasonForVisit</td>
-                    <td>@item.Status</td>
-                    <td>@(item.IsCheckedIn ? "Đã check-in" : "Chưa")</td>
+                    <th>Ngày khám</th>
+                    <th>Bác sĩ</th>
+                    <th>Chuyên khoa</th>
+                    <th>Lý do khám</th>
+                    <th>Trạng thái</th>
+                    <th>Check-in</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ScheduledDate.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>@(item.Doctor?.User?.Name ?? "Chưa cập nhật")</td>
+                            <td>@(item.Doctor?.Specialty ?? "Chưa cập nhật")</td>
+                            <td>@(string.IsNullOrWhiteSpace(item.ReasonForVisit) ? "Không có ghi chú" : item.ReasonForVisit)</td>
+                            <td>
+                                <span class="patient-status-badge">@item.Status</span>
+                            </td>
+                            <td>
+                                @if (item.IsCheckedIn)
+                                {
+                                    <span class="patient-status-badge patient-checkin-done">Đã check-in</span>
+                                }
+                                else
+                                {
+                                    <span class="patient-status-badge patient-checkin-wait">Chưa check-in</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">
+                            Bạn chưa có lịch hẹn nào.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

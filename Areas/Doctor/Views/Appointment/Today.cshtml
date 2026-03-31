@@ -4,19 +4,64 @@
     ViewData["Title"] = "Lịch khám hôm nay";
 }
 
-<div class="container mt-4">
-    <h2 class="mb-4">Lịch khám hôm nay</h2>
+<section class="doctor-hero">
+    <div class="doctor-card doctor-hero-main">
+        <div class="doctor-page-badge">
+            <i class="bi bi-calendar-day"></i>
+            <span>Lịch khám trong ngày</span>
+        </div>
 
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <table class="table table-bordered table-striped">
+        <h2>Danh sách bệnh nhân cần tiếp nhận hôm nay được hiển thị gọn, rõ và sẵn sàng thao tác</h2>
+
+        <p>
+            Đây là màn hình ưu tiên cho ca trực hằng ngày. Bác sĩ có thể xem nhanh thời gian khám,
+            lý do khám và mở ngay phiếu khám để xử lý liền mạch ngay tại thời điểm tiếp nhận bệnh nhân.
+        </p>
+    </div>
+
+    <aside class="doctor-highlight-card">
+        <h3>Trọng tâm của hôm nay</h3>
+        <p>
+            Toàn bộ lịch khám trong ngày được gom vào một nơi để bác sĩ xử lý nhanh và đúng thứ tự.
+        </p>
+
+        <div class="doctor-highlight-list">
+            <div class="doctor-highlight-item">
+                <i class="bi bi-alarm"></i>
+                <div>
+                    <strong>Theo dõi theo khung giờ</strong>
+                    <span>Giảm rối khi số lượng bệnh nhân trong ngày tăng lên.</span>
+                </div>
+            </div>
+
+            <div class="doctor-highlight-item">
+                <i class="bi bi-capsule-pill"></i>
+                <div>
+                    <strong>Mở khám ngay</strong>
+                    <span>Đi thẳng vào phiếu khám để ghi chẩn đoán, kê thuốc và lưu hồ sơ.</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+</section>
+
+<section class="doctor-table-card">
+    <div class="doctor-table-head">
+        <h3>Lịch khám hôm nay</h3>
+        <p>Danh sách lịch khám được sắp theo giờ để phục vụ thao tác tiếp nhận và khám bệnh trong ngày.</p>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="doctor-table-wrap">
+            <table class="doctor-table">
                 <thead>
                     <tr>
                         <th>Thời gian</th>
                         <th>Bệnh nhân</th>
                         <th>Lý do khám</th>
                         <th>Trạng thái</th>
-                        <th></th>
+                        <th>Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,18 +69,42 @@
                     {
                         <tr>
                             <td>@item.ScheduledDate.ToString("dd/MM/yyyy HH:mm")</td>
-                            <td>@item.Patient.User.Name</td>
-                            <td>@item.ReasonForVisit</td>
-                            <td>@item.Status</td>
                             <td>
-                                <a asp-area="Doctor" asp-controller="MedicalExamination" asp-action="CreateOrEdit" asp-route-appointmentId="@item.Id" class="btn btn-sm btn-success">
-                                    Khám ngay
-                                </a>
+                                <div class="doctor-patient-box">
+                                    <strong>@item.Patient?.User?.Name</strong>
+                                    <span>Mã bệnh nhân: @item.PatientId</span>
+                                </div>
+                            </td>
+                            <td>@item.ReasonForVisit</td>
+                            <td>
+                                <span class="doctor-status-badge">@item.Status</span>
+                            </td>
+                            <td>
+                                <div class="doctor-table-actions">
+                                    <a asp-area="Doctor"
+                                       asp-controller="MedicalExamination"
+                                       asp-action="CreateOrEdit"
+                                       asp-route-appointmentId="@item.Id"
+                                       class="doctor-action-btn doctor-action-success">
+                                        <i class="bi bi-heart-pulse"></i>
+                                        <span>Khám ngay</span>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
         </div>
-    </div>
-</div>
+    }
+    else
+    {
+        <div class="doctor-empty">
+            <div class="doctor-empty-icon">
+                <i class="bi bi-calendar-event"></i>
+            </div>
+            <h4>Hôm nay chưa có lịch khám</h4>
+            <p>Hiện chưa có bệnh nhân nào được lên lịch khám trong ngày hôm nay.</p>
+        </div>
+    }
+</section>

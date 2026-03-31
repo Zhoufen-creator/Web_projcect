@@ -5,45 +5,71 @@
     ViewData["Title"] = "Xử lý lịch hẹn";
 }
 
-<h2 class="mb-3">Xử lý lịch hẹn khám</h2>
+<div class="employee-page-top">
+    <div>
+        <div class="employee-topbar-badge">
+            <i class="bi bi-pencil-square"></i>
+            Xử lý lịch hẹn
+        </div>
+        <h1 class="employee-topbar-title">Cập nhật lịch hẹn khám</h1>
+    </div>
+</div>
 
-<form asp-area="Employee" asp-controller="Appointments" asp-action="Edit" method="post">
-    <input asp-for="Id" type="hidden" />
-
-    <div asp-validation-summary="All" class="text-danger mb-3"></div>
-
-    <div class="mb-3">
-        <label class="form-label">Bệnh nhân</label>
-        <input asp-for="PatientName" class="form-control" readonly />
+<div class="employee-form-card">
+    <div class="employee-form-head">
+        <h3>Thông tin lịch hẹn</h3>
+        <p>Phân công bác sĩ, cập nhật thời gian khám và trạng thái xử lý cho bệnh nhân.</p>
     </div>
 
-    <div class="mb-3">
-        <label class="form-label">Lý do khám</label>
-        <textarea asp-for="ReasonForVisit" class="form-control" rows="3" readonly></textarea>
-    </div>
+    <form asp-area="Employee" asp-controller="Appointments" asp-action="Edit" method="post" class="employee-form-body">
+        <input asp-for="Id" type="hidden" />
 
-    <div class="mb-3">
-        <label class="form-label">Bác sĩ phụ trách</label>
-        <select asp-for="DoctorId" asp-items="ViewBag.DoctorId" class="form-select">
-            <option value="">-- Chọn bác sĩ --</option>
-        </select>
-        <span asp-validation-for="DoctorId" class="text-danger"></span>
-    </div>
+        <div asp-validation-summary="All" class="alert alert-danger employee-validation"></div>
 
-    <div class="mb-3">
-        <label class="form-label">Thời gian khám</label>
-        <input asp-for="ScheduledDate" type="datetime-local" class="form-control" />
-        <span asp-validation-for="ScheduledDate" class="text-danger"></span>
-    </div>
+        <div class="employee-form-grid">
+            <div class="employee-form-group">
+                <label class="employee-label">Bệnh nhân</label>
+                <input asp-for="PatientName" class="employee-input" readonly />
+            </div>
 
-    <div class="mb-3">
-        <label class="form-label">Trạng thái</label>
-        <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<AppointmentStatus>()"></select>
-    </div>
+            <div class="employee-form-group">
+                <label class="employee-label">Bác sĩ phụ trách</label>
+                <select asp-for="DoctorId" asp-items="ViewBag.DoctorId" class="employee-select">
+                    <option value="">-- Chọn bác sĩ --</option>
+                </select>
+                <span asp-validation-for="DoctorId" class="text-danger"></span>
+            </div>
 
-    <button type="submit" class="btn btn-success">Lưu thay đổi</button>
-    <a asp-area="Employee" asp-controller="Appointments" asp-action="Index" class="btn btn-secondary">Quay lại</a>
-</form>
+            <div class="employee-form-group employee-form-group-full">
+                <label class="employee-label">Lý do khám</label>
+                <textarea asp-for="ReasonForVisit" class="employee-textarea" rows="5" readonly></textarea>
+            </div>
+
+            <div class="employee-form-group">
+                <label class="employee-label">Thời gian khám</label>
+                <input asp-for="ScheduledDate" type="datetime-local" class="employee-input" />
+                <span asp-validation-for="ScheduledDate" class="text-danger"></span>
+            </div>
+
+            <div class="employee-form-group">
+                <label class="employee-label">Trạng thái</label>
+                <select asp-for="Status" asp-items="Html.GetEnumSelectList<AppointmentStatus>()" class="employee-select"></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <div class="employee-form-actions">
+                <button type="submit" class="employee-primary-btn">
+                    <i class="bi bi-check2-circle"></i>
+                    Lưu thay đổi
+                </button>
+
+                <a asp-area="Employee" asp-controller="Appointments" asp-action="Index" class="employee-secondary-btn">
+                    Quay lại
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

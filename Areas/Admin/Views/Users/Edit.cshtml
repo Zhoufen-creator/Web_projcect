@@ -1,60 +1,102 @@
 @model DoAnWeb.Areas.Admin.ViewModels.UserViewModel
+@using Microsoft.AspNetCore.Mvc.Rendering
 
 @{
-    ViewData["Title"] = "Sửa tài khoản";
+    ViewData["Title"] = "Chỉnh sửa tài khoản";
 }
 
-<div class="container mt-4">
-    <h2>Sửa tài khoản</h2>
+<section class="admin-page-section">
+    <div class="container-xxl">
+        <div class="admin-page-header">
+            <div>
+                <span class="admin-page-badge">Admin Panel</span>
+                <h1>Chỉnh sửa tài khoản</h1>
+                <p>Cập nhật thông tin người dùng và vai trò truy cập trong hệ thống.</p>
+            </div>
 
-    <form asp-action="Edit" method="post">
-        <input type="hidden" asp-for="Id" />
-        <div asp-validation-summary="All" class="text-danger"></div>
-
-        <div class="mb-3">
-            <label asp-for="Name"></label>
-            <input asp-for="Name" class="form-control" />
+            <a asp-action="Index" class="admin-outline-btn">
+                <i class="bi bi-arrow-left"></i>
+                Quay lại danh sách
+            </a>
         </div>
 
-        <div class="mb-3">
-            <label asp-for="Email"></label>
-            <input asp-for="Email" class="form-control" />
-        </div>
+        <div class="admin-form-wrapper">
+            <div class="admin-form-card">
+                <div class="admin-form-card-head">
+                    <h3>Thông tin tài khoản</h3>
+                    <p>Chỉnh sửa đầy đủ thông tin hồ sơ người dùng.</p>
+                </div>
 
-        <div class="mb-3">
-            <label asp-for="PhoneNumber"></label>
-            <input asp-for="PhoneNumber" class="form-control" />
-        </div>
+                <form asp-action="Edit" method="post" class="admin-form-grid">
+                    <input type="hidden" asp-for="Id" />
+                    <div asp-validation-summary="All" class="alert alert-danger admin-validation"></div>
 
-        <div class="mb-3">
-            <label asp-for="Gender"></label>
-            <input asp-for="Gender" class="form-control" />
-        </div>
+                    <div class="admin-form-group">
+                        <label asp-for="Name" class="form-label">Họ và tên</label>
+                        <input asp-for="Name" class="form-control admin-input" placeholder="Nhập họ và tên" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
 
-        <div class="mb-3">
-            <label asp-for="DateOfBirth"></label>
-            <input asp-for="DateOfBirth" type="date" class="form-control" />
-        </div>
+                    <div class="admin-form-group">
+                        <label asp-for="Email" class="form-label">Email</label>
+                        <input asp-for="Email" class="form-control admin-input" placeholder="Nhập email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
 
-        <div class="mb-3">
-            <label asp-for="Address"></label>
-            <input asp-for="Address" class="form-control" />
-        </div>
+                    <div class="admin-form-group">
+                        <label asp-for="PhoneNumber" class="form-label">Số điện thoại</label>
+                        <input asp-for="PhoneNumber" class="form-control admin-input" placeholder="Nhập số điện thoại" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
 
-        <div class="mb-3">
-            <label asp-for="Role"></label>
-            <select asp-for="Role" class="form-control" asp-items="@(new SelectList(ViewBag.Roles))"></select>
-        </div>
+                    <div class="admin-form-group">
+                        <label asp-for="Gender" class="form-label">Giới tính</label>
+                        <input asp-for="Gender" class="form-control admin-input" placeholder="Ví dụ: Nam / Nữ" />
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    </div>
 
-        <div class="form-check mb-3">
-            <input asp-for="IsSpam" class="form-check-input" />
-            <label asp-for="IsSpam" class="form-check-label"></label>
-        </div>
+                    <div class="admin-form-group">
+                        <label asp-for="DateOfBirth" class="form-label">Ngày sinh</label>
+                        <input asp-for="DateOfBirth" type="date" class="form-control admin-input" />
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                    </div>
 
-        <button type="submit" class="btn btn-primary">Cập nhật</button>
-        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
-    </form>
-</div>
+                    <div class="admin-form-group">
+                        <label asp-for="Role" class="form-label">Vai trò</label>
+                        <select asp-for="Role" class="form-select admin-input" asp-items="@(new SelectList((IEnumerable<string>)ViewBag.Roles))">
+                            <option value="">-- Chọn vai trò --</option>
+                        </select>
+                        <span asp-validation-for="Role" class="text-danger"></span>
+                    </div>
+
+                    <div class="admin-form-group admin-form-group-full">
+                        <label asp-for="Address" class="form-label">Địa chỉ</label>
+                        <input asp-for="Address" class="form-control admin-input" placeholder="Nhập địa chỉ liên hệ" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="admin-form-group admin-form-group-full">
+                        <div class="admin-check-card">
+                            <input asp-for="IsSpam" class="form-check-input" />
+                            <label asp-for="IsSpam" class="form-check-label">Đánh dấu tài khoản spam</label>
+                        </div>
+                    </div>
+
+                    <div class="admin-form-actions">
+                        <button type="submit" class="admin-primary-btn">
+                            <i class="bi bi-save2"></i>
+                            Cập nhật tài khoản
+                        </button>
+
+                        <a asp-action="Index" class="admin-secondary-btn">
+                            Hủy
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

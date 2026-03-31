@@ -23,7 +23,8 @@ namespace DoAnWeb.Areas.Patient.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
-            if (user == null) return RedirectToAction("Login", "Account", new { area = "" });
+            if (user == null)
+                return RedirectToAction("Login", "Account", new { area = "" });
 
             var patient = await _context.Patients
                 .Include(p => p.User)
@@ -31,12 +32,22 @@ namespace DoAnWeb.Areas.Patient.Controllers
 
             if (patient == null)
             {
-                TempData["Error"] = "Không tìm thấy hồ sơ bệnh nhân.";
-                return RedirectToAction("Index", "Home", new { area = "" });
+                patient = new DoAnWeb.Models.Patient
+                {
+                    UserId = user.Id
+                };
+
+                _context.Patients.Add(patient);
+                await _context.SaveChangesAsync();
+
+                patient = await _context.Patients
+                    .Include(p => p.User)
+                    .FirstOrDefaultAsync(p => p.UserId == user.Id);
             }
 
             var upcomingAppointments = await _context.Appointments
                 .Include(a => a.Doctor)
+                    .ThenInclude(d => d.User)
                 .Where(a => a.PatientId == patient.Id && a.ScheduledDate >= DateTime.Now)
                 .OrderBy(a => a.ScheduledDate)
                 .Take(5)

@@ -1,0 +1,107 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<DoAnWeb.Models.ApplicationUser> SignInManager
+@inject UserManager<DoAnWeb.Models.ApplicationUser> UserManager
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Phân hệ Bác sĩ | An Phúc Hospital</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DoAnWeb.styles.css" asp-append-version="true" />
+</head>
+<body class="doctor-body">
+    <div class="doctor-shell">
+        <aside class="doctor-sidebar">
+            <a asp-area="Doctor" asp-controller="Dashboard" asp-action="Index" class="doctor-brand">
+                <div class="doctor-brand-icon">
+                    <i class="bi bi-heart-pulse-fill"></i>
+                </div>
+                <div class="doctor-brand-text">
+                    <h2>An Phúc Hospital</h2>
+                    <p>Phân hệ Bác sĩ</p>
+                </div>
+            </a>
+
+            <div class="doctor-user-card">
+                <div class="doctor-user-avatar">
+                    <i class="bi bi-person-badge-fill"></i>
+                </div>
+                <div class="doctor-user-info">
+                    <strong>@(User?.Identity?.Name ?? "Bác sĩ")</strong>
+                    <span>Bác sĩ điều trị</span>
+                </div>
+            </div>
+
+            <nav class="doctor-nav">
+                <a asp-area="Doctor" asp-controller="Dashboard" asp-action="Index"
+                   class="doctor-nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" ? "active" : "")">
+                    <i class="bi bi-grid-1x2-fill"></i>
+                    <span>Tổng quan</span>
+                </a>
+
+                <a asp-area="Doctor" asp-controller="Appointment" asp-action="Index"
+                   class="doctor-nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Appointment" && ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "active" : "")">
+                    <i class="bi bi-calendar2-week-fill"></i>
+                    <span>Tất cả lịch khám</span>
+                </a>
+
+                <a asp-area="Doctor" asp-controller="Appointment" asp-action="Today"
+                   class="doctor-nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Appointment" && ViewContext.RouteData.Values["action"]?.ToString() == "Today" ? "active" : "")">
+                    <i class="bi bi-calendar-check-fill"></i>
+                    <span>Lịch hôm nay</span>
+                </a>
+
+                <a asp-area="Doctor" asp-controller="MedicalExamination" asp-action="Index"
+                   class="doctor-nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "MedicalExamination" ? "active" : "")">
+                    <i class="bi bi-clipboard2-pulse-fill"></i>
+                    <span>Phiếu khám</span>
+                </a>
+
+                <a asp-area="Doctor" asp-controller="Profile" asp-action="Index"
+                   class="doctor-nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Profile" ? "active" : "")">
+                    <i class="bi bi-person-vcard-fill"></i>
+                    <span>Hồ sơ bác sĩ</span>
+                </a>
+            </nav>
+
+            <div class="doctor-side-footer">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="doctor-side-btn doctor-side-btn-light">
+                    <i class="bi bi-house-door-fill"></i>
+                    <span>Về trang chủ</span>
+                </a>
+
+                <a asp-area="" asp-controller="Account" asp-action="Logout" class="doctor-side-btn doctor-side-btn-danger">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Đăng xuất</span>
+                </a>
+            </div>
+        </aside>
+
+        <div class="doctor-main">
+            <header class="doctor-topbar">
+                <div>
+                    <div class="doctor-topbar-badge">
+                        <i class="bi bi-shield-check"></i>
+                        <span>Hệ thống hỗ trợ khám chữa bệnh</span>
+                    </div>
+                    <h1 class="doctor-topbar-title">@ViewData["Title"]</h1>
+                </div>
+            </header>
+
+            <main class="doctor-content">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

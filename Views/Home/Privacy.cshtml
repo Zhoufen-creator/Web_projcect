@@ -1,6 +1,172 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Giới thiệu";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<section class="intro-banner">
+    <div class="container-xxl">
+        <div class="intro-banner-box">
+            <div class="intro-banner-content">
+                <span class="intro-badge">Giới thiệu bệnh viện</span>
+                <h1>Bệnh viện Đa khoa An Phúc</h1>
+                <p>
+                    Bệnh viện Đa khoa An Phúc định hướng phát triển theo mô hình bệnh viện hiện đại,
+                    lấy người bệnh làm trung tâm, chú trọng chất lượng chuyên môn, trải nghiệm dịch vụ
+                    và hiệu quả phối hợp giữa các bộ phận trong toàn hệ thống.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="intro-page-section">
+    <div class="container-xxl">
+        <div class="intro-breadcrumb">
+            <a asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
+            <span><i class="bi bi-chevron-right"></i></span>
+            <span>Giới thiệu</span>
+        </div>
+
+        <div class="intro-layout">
+            <article class="intro-article">
+                <h2 class="intro-article-title">Tổng quan về bệnh viện</h2>
+
+                <div class="intro-toc">
+                    <div class="intro-toc-title">
+                        <i class="bi bi-list-ul"></i>
+                        <span>Nội dung chính</span>
+                    </div>
+                    <ul>
+                        <li><a href="#tong-quan">Tổng quan bệnh viện</a></li>
+                        <li><a href="#tam-nhin">Tầm nhìn và sứ mệnh</a></li>
+                        <li><a href="#dich-vu">Dịch vụ và chuyên khoa</a></li>
+                        <li><a href="#cam-ket">Cam kết chất lượng</a></li>
+                    </ul>
+                </div>
+
+                <section id="tong-quan" class="intro-content-block">
+                    <h3>Tổng quan bệnh viện</h3>
+                    <p>
+                        Bệnh viện Đa khoa An Phúc là cơ sở y tế định hướng phát triển theo mô hình bệnh viện đa chuyên khoa,
+                        cung cấp các dịch vụ khám, chẩn đoán, điều trị và theo dõi sức khỏe với tiêu chí an toàn, chính xác
+                        và tận tâm.
+                    </p>
+                    <p>
+                        Với định hướng lấy người bệnh làm trung tâm, bệnh viện không ngừng chuẩn hóa quy trình tiếp nhận,
+                        thăm khám, lưu trữ hồ sơ bệnh án và điều phối thông tin giữa các bộ phận chuyên môn.
+                    </p>
+                </section>
+
+                <section id="tam-nhin" class="intro-content-block">
+                    <h3>Tầm nhìn và sứ mệnh</h3>
+                    <ul class="intro-list">
+                        <li>Cung cấp dịch vụ khám chữa bệnh an toàn, hiệu quả và minh bạch.</li>
+                        <li>Tăng cường phối hợp liên chuyên khoa để hỗ trợ chẩn đoán và điều trị chính xác.</li>
+                        <li>Đẩy mạnh ứng dụng công nghệ thông tin trong quản lý hồ sơ và lịch hẹn.</li>
+                        <li>Nâng cao trải nghiệm người bệnh thông qua quy trình tiếp nhận rõ ràng, nhanh gọn.</li>
+                    </ul>
+                </section>
+
+                <section id="dich-vu" class="intro-content-block">
+                    <h3>Dịch vụ và chuyên khoa</h3>
+                    <div class="intro-feature-grid">
+                        <div class="intro-feature-card">
+                            <div class="intro-feature-icon"><i class="bi bi-heart-pulse"></i></div>
+                            <h4>Khám nội tổng quát</h4>
+                            <p>Thăm khám, tư vấn và theo dõi sức khỏe định kỳ cho người lớn với quy trình tiếp nhận rõ ràng.</p>
+                        </div>
+
+                        <div class="intro-feature-card">
+                            <div class="intro-feature-icon"><i class="bi bi-activity"></i></div>
+                            <h4>Tim mạch - Nội tiết</h4>
+                            <p>Hỗ trợ kiểm tra, theo dõi và quản lý các bệnh lý mạn tính thường gặp ở người trưởng thành.</p>
+                        </div>
+
+                        <div class="intro-feature-card">
+                            <div class="intro-feature-icon"><i class="bi bi-gender-female"></i></div>
+                            <h4>Sản phụ khoa</h4>
+                            <p>Cung cấp dịch vụ tư vấn, thăm khám và chăm sóc sức khỏe phụ nữ theo từng giai đoạn.</p>
+                        </div>
+
+                        <div class="intro-feature-card">
+                            <div class="intro-feature-icon"><i class="bi bi-bandaid"></i></div>
+                            <h4>Ngoại khoa - Tiểu phẫu</h4>
+                            <p>Hỗ trợ tiếp nhận, đánh giá và theo dõi điều trị các trường hợp cần can thiệp ngoại khoa cơ bản.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="cam-ket" class="intro-content-block">
+                    <h3>Cam kết chất lượng</h3>
+                    <p>
+                        Bệnh viện Đa khoa An Phúc cam kết xây dựng môi trường khám chữa bệnh chuyên nghiệp,
+                        tôn trọng người bệnh, bảo đảm thông tin minh bạch và tăng cường hiệu quả phối hợp giữa các bộ phận.
+                    </p>
+                </section>
+            </article>
+
+            <aside class="intro-sidebar">
+                <div class="intro-side-card">
+                    <h4>Thông tin liên hệ</h4>
+
+                    <div class="intro-side-item">
+                        <i class="bi bi-geo-alt"></i>
+                        <div>
+                            <strong>Địa chỉ</strong>
+                            <span>86 Nguyễn Tri Phương, Phường 9, Quận 5, TP. Hồ Chí Minh</span>
+                        </div>
+                    </div>
+
+                    <div class="intro-side-item">
+                        <i class="bi bi-telephone"></i>
+                        <div>
+                            <strong>Hotline</strong>
+                            <span>1900 6868</span>
+                        </div>
+                    </div>
+
+                    <div class="intro-side-item">
+                        <i class="bi bi-ambulance"></i>
+                        <div>
+                            <strong>Cấp cứu 24/7</strong>
+                            <span>028 3888 9999</span>
+                        </div>
+                    </div>
+
+                    <div class="intro-side-item">
+                        <i class="bi bi-envelope"></i>
+                        <div>
+                            <strong>Email hỗ trợ</strong>
+                            <span>cskh@anphuchospital.vn</span>
+                        </div>
+                    </div>
+
+                    <div class="intro-side-item">
+                        <i class="bi bi-clock"></i>
+                        <div>
+                            <strong>Giờ làm việc</strong>
+                            <span>Thứ 2 - Thứ 7: 07:00 - 17:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="intro-side-card side-highlight-card">
+                    <h4>Điều hướng nhanh</h4>
+                    <p>Truy cập nhanh về trang chủ hoặc quay lại khu vực làm việc trong hệ thống.</p>
+
+                    <div class="d-flex flex-column gap-2">
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="intro-side-btn">
+                            Về trang chủ
+                        </a>
+
+                        @if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="intro-side-btn">
+                                Về Admin Dashboard
+                            </a>
+                        }
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>

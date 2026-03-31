@@ -1,6 +1,6 @@
 @using DoAnWeb.Models
 @{
-    ViewData["Title"] = "Dashboard Bệnh Nhân";
+    ViewData["Title"] = "Tổng quan bệnh nhân";
 
     var patient = ViewBag.Patient as Patient;
     var appointments = ViewBag.UpcomingAppointments as List<Appointment>;
@@ -8,70 +8,409 @@
     var totalExaminations = (int)ViewBag.TotalExaminations;
 }
 
-<div class="container mt-4">
-    <h2 class="mb-4">Trang bệnh nhân</h2>
+@section Styles {
+    <style>
+        .patient-dashboard-hero {
+            background: linear-gradient(135deg, #0f4c97 0%, #2f7fe6 100%);
+            border-radius: 28px;
+            padding: 32px;
+            color: #fff;
+            box-shadow: 0 20px 45px rgba(15, 76, 151, 0.18);
+            margin-bottom: 24px;
+        }
 
-    @if (patient != null)
-    {
-        <div class="card shadow-sm mb-4">
-            <div class="card-header bg-primary text-white">
-                Thông tin cá nhân
-            </div>
-            <div class="card-body">
-                <p><strong>Họ tên:</strong> @patient.User.Name</p>
-                <p><strong>Nhóm máu:</strong> @patient.BloodType</p>
-                <p><strong>Chiều cao:</strong> @patient.Height cm</p>
-                <p><strong>Cân nặng:</strong> @patient.Weight kg</p>
-                <p><strong>BHYT:</strong> @patient.HealthInsuranceNumber</p>
+        .patient-dashboard-hero .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.14);
+            border: 1px solid rgba(255,255,255,0.12);
+            font-size: 0.92rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
 
-                <a asp-area="Patient" asp-controller="Profile" asp-action="Index" class="btn btn-outline-primary">
-                    Xem / sửa hồ sơ
-                </a>
-            </div>
+        .patient-dashboard-hero h2 {
+            font-size: 2.15rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .patient-dashboard-hero p {
+            max-width: 760px;
+            color: rgba(255,255,255,0.92);
+            margin-bottom: 22px;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .patient-hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .patient-btn-white,
+        .patient-btn-outline {
+            min-height: 48px;
+            padding: 0 20px;
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .patient-btn-white {
+            background: #fff;
+            color: #0f4c97;
+            border: none;
+        }
+
+        .patient-btn-white:hover {
+            color: #0f4c97;
+            transform: translateY(-1px);
+        }
+
+        .patient-btn-outline {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.25);
+        }
+
+        .patient-btn-outline:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.14);
+        }
+
+        .patient-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .patient-stat-card {
+            background: #fff;
+            border: 1px solid #e8eef6;
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 12px 30px rgba(15, 76, 151, 0.07);
+            height: 100%;
+        }
+
+        .patient-stat-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #edf5ff;
+            color: #0f4c97;
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+        }
+
+        .patient-stat-label {
+            color: #6d7f95;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .patient-stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+            color: #153a70;
+            margin-bottom: 0;
+        }
+
+        .patient-card {
+            background: #fff;
+            border: 1px solid #e8eef6;
+            border-radius: 24px;
+            box-shadow: 0 12px 30px rgba(15, 76, 151, 0.06);
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .patient-card-header {
+            padding: 22px 24px 16px;
+            border-bottom: 1px solid #eef3f8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .patient-card-title {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #163b72;
+        }
+
+        .patient-card-desc {
+            margin: 6px 0 0;
+            color: #72839a;
+            font-size: 0.94rem;
+        }
+
+        .patient-card-body {
+            padding: 24px;
+        }
+
+        .patient-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .patient-info-box {
+            background: #f8fbff;
+            border: 1px solid #edf3fa;
+            border-radius: 18px;
+            padding: 18px;
+        }
+
+        .patient-info-box .label {
+            color: #7b8ba1;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .patient-info-box .value {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #213d67;
+            word-break: break-word;
+        }
+
+        .patient-table-modern {
+            margin-bottom: 0;
+        }
+
+        .patient-table-modern thead th {
+            background: #f3f8fd;
+            color: #2d4e78;
+            font-size: 0.92rem;
+            font-weight: 800;
+            border: none;
+            padding: 15px 16px;
+            white-space: nowrap;
+        }
+
+        .patient-table-modern tbody td {
+            border-color: #eef3f8;
+            padding: 16px;
+            vertical-align: middle;
+            color: #334e72;
+        }
+
+        .patient-status-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 34px;
+            padding: 0 12px;
+            border-radius: 999px;
+            background: #edf5ff;
+            color: #0f4c97;
+            font-size: 0.85rem;
+            font-weight: 800;
+        }
+
+        .patient-soft-btn {
+            min-height: 42px;
+            padding: 0 16px;
+            border-radius: 12px;
+            border: 1px solid #dce7f3;
+            background: #fff;
+            color: #1d4f8f;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .patient-soft-btn:hover {
+            color: #1d4f8f;
+            background: #f7fbff;
+        }
+
+        @@media (max-width: 1199.98px) {
+            .patient-stat-grid,
+            .patient-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @@media (max-width: 767.98px) {
+            .patient-dashboard-hero {
+                padding: 22px;
+            }
+
+            .patient-dashboard-hero h2 {
+                font-size: 1.7rem;
+            }
+
+            .patient-card-header,
+            .patient-card-body {
+                padding: 18px;
+            }
+
+            .patient-hero-actions {
+                flex-direction: column;
+            }
+
+            .patient-btn-white,
+            .patient-btn-outline {
+                width: 100%;
+            }
+        }
+    </style>
+}
+
+<div class="patient-dashboard-hero">
+    <div class="hero-badge">
+        <i class="fa-solid fa-shield-heart"></i>
+        <span>Cổng dịch vụ bệnh nhân</span>
+    </div>
+
+    <h2>Xin chào @(patient?.User?.Name ?? "bệnh nhân"), chào mừng bạn quay lại.</h2>
+
+    <p>
+        Theo dõi lịch hẹn, tra cứu hồ sơ khám bệnh và cập nhật thông tin cá nhân ngay trên
+        một giao diện gọn gàng, rõ ràng và đồng bộ theo phong cách website bệnh viện chuyên nghiệp.
+    </p>
+
+    <div class="patient-hero-actions">
+        <a href="/Patient/Appointment/Create" class="patient-btn-white">
+            <i class="fa-solid fa-calendar-plus"></i>
+            Đặt lịch khám
+        </a>
+
+        <a href="/Patient/MedicalHistory/Index" class="patient-btn-outline">
+            <i class="fa-solid fa-file-medical"></i>
+            Xem lịch sử khám
+        </a>
+    </div>
+</div>
+
+<div class="patient-stat-grid">
+    <div class="patient-stat-card">
+        <div class="patient-stat-icon">
+            <i class="fa-solid fa-calendar-check"></i>
         </div>
-    }
+        <div class="patient-stat-label">Tổng lịch hẹn</div>
+        <p class="patient-stat-number">@totalAppointments</p>
+    </div>
 
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <div class="card text-center shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Tổng lịch hẹn</h5>
-                    <h2>@totalAppointments</h2>
+    <div class="patient-stat-card">
+        <div class="patient-stat-icon">
+            <i class="fa-solid fa-stethoscope"></i>
+        </div>
+        <div class="patient-stat-label">Tổng lần khám</div>
+        <p class="patient-stat-number">@totalExaminations</p>
+    </div>
+
+    <div class="patient-stat-card">
+        <div class="patient-stat-icon">
+            <i class="fa-solid fa-user-pen"></i>
+        </div>
+        <div class="patient-stat-label">Quản lý hồ sơ</div>
+        <p class="mb-3 text-muted">Cập nhật dữ liệu cá nhân và y tế nhanh gọn, chính xác hơn.</p>
+        <a href="/Patient/Profile/Index" class="patient-soft-btn">
+            <i class="fa-solid fa-id-card"></i>
+            Xem hồ sơ cá nhân
+        </a>
+    </div>
+</div>
+
+@if (patient != null)
+{
+    <div class="patient-card">
+        <div class="patient-card-header">
+            <div>
+                <h3 class="patient-card-title">Thông tin bệnh nhân</h3>
+                <p class="patient-card-desc">Thông tin cơ bản đang được đồng bộ trong hệ thống.</p>
+            </div>
+
+            <a href="/Patient/Profile/Index" class="patient-soft-btn">
+                <i class="fa-solid fa-pen-to-square"></i>
+                Chỉnh sửa hồ sơ
+            </a>
+        </div>
+
+        <div class="patient-card-body">
+            <div class="patient-info-grid">
+                <div class="patient-info-box">
+                    <div class="label">Họ và tên</div>
+                    <div class="value">@patient.User?.Name</div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card text-center shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Tổng lần khám</h5>
-                    <h2>@totalExaminations</h2>
+
+                <div class="patient-info-box">
+                    <div class="label">Nhóm máu</div>
+                    <div class="value">@(string.IsNullOrWhiteSpace(patient.BloodType) ? "Chưa cập nhật" : patient.BloodType)</div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card text-center shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Chức năng nhanh</h5>
-                    <a asp-area="Patient" asp-controller="Appointment" asp-action="Create" class="btn btn-success btn-sm mb-2">Đặt lịch khám</a>
-                    <br />
-                    <a asp-area="Patient" asp-controller="MedicalHistory" asp-action="Index" class="btn btn-info btn-sm text-white">Lịch sử khám</a>
+
+                <div class="patient-info-box">
+                    <div class="label">Mã bệnh nhân</div>
+                    <div class="value">#BN@(patient.Id)</div>
+                </div>
+
+                <div class="patient-info-box">
+                    <div class="label">Chiều cao</div>
+                    <div class="value">@(patient.Height.HasValue ? $"{patient.Height} cm" : "Chưa cập nhật")</div>
+                </div>
+
+                <div class="patient-info-box">
+                    <div class="label">Cân nặng</div>
+                    <div class="value">@(patient.Weight.HasValue ? $"{patient.Weight} kg" : "Chưa cập nhật")</div>
+                </div>
+
+                <div class="patient-info-box">
+                    <div class="label">Bảo hiểm y tế</div>
+                    <div class="value">@(string.IsNullOrWhiteSpace(patient.HealthInsuranceNumber) ? "Chưa cập nhật" : patient.HealthInsuranceNumber)</div>
                 </div>
             </div>
         </div>
     </div>
+}
 
-    <div class="card shadow-sm">
-        <div class="card-header bg-success text-white">
-            Lịch hẹn sắp tới
+<div class="patient-card">
+    <div class="patient-card-header">
+        <div>
+            <h3 class="patient-card-title">Lịch hẹn sắp tới</h3>
+            <p class="patient-card-desc">Danh sách lịch khám gần nhất của bạn trong hệ thống.</p>
         </div>
-        <div class="card-body">
-            @if (appointments != null && appointments.Any())
-            {
-                <table class="table table-bordered">
+
+        <a href="/Patient/Appointment/Index" class="patient-soft-btn">
+            <i class="fa-solid fa-list"></i>
+            Xem tất cả
+        </a>
+    </div>
+
+    <div class="patient-card-body p-0">
+        @if (appointments != null && appointments.Any())
+        {
+            <div class="table-responsive">
+                <table class="table patient-table-modern align-middle">
                     <thead>
                         <tr>
                             <th>Ngày khám</th>
                             <th>Bác sĩ</th>
+                            <th>Chuyên khoa</th>
                             <th>Trạng thái</th>
                         </tr>
                     </thead>
@@ -80,17 +419,20 @@
                         {
                             <tr>
                                 <td>@item.ScheduledDate.ToString("dd/MM/yyyy HH:mm")</td>
-                                <td>@item.Doctor.Specialty</td>
-                                <td>@item.Status</td>
+                                <td>@(item.Doctor?.User?.Name ?? "Chưa cập nhật")</td>
+                                <td>@(item.Doctor?.Specialty ?? "Chưa cập nhật")</td>
+                                <td>
+                                    <span class="patient-status-badge">@item.Status</span>
+                                </td>
                             </tr>
                         }
                     </tbody>
                 </table>
-            }
-            else
-            {
-                <p class="text-muted">Chưa có lịch hẹn sắp tới.</p>
-            }
-        </div>
+            </div>
+        }
+        else
+        {
+            <div class="p-4 text-muted">Bạn chưa có lịch hẹn sắp tới.</div>
+        }
     </div>
 </div>

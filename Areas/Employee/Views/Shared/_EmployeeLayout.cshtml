@@ -1,0 +1,100 @@
+@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+    var userName = User?.Identity?.Name ?? "Nhân viên";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Phân hệ Nhân viên</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="employee-body">
+    <div class="employee-dashboard-shell">
+        <aside class="employee-sidebar">
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="employee-brand">
+                <div class="employee-brand-icon">
+                    <i class="bi bi-hospital"></i>
+                </div>
+                <div class="employee-brand-text">
+                    <h2>An Phúc Hospital</h2>
+                    <p>Phân hệ Nhân viên</p>
+                </div>
+            </a>
+
+            <div class="employee-user-card">
+                <div class="employee-user-avatar">
+                    <i class="bi bi-person-badge"></i>
+                </div>
+                <div class="employee-user-info">
+                    <strong>@userName</strong>
+                    <span>Nhân viên hành chính</span>
+                </div>
+            </div>
+
+            <nav class="employee-nav">
+                <a asp-area="Employee"
+                   asp-controller="Dashboard"
+                   asp-action="Index"
+                   class="employee-nav-link @(currentController == "Dashboard" ? "active" : "")">
+                    <i class="bi bi-grid-1x2-fill"></i>
+                    <span>Tổng quan</span>
+                </a>
+
+                <a asp-area="Employee"
+                   asp-controller="DoctorSchedules"
+                   asp-action="Index"
+                   class="employee-nav-link @(currentController == "DoctorSchedules" ? "active" : "")">
+                    <i class="bi bi-calendar2-week-fill"></i>
+                    <span>Ca làm bác sĩ</span>
+                </a>
+
+                <a asp-area="Employee"
+                   asp-controller="Appointments"
+                   asp-action="Index"
+                   class="employee-nav-link @(currentController == "Appointments" ? "active" : "")">
+                    <i class="bi bi-journal-medical"></i>
+                    <span>Lịch hẹn khám</span>
+                </a>
+
+                <a asp-area="Employee"
+                   asp-controller="Notifications"
+                   asp-action="Index"
+                   class="employee-nav-link @(currentController == "Notifications" ? "active" : "")">
+                    <i class="bi bi-bell-fill"></i>
+                    <span>Thông báo bệnh nhân</span>
+                </a>
+            </nav>
+
+            <div class="employee-side-footer">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="employee-side-btn employee-side-btn-light">
+                    <i class="bi bi-house-door-fill"></i>
+                    Về trang chủ
+                </a>
+
+                <a asp-area="" asp-controller="Account" asp-action="Logout" class="employee-side-btn employee-side-btn-danger">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Đăng xuất
+                </a>
+            </div>
+        </aside>
+
+        <main class="employee-main">
+            <div class="employee-content">
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

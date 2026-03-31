@@ -4,17 +4,64 @@
     ViewData["Title"] = "Danh sách phiếu khám";
 }
 
-<div class="container mt-4">
-    <h2 class="mb-4">Danh sách phiếu khám</h2>
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success doctor-alert mb-4">
+        <i class="bi bi-check-circle-fill me-2"></i>@TempData["Success"]
+    </div>
+}
 
-    @if (TempData["Success"] != null)
+<section class="doctor-hero">
+    <div class="doctor-card doctor-hero-main">
+        <div class="doctor-page-badge">
+            <i class="bi bi-file-earmark-medical-fill"></i>
+            <span>Quản lý hồ sơ khám bệnh</span>
+        </div>
+
+        <h2>Toàn bộ phiếu khám được hiển thị tập trung để theo dõi điều trị và tra cứu nhanh lịch sử bệnh nhân</h2>
+
+        <p>
+            Danh sách phiếu khám cho phép bác sĩ rà soát lại triệu chứng, chẩn đoán, trạng thái điều trị
+            và truy cập tiếp vào hồ sơ lịch sử của từng bệnh nhân một cách gọn gàng, chuyên nghiệp.
+        </p>
+    </div>
+
+    <aside class="doctor-highlight-card">
+        <h3>Mục tiêu của phân hệ này</h3>
+        <p>
+            Không chỉ lưu phiếu khám, màn hình này còn giúp bác sĩ nhìn lại tiến trình chăm sóc bệnh nhân theo thời gian.
+        </p>
+
+        <div class="doctor-highlight-list">
+            <div class="doctor-highlight-item">
+                <i class="bi bi-search"></i>
+                <div>
+                    <strong>Tra cứu thuận tiện</strong>
+                    <span>Xem lại nội dung khám, triệu chứng và chẩn đoán đã nhập trước đó.</span>
+                </div>
+            </div>
+
+            <div class="doctor-highlight-item">
+                <i class="bi bi-clock-history"></i>
+                <div>
+                    <strong>Lịch sử khám bệnh</strong>
+                    <span>Mở nhanh hồ sơ điều trị theo từng bệnh nhân để đánh giá liên tục.</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+</section>
+
+<section class="doctor-table-card">
+    <div class="doctor-table-head">
+        <h3>Danh sách phiếu khám</h3>
+        <p>Toàn bộ phiếu khám do bác sĩ thực hiện được sắp xếp từ mới đến cũ để tiện theo dõi.</p>
+    </div>
+
+    @if (Model != null && Model.Any())
     {
-        <div class="alert alert-success">@TempData["Success"]</div>
-    }
-
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <table class="table table-bordered table-striped">
+        <div class="doctor-table-wrap">
+            <table class="doctor-table">
                 <thead>
                     <tr>
                         <th>Ngày khám</th>
@@ -22,7 +69,7 @@
                         <th>Triệu chứng</th>
                         <th>Chẩn đoán</th>
                         <th>Trạng thái</th>
-                        <th></th>
+                        <th>Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,19 +77,43 @@
                     {
                         <tr>
                             <td>@item.StartTime?.ToString("dd/MM/yyyy HH:mm")</td>
-                            <td>@item.Patient.User.Name</td>
+                            <td>
+                                <div class="doctor-patient-box">
+                                    <strong>@item.Patient?.User?.Name</strong>
+                                    <span>Mã bệnh nhân: @item.PatientId</span>
+                                </div>
+                            </td>
                             <td>@item.Symptoms</td>
                             <td>@item.Diagnosis</td>
-                            <td>@item.Status</td>
                             <td>
-                                <a asp-area="Doctor" asp-controller="PatientRecord" asp-action="History" asp-route-patientId="@item.PatientId" class="btn btn-sm btn-info text-white">
-                                    Xem lịch sử
-                                </a>
+                                <span class="doctor-status-badge">@item.Status</span>
+                            </td>
+                            <td>
+                                <div class="doctor-table-actions">
+                                    <a asp-area="Doctor"
+                                       asp-controller="PatientRecord"
+                                       asp-action="History"
+                                       asp-route-patientId="@item.PatientId"
+                                       class="doctor-action-btn doctor-action-info">
+                                        <i class="bi bi-clock-history"></i>
+                                        <span>Xem lịch sử</span>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
         </div>
-    </div>
-</div>
+    }
+    else
+    {
+        <div class="doctor-empty">
+            <div class="doctor-empty-icon">
+                <i class="bi bi-file-earmark-x"></i>
+            </div>
+            <h4>Chưa có phiếu khám nào</h4>
+            <p>Hiện chưa có dữ liệu phiếu khám để hiển thị trong phân hệ bác sĩ.</p>
+        </div>
+    }
+</section>

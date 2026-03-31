@@ -1,103 +1,273 @@
 @using DoAnWeb.Models
 @{
-    ViewData["Title"] = "Dashboard Bác Sĩ";
+    ViewData["Title"] = "Bảng điều khiển bác sĩ";
 
     var doctor = ViewBag.Doctor as Doctor;
     var todayAppointments = ViewBag.TodayAppointments as List<Appointment>;
     var totalPatients = (int)ViewBag.TotalPatients;
     var totalExaminations = (int)ViewBag.TotalExaminations;
+    var todayCount = todayAppointments?.Count ?? 0;
 }
 
-<div class="container mt-4">
-    <h2 class="mb-4">Trang Bác Sĩ</h2>
-
-    @if (doctor != null)
-    {
-        <div class="card shadow-sm mb-4">
-            <div class="card-header bg-primary text-white">
-                Thông tin bác sĩ
-            </div>
-            <div class="card-body">
-                <p><strong>Họ tên:</strong> @doctor.User.Name</p>
-                <p><strong>Chuyên khoa:</strong> @doctor.Specialty</p>
-                <p><strong>Số chứng chỉ:</strong> @doctor.LicenseNumber</p>
-                <p><strong>Bằng cấp:</strong> @doctor.Qualifications</p>
-
-                <a asp-area="Doctor" asp-controller="Profile" asp-action="Index" class="btn btn-outline-primary">
-                    Xem / sửa hồ sơ
-                </a>
-            </div>
+<div class="doctor-hero doctor-hero-dashboard">
+    <section class="doctor-card doctor-hero-main doctor-hero-main-compact">
+        <div class="doctor-page-badge">
+            <i class="bi bi-hospital"></i>
+            <span>Trung tâm hỗ trợ khám chữa bệnh</span>
         </div>
-    }
 
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <div class="card shadow-sm text-center">
-                <div class="card-body">
-                    <h5>Tổng bệnh nhân</h5>
-                    <h2>@totalPatients</h2>
+        <h2>Không gian làm việc dành cho bác sĩ với dữ liệu rõ ràng, thao tác nhanh và trải nghiệm chuyên nghiệp</h2>
+
+        <p>
+            Theo dõi lịch hẹn, mở phiếu khám, quản lý hồ sơ bệnh nhân và xử lý nghiệp vụ khám chữa bệnh
+            trên một giao diện thống nhất. Thiết kế ưu tiên sự trực quan để bác sĩ tập trung vào chuyên môn.
+        </p>
+    </section>
+
+    <aside class="doctor-highlight-card">
+        <h3>Ưu tiên trong ca làm việc</h3>
+        <p>
+            Các chức năng được gom theo luồng xử lý thực tế để hạn chế thao tác rườm rà và giảm thời gian chuyển màn hình.
+        </p>
+
+        <div class="doctor-highlight-list">
+            <div class="doctor-highlight-item">
+                <i class="bi bi-check2-circle"></i>
+                <div>
+                    <strong>Lịch khám theo thời gian</strong>
+                    <span>Quan sát nhanh bệnh nhân, giờ hẹn và trạng thái tiếp nhận trong ngày.</span>
+                </div>
+            </div>
+
+            <div class="doctor-highlight-item">
+                <i class="bi bi-file-earmark-medical"></i>
+                <div>
+                    <strong>Phiếu khám điện tử</strong>
+                    <span>Nhập triệu chứng, chẩn đoán, lời dặn, thuốc và dịch vụ ngay trong một biểu mẫu.</span>
+                </div>
+            </div>
+
+            <div class="doctor-highlight-item">
+                <i class="bi bi-clock-history"></i>
+                <div>
+                    <strong>Lịch sử khám bệnh</strong>
+                    <span>Tra cứu hồ sơ cũ để hỗ trợ đánh giá liên tục và chính xác hơn cho từng bệnh nhân.</span>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm text-center">
-                <div class="card-body">
-                    <h5>Tổng phiếu khám</h5>
-                    <h2>@totalExaminations</h2>
-                </div>
-            </div>
+    </aside>
+</div>
+
+<section class="doctor-stats-grid">
+    <div class="doctor-stat-card">
+        <div class="doctor-stat-icon">
+            <i class="bi bi-people-fill"></i>
         </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm text-center">
-                <div class="card-body">
-                    <h5>Chức năng nhanh</h5>
-                    <a asp-area="Doctor" asp-controller="Appointment" asp-action="Today" class="btn btn-success btn-sm mb-2">Lịch hôm nay</a>
-                    <br />
-                    <a asp-area="Doctor" asp-controller="MedicalExamination" asp-action="Index" class="btn btn-info btn-sm text-white">Phiếu khám</a>
-                </div>
-            </div>
+        <div class="doctor-stat-text">
+            <strong>@totalPatients</strong>
+            <span>Tổng bệnh nhân đã tiếp nhận</span>
         </div>
     </div>
 
-    <div class="card shadow-sm">
-        <div class="card-header bg-success text-white">
-            Lịch khám hôm nay
+    <div class="doctor-stat-card">
+        <div class="doctor-stat-icon">
+            <i class="bi bi-clipboard2-heart-fill"></i>
         </div>
-        <div class="card-body">
-            @if (todayAppointments != null && todayAppointments.Any())
+        <div class="doctor-stat-text">
+            <strong>@totalExaminations</strong>
+            <span>Tổng phiếu khám đã lập</span>
+        </div>
+    </div>
+
+    <div class="doctor-stat-card">
+        <div class="doctor-stat-icon">
+            <i class="bi bi-calendar2-day-fill"></i>
+        </div>
+        <div class="doctor-stat-text">
+            <strong>@todayCount</strong>
+            <span>Lịch khám trong hôm nay</span>
+        </div>
+    </div>
+
+    <div class="doctor-stat-card">
+        <div class="doctor-stat-icon">
+            <i class="bi bi-shield-plus"></i>
+        </div>
+        <div class="doctor-stat-text">
+            <strong>24/7</strong>
+            <span>Hỗ trợ vận hành liên tục</span>
+        </div>
+    </div>
+</section>
+
+<div class="doctor-grid-2">
+    <section class="doctor-section-card">
+        <div class="doctor-section-head">
+            <h3>Thông tin bác sĩ</h3>
+            <p>Hiển thị nhanh hồ sơ chuyên môn để kiểm tra và cập nhật thuận tiện trong quá trình làm việc.</p>
+        </div>
+
+        <div class="doctor-section-body">
+            @if (doctor != null)
             {
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Thời gian</th>
-                            <th>Bệnh nhân</th>
-                            <th>Lý do khám</th>
-                            <th>Trạng thái</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in todayAppointments)
-                        {
-                            <tr>
-                                <td>@item.ScheduledDate.ToString("dd/MM/yyyy HH:mm")</td>
-                                <td>@item.Patient.User.Name</td>
-                                <td>@item.ReasonForVisit</td>
-                                <td>@item.Status</td>
-                                <td>
-                                    <a asp-area="Doctor" asp-controller="MedicalExamination" asp-action="CreateOrEdit" asp-route-appointmentId="@item.Id" class="btn btn-sm btn-primary">
-                                        Khám bệnh
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                <div class="doctor-profile-list">
+                    <div class="doctor-profile-item">
+                        <i class="bi bi-person-vcard"></i>
+                        <div>
+                            <strong>Họ và tên</strong>
+                            <span>@doctor.User?.Name</span>
+                        </div>
+                    </div>
+
+                    <div class="doctor-profile-item">
+                        <i class="bi bi-heart-pulse"></i>
+                        <div>
+                            <strong>Chuyên khoa</strong>
+                            <span>@doctor.Specialty</span>
+                        </div>
+                    </div>
+
+                    <div class="doctor-profile-item">
+                        <i class="bi bi-patch-check"></i>
+                        <div>
+                            <strong>Số chứng chỉ hành nghề</strong>
+                            <span>@doctor.LicenseNumber</span>
+                        </div>
+                    </div>
+
+                    <div class="doctor-profile-item">
+                        <i class="bi bi-mortarboard"></i>
+                        <div>
+                            <strong>Bằng cấp / chuyên môn</strong>
+                            <span>@doctor.Qualifications</span>
+                        </div>
+                    </div>
+                </div>
             }
             else
             {
-                <p class="text-muted">Hôm nay chưa có lịch khám.</p>
+                <div class="doctor-empty">
+                    <div class="doctor-empty-icon">
+                        <i class="bi bi-exclamation-circle"></i>
+                    </div>
+                    <h4>Chưa có hồ sơ bác sĩ</h4>
+                    <p>Hiện chưa tìm thấy thông tin hồ sơ để hiển thị trên bảng điều khiển.</p>
+                </div>
             }
         </div>
-    </div>
+    </section>
+
+    <aside class="doctor-section-card">
+        <div class="doctor-section-head">
+            <h3>Thao tác nhanh</h3>
+            <p>Các lối tắt phục vụ đúng nhu cầu bác sĩ trong quá trình thăm khám và theo dõi hồ sơ.</p>
+        </div>
+
+        <div class="doctor-section-body">
+            <div class="doctor-quick-grid">
+                <div class="doctor-quick-card">
+                    <div class="doctor-quick-icon">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+                    <div>
+                        <h4>Lịch khám hôm nay</h4>
+                        <p>Xem ngay danh sách bệnh nhân theo thời gian hẹn để xử lý đúng thứ tự.</p>
+                        <a asp-area="Doctor" asp-controller="Appointment" asp-action="Today" class="doctor-inline-link">
+                            Truy cập lịch hôm nay
+                        </a>
+                    </div>
+                </div>
+
+                <div class="doctor-quick-card">
+                    <div class="doctor-quick-icon">
+                        <i class="bi bi-file-medical"></i>
+                    </div>
+                    <div>
+                        <h4>Danh sách phiếu khám</h4>
+                        <p>Kiểm tra các phiếu khám đã lập và truy cập lịch sử khám của bệnh nhân.</p>
+                        <a asp-area="Doctor" asp-controller="MedicalExamination" asp-action="Index" class="doctor-inline-link">
+                            Mở danh sách phiếu khám
+                        </a>
+                    </div>
+                </div>
+
+                <div class="doctor-quick-card">
+                    <div class="doctor-quick-icon">
+                        <i class="bi bi-calendar2-week"></i>
+                    </div>
+                    <div>
+                        <h4>Tất cả lịch hẹn</h4>
+                        <p>Theo dõi toàn bộ lịch khám được phân công trong hệ thống bác sĩ.</p>
+                        <a asp-area="Doctor" asp-controller="Appointment" asp-action="Index" class="doctor-inline-link">
+                            Xem tất cả lịch hẹn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
 </div>
+
+<section class="doctor-table-card">
+    <div class="doctor-table-head">
+        <h3>Lịch khám hôm nay</h3>
+        <p>Danh sách lịch hẹn trong ngày để mở phiếu khám và xử lý nhanh theo từng bệnh nhân.</p>
+    </div>
+
+    @if (todayAppointments != null && todayAppointments.Any())
+    {
+        <div class="doctor-table-wrap">
+            <table class="doctor-table">
+                <thead>
+                    <tr>
+                        <th>Thời gian</th>
+                        <th>Bệnh nhân</th>
+                        <th>Lý do khám</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in todayAppointments)
+                    {
+                        <tr>
+                            <td>@item.ScheduledDate.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>
+                                <div class="doctor-patient-box">
+                                    <strong>@item.Patient?.User?.Name</strong>
+                                    <span>Mã bệnh nhân: @item.PatientId</span>
+                                </div>
+                            </td>
+                            <td>@item.ReasonForVisit</td>
+                            <td>
+                                <span class="doctor-status-badge">@item.Status</span>
+                            </td>
+                            <td>
+                                <div class="doctor-table-actions">
+                                    <a asp-area="Doctor"
+                                       asp-controller="MedicalExamination"
+                                       asp-action="CreateOrEdit"
+                                       asp-route-appointmentId="@item.Id"
+                                       class="doctor-action-btn doctor-action-primary">
+                                        <i class="bi bi-clipboard2-pulse"></i>
+                                        <span>Khám bệnh</span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="doctor-empty">
+            <div class="doctor-empty-icon">
+                <i class="bi bi-calendar-x"></i>
+            </div>
+            <h4>Hôm nay chưa có lịch khám</h4>
+            <p>Hiện chưa có lịch hẹn nào được phân công trong ngày hôm nay.</p>
+        </div>
+    }
+</section>

@@ -4,39 +4,80 @@
     ViewData["Title"] = "Quản lý lịch hẹn";
 }
 
-<h2 class="mb-3">Quản lý lịch hẹn khám</h2>
+<div class="employee-page-top">
+    <div>
+        <div class="employee-topbar-badge">
+            <i class="bi bi-journal-medical"></i>
+            Quản lý lịch hẹn
+        </div>
+        <h1 class="employee-topbar-title">Danh sách lịch hẹn khám</h1>
+    </div>
+</div>
 
 @if (TempData["success"] != null)
 {
-    <div class="alert alert-success">@TempData["success"]</div>
+    <div class="alert alert-success employee-alert">@TempData["success"]</div>
 }
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Bệnh nhân</th>
-            <th>Bác sĩ</th>
-            <th>Ngày khám</th>
-            <th>Lý do khám</th>
-            <th>Trạng thái</th>
-            <th width="140">Thao tác</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Patient.User.Name</td>
-                <td>@item.Doctor.User.Name</td>
-                <td>@item.ScheduledDate.ToString("dd/MM/yyyy HH:mm")</td>
-                <td>@item.ReasonForVisit</td>
-                <td>@item.Status</td>
-                <td>
-                    <a asp-area="Employee" asp-controller="Appointments" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">
-                        Xử lý
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="employee-table-card">
+    <div class="employee-table-head">
+        <h3>Lịch hẹn bệnh nhân</h3>
+        <p>Theo dõi, xử lý và cập nhật thông tin lịch hẹn khám trong hệ thống.</p>
+    </div>
+
+    <div class="employee-table-wrap">
+        <table class="table employee-table mb-0">
+            <thead>
+                <tr>
+                    <th>Bệnh nhân</th>
+                    <th>Bác sĩ</th>
+                    <th>Ngày khám</th>
+                    <th>Lý do khám</th>
+                    <th>Trạng thái</th>
+                    <th width="150">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Patient.User.Name</td>
+                            <td>@(item.Doctor != null ? item.Doctor.User.Name : "Chưa phân công")</td>
+                            <td>@item.ScheduledDate.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>@item.ReasonForVisit</td>
+                            <td>
+                                <span class="employee-status-badge employee-status-info">@item.Status</span>
+                            </td>
+                            <td>
+                                <a asp-area="Employee"
+                                   asp-controller="Appointments"
+                                   asp-action="Edit"
+                                   asp-route-id="@item.Id"
+                                   class="employee-action-btn employee-action-warning">
+                                    <i class="bi bi-pencil-square"></i>
+                                    Xử lý
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6">
+                            <div class="employee-empty">
+                                <div class="employee-empty-icon">
+                                    <i class="bi bi-calendar-x"></i>
+                                </div>
+                                <h4>Chưa có lịch hẹn nào</h4>
+                                <p>Hiện chưa có dữ liệu lịch hẹn trong hệ thống.</p>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

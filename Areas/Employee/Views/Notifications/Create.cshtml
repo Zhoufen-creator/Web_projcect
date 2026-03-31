@@ -4,34 +4,59 @@
     ViewData["Title"] = "Gửi thông báo";
 }
 
-<h2 class="mb-3">Gửi thông báo cho bệnh nhân</h2>
+<div class="employee-page-top">
+    <div>
+        <div class="employee-topbar-badge">
+            <i class="bi bi-send-check"></i>
+            Gửi thông báo
+        </div>
+        <h1 class="employee-topbar-title">Tạo thông báo cho bệnh nhân</h1>
+    </div>
+</div>
 
-<form asp-area="Employee" asp-controller="Notifications" asp-action="Create" method="post">
-    <div asp-validation-summary="All" class="text-danger mb-3"></div>
-
-    <div class="mb-3">
-        <label class="form-label">Bệnh nhân</label>
-        <select asp-for="UserId" asp-items="ViewBag.UserId" class="form-select">
-            <option value="">-- Chọn bệnh nhân --</option>
-        </select>
-        <span asp-validation-for="UserId" class="text-danger"></span>
+<div class="employee-form-card">
+    <div class="employee-form-head">
+        <h3>Thông tin thông báo</h3>
+        <p>Chọn đúng bệnh nhân và nhập nội dung rõ ràng trước khi gửi.</p>
     </div>
 
-    <div class="mb-3">
-        <label class="form-label">Tiêu đề</label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
-    </div>
+    <form asp-area="Employee" asp-controller="Notifications" asp-action="Create" method="post" class="employee-form-body">
+        <div asp-validation-summary="All" class="alert alert-danger employee-validation"></div>
 
-    <div class="mb-3">
-        <label class="form-label">Nội dung</label>
-        <textarea asp-for="Message" class="form-control" rows="5"></textarea>
-        <span asp-validation-for="Message" class="text-danger"></span>
-    </div>
+        <div class="employee-form-grid">
+            <div class="employee-form-group employee-form-group-full">
+                <label class="employee-label">Bệnh nhân</label>
+                <select asp-for="UserId" asp-items="ViewBag.UserId" class="employee-select">
+                    <option value="">-- Chọn bệnh nhân --</option>
+                </select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
 
-    <button type="submit" class="btn btn-success">Gửi</button>
-    <a asp-area="Employee" asp-controller="Notifications" asp-action="Index" class="btn btn-secondary">Quay lại</a>
-</form>
+            <div class="employee-form-group employee-form-group-full">
+                <label class="employee-label">Tiêu đề</label>
+                <input asp-for="Title" class="employee-input" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="employee-form-group employee-form-group-full">
+                <label class="employee-label">Nội dung</label>
+                <textarea asp-for="Message" class="employee-textarea" rows="6"></textarea>
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+
+            <div class="employee-form-actions">
+                <button type="submit" class="employee-primary-btn">
+                    <i class="bi bi-send"></i>
+                    Gửi thông báo
+                </button>
+
+                <a asp-area="Employee" asp-controller="Notifications" asp-action="Index" class="employee-secondary-btn">
+                    Quay lại
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -1,8 +1,196 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Trang chủ";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="home-hero-section">
+    <div class="container-xxl">
+        <div class="home-hero-grid">
+            <div class="home-hero-left">
+                <span class="hero-label">
+                    <i class="bi bi-shield-check"></i>
+                    Hệ thống quản lý bệnh viện đồng bộ
+                </span>
+
+                <h2 class="home-hero-title">
+                    Bệnh viện Đa khoa An Phúc - Nền tảng quản lý hiện đại, trực quan và sẵn sàng vận hành thực tế
+                </h2>
+
+                <p class="home-hero-desc">
+                    Hỗ trợ đồng bộ quy trình tiếp nhận, lịch khám, hồ sơ bệnh án, phân quyền tài khoản
+                    và phối hợp giữa bác sĩ, nhân viên y tế, bộ phận tiếp nhận và người bệnh trên cùng một hệ thống.
+                </p>
+
+                <div class="hero-action-group">
+                    @if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="btn btn-hero-main">
+                            <i class="bi bi-speedometer2 me-2"></i>Về trang quản trị
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-area="" asp-controller="Account" asp-action="Login" class="btn btn-hero-main">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Đăng nhập hệ thống
+                        </a>
+                    }
+
+                    <a asp-area="" asp-controller="Home" asp-action="Privacy" class="btn btn-hero-sub">
+                        <i class="bi bi-building me-2"></i>Giới thiệu bệnh viện
+                    </a>
+                </div>
+
+                <div class="hero-metric-grid">
+                    <div class="hero-metric-card">
+                        <strong>4 nhóm vai trò</strong>
+                        <span>Quản trị viên, bác sĩ, nhân viên, bệnh nhân</span>
+                    </div>
+
+                    <div class="hero-metric-card">
+                        <strong>Liên thông dữ liệu</strong>
+                        <span>Quản lý tập trung toàn bộ quy trình khám chữa bệnh</span>
+                    </div>
+
+                    <div class="hero-metric-card">
+                        <strong>24/7</strong>
+                        <span>Hỗ trợ tiếp nhận thông tin và vận hành liên tục</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home-hero-right">
+                <div class="hero-dashboard-card">
+                    <div class="hero-dashboard-top">
+                        <h3>Phân hệ vận hành nổi bật</h3>
+                        <p>
+                            Thiết kế theo vai trò sử dụng, giúp thao tác nhanh, dễ hiểu và hạn chế rối trong quá trình vận hành.
+                        </p>
+                    </div>
+
+                    <div class="hero-role-grid">
+                        <div class="hero-role-card">
+                            <div class="hero-role-icon"><i class="bi bi-person-badge"></i></div>
+                            <h5>Bác sĩ</h5>
+                            <p>Theo dõi lịch khám, cập nhật phiếu khám, quản lý thông tin chuyên môn và lịch sử điều trị.</p>
+                        </div>
+
+                        <div class="hero-role-card">
+                            <div class="hero-role-icon"><i class="bi bi-clipboard2-pulse"></i></div>
+                            <h5>Bệnh nhân</h5>
+                            <p>Tra cứu lịch hẹn, xem hồ sơ cá nhân và theo dõi quá trình khám chữa bệnh thuận tiện hơn.</p>
+                        </div>
+
+                        <div class="hero-role-card">
+                            <div class="hero-role-icon"><i class="bi bi-calendar2-check"></i></div>
+                            <h5>Lịch khám</h5>
+                            <p>Điều phối lịch hẹn rõ ràng, hỗ trợ tiếp nhận nhanh và giảm trùng lặp trong khung giờ.</p>
+                        </div>
+
+                        <div class="hero-role-card">
+                            <div class="hero-role-icon"><i class="bi bi-gear-wide-connected"></i></div>
+                            <h5>Quản trị hệ thống</h5>
+                            <p>Kiểm soát tài khoản, phân quyền truy cập và duy trì vận hành ổn định toàn hệ thống.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="home-section">
+    <div class="container-xxl">
+        <div class="section-header center">
+            <span class="section-badge">Dịch vụ nổi bật</span>
+            <h2>Các chức năng cốt lõi của hệ thống</h2>
+            <p>
+                Hỗ trợ các nghiệp vụ quan trọng trong môi trường bệnh viện hiện đại, từ tiếp nhận ban đầu đến theo dõi điều trị.
+            </p>
+        </div>
+
+        <div class="feature-grid-four">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="bi bi-calendar2-plus"></i></div>
+                <h5>Đăng ký lịch khám</h5>
+                <p>Hỗ trợ tiếp nhận yêu cầu đặt lịch, theo dõi thời gian khám và quản lý trạng thái lịch hẹn rõ ràng.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="bi bi-file-earmark-medical"></i></div>
+                <h5>Hồ sơ bệnh án</h5>
+                <p>Lưu trữ hồ sơ người bệnh, kết quả khám, chẩn đoán và lịch sử điều trị theo hướng tập trung.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="bi bi-bell"></i></div>
+                <h5>Nhắc lịch và thông báo</h5>
+                <p>Gửi thông báo nội bộ, nhắc lịch tái khám hoặc cập nhật thay đổi liên quan đến quy trình khám chữa bệnh.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="bi bi-people"></i></div>
+                <h5>Quản lý người dùng</h5>
+                <p>Phân quyền truy cập giữa các nhóm tài khoản nhằm bảo đảm bảo mật và kiểm soát dữ liệu y tế.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="home-section section-soft">
+    <div class="container-xxl">
+        <div class="section-header center">
+            <span class="section-badge">Lợi thế hệ thống</span>
+            <h2>Thiết kế theo định hướng website bệnh viện chuyên nghiệp</h2>
+            <p>
+                Không chỉ đẹp ở giao diện mà còn rõ ở bố cục, dễ thao tác và phù hợp với bài toán quản lý bệnh viện thực tế.
+            </p>
+        </div>
+
+        <div class="feature-grid-four">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="bi bi-hospital"></i></div>
+                <h5>Vận hành tập trung</h5>
+                <p>Tất cả nghiệp vụ chính được tập trung trên một hệ thống duy nhất, giảm phân tán dữ liệu giữa các bộ phận.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="bi bi-shield-lock"></i></div>
+                <h5>Bảo mật theo vai trò</h5>
+                <p>Kiểm soát quyền truy cập dữ liệu theo từng loại người dùng, phù hợp với yêu cầu của môi trường y tế.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="bi bi-heart-pulse"></i></div>
+                <h5>Hỗ trợ nghiệp vụ khám chữa bệnh</h5>
+                <p>Giảm bớt thao tác lặp lại, tăng tính rõ ràng trong quy trình tiếp nhận, khám và xử lý thông tin bệnh nhân.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                <h5>Tối ưu hiệu suất làm việc</h5>
+                <p>Bố cục rõ ràng, nội dung có thứ bậc giúp bác sĩ và nhân viên xử lý công việc nhanh và hạn chế sai sót hơn.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="home-section">
+    <div class="container-xxl">
+        <div class="hospital-banner">
+            <div class="hospital-banner-content">
+                <span class="section-badge">Định hướng phát triển</span>
+                <h2>Sẵn sàng mở rộng thêm các phân hệ chuyên sâu</h2>
+                <p>
+                    Hệ thống có thể phát triển thêm các module quản lý chuyên khoa, bác sĩ, nội trú, viện phí,
+                    dashboard thống kê, hồ sơ bệnh án điện tử và cổng tra cứu thông tin cho người bệnh.
+                </p>
+            </div>
+
+            <div class="hospital-banner-list">
+                <div class="hospital-banner-item"><i class="bi bi-check2-circle"></i> Dashboard theo vai trò</div>
+                <div class="hospital-banner-item"><i class="bi bi-check2-circle"></i> Quản lý lịch khám chi tiết</div>
+                <div class="hospital-banner-item"><i class="bi bi-check2-circle"></i> Hồ sơ bệnh án điện tử</div>
+                <div class="hospital-banner-item"><i class="bi bi-check2-circle"></i> Điều phối và thông báo nội bộ</div>
+            </div>
+        </div>
+    </div>
+</section>

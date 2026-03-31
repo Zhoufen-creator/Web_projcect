@@ -1,15 +1,61 @@
 @model List<DoAnWeb.Models.Appointment>
 
 @{
-    ViewData["Title"] = "Lịch hẹn khám";
+    ViewData["Title"] = "Tất cả lịch khám";
 }
 
-<div class="container mt-4">
-    <h2 class="mb-4">Tất cả lịch hẹn khám</h2>
+<section class="doctor-hero">
+    <div class="doctor-card doctor-hero-main">
+        <div class="doctor-page-badge">
+            <i class="bi bi-calendar2-week"></i>
+            <span>Quản lý lịch khám bác sĩ</span>
+        </div>
 
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <table class="table table-bordered table-striped">
+        <h2>Theo dõi toàn bộ lịch hẹn được phân công theo cách rõ ràng và dễ xử lý</h2>
+
+        <p>
+            Danh sách lịch khám hiển thị tập trung để bác sĩ theo dõi bệnh nhân, lý do khám,
+            trạng thái và mở nhanh phiếu khám khi cần. Giao diện ưu tiên tốc độ thao tác
+            và khả năng nhìn dữ liệu trong thời gian ngắn.
+        </p>
+    </div>
+
+    <aside class="doctor-highlight-card">
+        <h3>Gợi ý thao tác</h3>
+        <p>
+            Khi cần khám nhanh, bạn chỉ việc mở phiếu khám trực tiếp từ từng lịch hẹn bên dưới.
+        </p>
+
+        <div class="doctor-highlight-list">
+            <div class="doctor-highlight-item">
+                <i class="bi bi-person-lines-fill"></i>
+                <div>
+                    <strong>Thông tin bệnh nhân rõ ràng</strong>
+                    <span>Xem tên bệnh nhân và lý do đến khám ngay trên cùng một dòng dữ liệu.</span>
+                </div>
+            </div>
+
+            <div class="doctor-highlight-item">
+                <i class="bi bi-clipboard2-pulse"></i>
+                <div>
+                    <strong>Mở phiếu khám tức thì</strong>
+                    <span>Đi thẳng vào quy trình khám chữa bệnh mà không cần chuyển qua nhiều màn hình.</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+</section>
+
+<section class="doctor-table-card">
+    <div class="doctor-table-head">
+        <h3>Danh sách lịch hẹn khám</h3>
+        <p>Toàn bộ lịch khám của bác sĩ được sắp xếp theo thời gian để tiện tra cứu và thao tác.</p>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="doctor-table-wrap">
+            <table class="doctor-table">
                 <thead>
                     <tr>
                         <th>Ngày khám</th>
@@ -17,7 +63,7 @@
                         <th>Lý do khám</th>
                         <th>Trạng thái</th>
                         <th>Check-in</th>
-                        <th></th>
+                        <th>Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,19 +71,47 @@
                     {
                         <tr>
                             <td>@item.ScheduledDate.ToString("dd/MM/yyyy HH:mm")</td>
-                            <td>@item.Patient.User.Name</td>
-                            <td>@item.ReasonForVisit</td>
-                            <td>@item.Status</td>
-                            <td>@(item.IsCheckedIn ? "Đã check-in" : "Chưa")</td>
                             <td>
-                                <a asp-area="Doctor" asp-controller="MedicalExamination" asp-action="CreateOrEdit" asp-route-appointmentId="@item.Id" class="btn btn-sm btn-primary">
-                                    Mở phiếu khám
-                                </a>
+                                <div class="doctor-patient-box">
+                                    <strong>@item.Patient?.User?.Name</strong>
+                                    <span>Mã bệnh nhân: @item.PatientId</span>
+                                </div>
+                            </td>
+                            <td>@item.ReasonForVisit</td>
+                            <td>
+                                <span class="doctor-status-badge">@item.Status</span>
+                            </td>
+                            <td>
+                                <span class="doctor-check-badge @(item.IsCheckedIn ? "check-yes" : "check-no")">
+                                    @(item.IsCheckedIn ? "Đã check-in" : "Chưa check-in")
+                                </span>
+                            </td>
+                            <td>
+                                <div class="doctor-table-actions">
+                                    <a asp-area="Doctor"
+                                       asp-controller="MedicalExamination"
+                                       asp-action="CreateOrEdit"
+                                       asp-route-appointmentId="@item.Id"
+                                       class="doctor-action-btn doctor-action-primary">
+                                        <i class="bi bi-clipboard2-pulse"></i>
+                                        <span>Mở phiếu khám</span>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
         </div>
-    </div>
-</div>
+    }
+    else
+    {
+        <div class="doctor-empty">
+            <div class="doctor-empty-icon">
+                <i class="bi bi-calendar-x"></i>
+            </div>
+            <h4>Chưa có lịch hẹn khám</h4>
+            <p>Hiện chưa có lịch khám nào được phân công cho bác sĩ trong hệ thống.</p>
+        </div>
+    }
+</section>

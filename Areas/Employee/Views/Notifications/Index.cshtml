@@ -4,39 +4,81 @@
     ViewData["Title"] = "Thông báo";
 }
 
-<h2 class="mb-3">Danh sách thông báo</h2>
+<div class="employee-page-top">
+    <div>
+        <div class="employee-topbar-badge">
+            <i class="bi bi-bell-fill"></i>
+            Thông báo bệnh nhân
+        </div>
+        <h1 class="employee-topbar-title">Danh sách thông báo</h1>
+    </div>
+
+    <a asp-area="Employee" asp-controller="Notifications" asp-action="Create" class="employee-topbar-btn employee-topbar-btn-primary">
+        <i class="bi bi-send-plus"></i>
+        Gửi thông báo
+    </a>
+</div>
 
 @if (TempData["success"] != null)
 {
-    <div class="alert alert-success">@TempData["success"]</div>
+    <div class="alert alert-success employee-alert">@TempData["success"]</div>
 }
 
-<p>
-    <a asp-area="Employee" asp-controller="Notifications" asp-action="Create" class="btn btn-primary">
-        + Gửi thông báo
-    </a>
-</p>
+<div class="employee-table-card">
+    <div class="employee-table-head">
+        <h3>Lịch sử thông báo</h3>
+        <p>Danh sách các thông báo đã gửi đến bệnh nhân trong hệ thống.</p>
+    </div>
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Người nhận</th>
-            <th>Tiêu đề</th>
-            <th>Nội dung</th>
-            <th>Ngày tạo</th>
-            <th>Đã đọc</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.User.Name</td>
-                <td>@item.Title</td>
-                <td>@item.Message</td>
-                <td>@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
-                <td>@(item.IsRead ? "Đã đọc" : "Chưa đọc")</td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="employee-table-wrap">
+        <table class="table employee-table mb-0">
+            <thead>
+                <tr>
+                    <th>Người nhận</th>
+                    <th>Tiêu đề</th>
+                    <th>Nội dung</th>
+                    <th>Ngày tạo</th>
+                    <th>Đã đọc</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.User.Name</td>
+                            <td>@item.Title</td>
+                            <td>@item.Message</td>
+                            <td>@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>
+                                @if (item.IsRead)
+                                {
+                                    <span class="employee-status-badge employee-status-success">Đã đọc</span>
+                                }
+                                else
+                                {
+                                    <span class="employee-status-badge employee-status-pending">Chưa đọc</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5">
+                            <div class="employee-empty">
+                                <div class="employee-empty-icon">
+                                    <i class="bi bi-bell-slash"></i>
+                                </div>
+                                <h4>Chưa có thông báo nào</h4>
+                                <p>Danh sách thông báo hiện đang trống.</p>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
