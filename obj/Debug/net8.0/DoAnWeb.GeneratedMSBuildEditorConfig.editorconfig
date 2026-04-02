@@ -19,197 +19,205 @@ build_property.TargetFrameworkIdentifier = .NETCoreApp
 build_property.TargetFrameworkVersion = v8.0
 build_property.RootNamespace = DoAnWeb
 build_property.RootNamespace = DoAnWeb
-build_property.ProjectDir = D:\BVV\Web_projcect\
+build_property.ProjectDir = D:\LTWProject\Web_projcect\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\BVV\Web_projcect
+build_property.MSBuildProjectDirectory = D:\LTWProject\Web_projcect
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[D:/BVV/Web_projcect/Areas/Admin/Views/Dashboard/Index.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Admin/Views/Dashboard/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGFzaGJvYXJkXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Admin/Views/Users/Create.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Admin/Views/Users/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVXNlcnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Admin/Views/Users/Delete.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Admin/Views/Users/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVXNlcnNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Admin/Views/Users/Edit.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Admin/Views/Users/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVXNlcnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Admin/Views/Users/Index.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Admin/Views/Users/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVXNlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Admin/Views/_ViewImports.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Admin/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Admin/Views/_ViewStart.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Admin/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Doctor/Views/Appointment/Index.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Doctor/Views/Appointment/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRG9jdG9yXFZpZXdzXEFwcG9pbnRtZW50XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Doctor/Views/Appointment/Today.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Doctor/Views/Appointment/Today.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRG9jdG9yXFZpZXdzXEFwcG9pbnRtZW50XFRvZGF5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Doctor/Views/Dashboard/Index.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Doctor/Views/Dashboard/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRG9jdG9yXFZpZXdzXERhc2hib2FyZFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Doctor/Views/MedicalExamination/CreateOrEdit.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Doctor/Views/MedicalExamination/CreateOrEdit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRG9jdG9yXFZpZXdzXE1lZGljYWxFeGFtaW5hdGlvblxDcmVhdGVPckVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Doctor/Views/MedicalExamination/Index.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Doctor/Views/MedicalExamination/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRG9jdG9yXFZpZXdzXE1lZGljYWxFeGFtaW5hdGlvblxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Doctor/Views/PatientRecord/History.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Doctor/Views/PatientRecord/History.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRG9jdG9yXFZpZXdzXFBhdGllbnRSZWNvcmRcSGlzdG9yeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Doctor/Views/Profile/Index.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Doctor/Views/Profile/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRG9jdG9yXFZpZXdzXFByb2ZpbGVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Doctor/Views/Shared/_DoctorLayout.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Doctor/Views/Shared/_DoctorLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRG9jdG9yXFZpZXdzXFNoYXJlZFxfRG9jdG9yTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Doctor/Views/_ViewImports.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Doctor/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRG9jdG9yXFZpZXdzXF9WaWV3SW1wb3J0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Doctor/Views/_ViewStart.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Doctor/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRG9jdG9yXFZpZXdzXF9WaWV3U3RhcnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Employee/Views/Appointments/Edit.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Employee/Views/Appointments/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZWVcVmlld3NcQXBwb2ludG1lbnRzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Employee/Views/Appointments/Index.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Employee/Views/Appointments/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZWVcVmlld3NcQXBwb2ludG1lbnRzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Employee/Views/Dashboard/Index.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Employee/Views/Dashboard/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZWVcVmlld3NcRGFzaGJvYXJkXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Employee/Views/DoctorSchedules/Create.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Employee/Views/DoctorSchedules/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZWVcVmlld3NcRG9jdG9yU2NoZWR1bGVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Employee/Views/DoctorSchedules/Delete.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Employee/Views/DoctorSchedules/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZWVcVmlld3NcRG9jdG9yU2NoZWR1bGVzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Employee/Views/DoctorSchedules/Edit.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Employee/Views/DoctorSchedules/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZWVcVmlld3NcRG9jdG9yU2NoZWR1bGVzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Employee/Views/DoctorSchedules/Index.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Employee/Views/DoctorSchedules/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZWVcVmlld3NcRG9jdG9yU2NoZWR1bGVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Employee/Views/Notifications/Create.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Employee/Views/Notifications/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZWVcVmlld3NcTm90aWZpY2F0aW9uc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Employee/Views/Notifications/Index.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Employee/Views/Notifications/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZWVcVmlld3NcTm90aWZpY2F0aW9uc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Employee/Views/Shared/_EmployeeLayout.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Employee/Views/Shared/_EmployeeLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZWVcVmlld3NcU2hhcmVkXF9FbXBsb3llZUxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Employee/Views/_ViewImports.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Employee/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZWVcVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Employee/Views/_ViewStart.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Employee/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZWVcVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Patient/Views/Appointment/Create.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Patient/Views/Appointment/Cancel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGF0aWVudFxWaWV3c1xBcHBvaW50bWVudFxDYW5jZWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LTWProject/Web_projcect/Areas/Patient/Views/Appointment/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGF0aWVudFxWaWV3c1xBcHBvaW50bWVudFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Patient/Views/Appointment/Index.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Patient/Views/Appointment/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGF0aWVudFxWaWV3c1xBcHBvaW50bWVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Patient/Views/Dashboard/Index.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Patient/Views/Dashboard/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGF0aWVudFxWaWV3c1xEYXNoYm9hcmRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Patient/Views/MedicalHistory/Index.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Patient/Views/MedicalHistory/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGF0aWVudFxWaWV3c1xNZWRpY2FsSGlzdG9yeVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Patient/Views/Profile/Index.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Patient/Views/Notifications/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGF0aWVudFxWaWV3c1xOb3RpZmljYXRpb25zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LTWProject/Web_projcect/Areas/Patient/Views/Profile/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGF0aWVudFxWaWV3c1xQcm9maWxlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Patient/Views/Shared/_PatientLayout.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Patient/Views/Shared/_PatientLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGF0aWVudFxWaWV3c1xTaGFyZWRcX1BhdGllbnRMYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Patient/Views/_ViewImports.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Patient/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGF0aWVudFxWaWV3c1xfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Areas/Patient/Views/_ViewStart.cshtml]
+[D:/LTWProject/Web_projcect/Areas/Patient/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUGF0aWVudFxWaWV3c1xfVmlld1N0YXJ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Views/Account/Login.cshtml]
+[D:/LTWProject/Web_projcect/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Views/Home/Index.cshtml]
+[D:/LTWProject/Web_projcect/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Views/Home/Privacy.cshtml]
+[D:/LTWProject/Web_projcect/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Views/Shared/Error.cshtml]
+[D:/LTWProject/Web_projcect/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Views/Shared/_AuthLayout.cshtml]
+[D:/LTWProject/Web_projcect/Views/Shared/_AuthLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BdXRoTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/LTWProject/Web_projcect/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Views/_ViewImports.cshtml]
+[D:/LTWProject/Web_projcect/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Views/_ViewStart.cshtml]
+[D:/LTWProject/Web_projcect/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BVV/Web_projcect/Views/Shared/_Layout.cshtml]
+[D:/LTWProject/Web_projcect/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-pp2kw1inbx

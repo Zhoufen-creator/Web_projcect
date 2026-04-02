@@ -19,6 +19,11 @@
     <div class="alert alert-success employee-alert">@TempData["success"]</div>
 }
 
+@if (TempData["error"] != null)
+{
+    <div class="alert alert-danger employee-alert">@TempData["error"]</div>
+}
+
 <div class="employee-table-card">
     <div class="employee-table-head">
         <h3>Lịch hẹn bệnh nhân</h3>
@@ -34,7 +39,8 @@
                     <th>Ngày khám</th>
                     <th>Lý do khám</th>
                     <th>Trạng thái</th>
-                    <th width="150">Thao tác</th>
+                    <th>Check-in</th>
+                    <th width="220">Thao tác</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,14 +57,55 @@
                                 <span class="employee-status-badge employee-status-info">@item.Status</span>
                             </td>
                             <td>
-                                <a asp-area="Employee"
-                                   asp-controller="Appointments"
-                                   asp-action="Edit"
-                                   asp-route-id="@item.Id"
-                                   class="employee-action-btn employee-action-warning">
-                                    <i class="bi bi-pencil-square"></i>
-                                    Xử lý
-                                </a>
+                                @if (item.IsCheckedIn)
+                                {
+                                    <span class="employee-status-badge employee-status-success">
+                                        Đã check-in
+                                        @if (item.CheckinTime.HasValue)
+                                        {
+                                            <text> - @item.CheckinTime.Value.ToString("dd/MM HH:mm")</text>
+                                        }
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="employee-status-badge employee-status-pending">Chưa check-in</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="employee-table-actions">
+                                    <a asp-area="Employee"
+                                       asp-controller="Appointments"
+                                       asp-action="Edit"
+                                       asp-route-id="@item.Id"
+                                       class="employee-action-btn employee-action-warning">
+                                        <i class="bi bi-pencil-square"></i>
+                                        Xử lý
+                                    </a>
+
+                                    @if (!item.IsCheckedIn && item.Status != DoAnWeb.Models.AppointmentStatus.Cancelled)
+                                    {
+                                        <form asp-area="Employee"
+                                              asp-controller="Appointments"
+                                              asp-action="CheckIn"
+                                              asp-route-id="@item.Id"
+                                              method="post"
+                                              style="display:inline;">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="employee-action-btn employee-action-success">
+                                                <i class="bi bi-check2-circle"></i>
+                                                Check-in
+                                            </button>
+                                        </form>
+                                    }
+                                    else if (item.IsCheckedIn)
+                                    {
+                                        <span class="employee-action-btn employee-action-success" style="opacity: .8; cursor: default;">
+                                            <i class="bi bi-check-circle-fill"></i>
+                                            Đã check-in
+                                        </span>
+                                    }
+                                </div>
                             </td>
                         </tr>
                     }
@@ -66,7 +113,7 @@
                 else
                 {
                     <tr>
-                        <td colspan="6">
+                        <td colspan="7">
                             <div class="employee-empty">
                                 <div class="employee-empty-icon">
                                     <i class="bi bi-calendar-x"></i>

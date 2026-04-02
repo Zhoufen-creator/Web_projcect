@@ -124,10 +124,19 @@ namespace DoAnWeb.Migrations
                     b.Property<DateTime?>("CheckinTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsCheckedIn")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsReminder24hSent")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsReminder2hSent")
                         .HasColumnType("bit");
 
                     b.Property<int>("PatientId")
@@ -135,6 +144,12 @@ namespace DoAnWeb.Migrations
 
                     b.Property<string>("ReasonForVisit")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Reminder24hSentAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("Reminder2hSentAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("ScheduledDate")
                         .HasColumnType("datetime2");

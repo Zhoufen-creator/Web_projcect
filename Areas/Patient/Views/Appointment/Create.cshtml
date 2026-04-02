@@ -123,6 +123,51 @@
             background: #f8fbff;
         }
 
+        .patient-predict-card {
+            margin-top: 22px;
+            padding: 18px;
+            border-radius: 18px;
+            border: 1px solid #dbe9f7;
+            background: #f8fbff;
+        }
+
+        .patient-predict-card h4 {
+            margin: 0 0 10px;
+            color: #143b73;
+            font-weight: 800;
+        }
+
+        .patient-predict-row {
+            margin-bottom: 8px;
+            color: #334e72;
+        }
+
+        .patient-predict-tag {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #e7f1ff;
+            color: #0f4c97;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin: 4px 6px 0 0;
+        }
+
+        /* SỬA: card gợi ý bác sĩ */
+        .patient-doctor-suggest-card {
+            margin-top: 18px;
+            padding: 18px;
+            border-radius: 18px;
+            border: 1px solid #dff2e4;
+            background: #f6fff8;
+        }
+
+        .patient-doctor-suggest-card h4 {
+            margin: 0 0 10px;
+            color: #166534;
+            font-weight: 800;
+        }
+
         @@media (max-width: 991.98px) {
             .patient-form-grid {
                 grid-template-columns: 1fr;
@@ -168,7 +213,9 @@
                         <option value="">-- Chọn bác sĩ phụ trách --</option>
                         @foreach (var doctor in Model.Doctors)
                         {
-                            <option value="@doctor.Id">@doctor.Name - @doctor.Specialty</option>
+                            <option value="@doctor.Id" selected="@(doctor.Id == Model.DoctorId)">
+                                @doctor.Name - @doctor.Specialty
+                            </option>
                         }
                     </select>
                     <span asp-validation-for="DoctorId" class="text-danger"></span>
@@ -186,6 +233,59 @@
                     <span asp-validation-for="ReasonForVisit" class="text-danger"></span>
                 </div>
             </div>
+
+            @if (!string.IsNullOrWhiteSpace(Model.PredictedSpecialty))
+            {
+                <div class="patient-predict-card">
+                    <h4>Gợi ý chuyên khoa từ mô tả bệnh nhân</h4>
+
+                    <div class="patient-predict-row">
+                        <strong>Chuyên khoa gợi ý:</strong> @Model.PredictedSpecialty
+                    </div>
+
+                    <div class="patient-predict-row">
+                        <strong>Điểm khớp:</strong> @Model.PredictionScore
+                    </div>
+
+                    <div class="patient-predict-row">
+                        <strong>Nhận xét:</strong> @(string.IsNullOrWhiteSpace(Model.PredictionMessage) ? "Không có nhận xét." : Model.PredictionMessage)
+                    </div>
+
+                    @if (Model.MatchedKeywords != null && Model.MatchedKeywords.Any())
+                    {
+                        <div class="patient-predict-row">
+                            <strong>Từ khóa hệ thống nhận diện:</strong><br />
+                            @foreach (var keyword in Model.MatchedKeywords)
+                            {
+                                <span class="patient-predict-tag">@keyword</span>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+
+            @* SỬA: hiển thị bác sĩ hệ thống gợi ý *@
+            @if (!string.IsNullOrWhiteSpace(Model.SuggestedDoctorMessage))
+            {
+                <div class="patient-doctor-suggest-card">
+                    <h4>Gợi ý bác sĩ tự động</h4>
+
+                    <div class="patient-predict-row">
+                        <strong>Thông báo:</strong> @Model.SuggestedDoctorMessage
+                    </div>
+
+                    @if (!string.IsNullOrWhiteSpace(Model.SuggestedDoctorName))
+                    {
+                        <div class="patient-predict-row">
+                            <strong>Bác sĩ được gợi ý:</strong> @Model.SuggestedDoctorName
+                        </div>
+
+                        <div class="patient-predict-row">
+                            <strong>Số chỗ còn lại trong ca:</strong> @Model.SuggestedRemainingSlots
+                        </div>
+                    }
+                </div>
+            }
 
             <div class="patient-form-actions">
                 <button type="submit" class="patient-btn-primary">

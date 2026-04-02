@@ -65,6 +65,9 @@
 </section>
 
 <form asp-action="CreateOrEdit" method="post">
+    @* SỬA: thêm AntiForgeryToken vì controller có [ValidateAntiForgeryToken] *@
+    @Html.AntiForgeryToken()
+
     <input type="hidden" asp-for="Id" />
     <input type="hidden" asp-for="AppointmentId" />
     <input type="hidden" asp-for="PatientId" />

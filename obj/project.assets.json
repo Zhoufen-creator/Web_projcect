@@ -8009,23 +8009,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Abu Dory\\.nuget\\packages\\": {},
+    "C:\\Users\\admin\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\BVV\\Web_projcect\\DoAnWeb.csproj",
+      "projectUniqueName": "D:\\LTWProject\\Web_projcect\\DoAnWeb.csproj",
       "projectName": "DoAnWeb",
-      "projectPath": "D:\\BVV\\Web_projcect\\DoAnWeb.csproj",
-      "packagesPath": "C:\\Users\\Abu Dory\\.nuget\\packages\\",
-      "outputPath": "D:\\BVV\\Web_projcect\\obj\\",
+      "projectPath": "D:\\LTWProject\\Web_projcect\\DoAnWeb.csproj",
+      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+      "outputPath": "D:\\LTWProject\\Web_projcect\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Abu Dory\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -8110,7 +8110,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

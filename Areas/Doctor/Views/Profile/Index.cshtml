@@ -11,6 +11,19 @@
     </div>
 }
 
+@if (ViewBag.DebugErrors != null)
+{
+    <div class="alert alert-danger doctor-alert mb-4">
+        <strong>Lỗi dữ liệu:</strong>
+        <ul class="mb-0 mt-2">
+            @foreach (var err in (List<string>)ViewBag.DebugErrors)
+            {
+                <li>@err</li>
+            }
+        </ul>
+    </div>
+}
+
 <section class="doctor-hero">
     <div class="doctor-card doctor-hero-main">
         <div class="doctor-page-badge">
@@ -64,7 +77,10 @@
     </aside>
 </section>
 
-<form asp-action="Index" method="post">
+<form asp-area="Doctor" asp-controller="Profile" asp-action="Index" method="post">
+    @* SỬA: token chống giả mạo *@
+    @Html.AntiForgeryToken()
+
     <input type="hidden" asp-for="DoctorId" />
 
     <section class="doctor-form-card">
@@ -85,13 +101,18 @@
 
                 <div class="doctor-form-group">
                     <label asp-for="DateOfBirth" class="doctor-label">Ngày sinh</label>
-                    <input asp-for="DateOfBirth" type="date" class="doctor-input" />
+                    <input asp-for="DateOfBirth" type="date" class="doctor-input" max="@DateTime.Today.ToString("yyyy-MM-dd")" />
                     <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                 </div>
 
                 <div class="doctor-form-group">
                     <label asp-for="Gender" class="doctor-label">Giới tính</label>
-                    <input asp-for="Gender" class="doctor-input" />
+                    <select asp-for="Gender" class="doctor-select">
+                        <option value="">-- Chọn giới tính --</option>
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                        <option value="Khác">Khác</option>
+                    </select>
                     <span asp-validation-for="Gender" class="text-danger"></span>
                 </div>
 

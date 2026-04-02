@@ -1,3 +1,5 @@
+@model DoAnWeb.Areas.Admin.ViewModels.AdminDashboardViewModel
+
 @{
     ViewData["Title"] = "Admin Dashboard";
 }
@@ -153,6 +155,77 @@
                     </a>
                 </div>
             </div>
+
+            <div class="mt-4">
+                <div class="card shadow-sm border-0 rounded-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h4 class="fw-bold mb-1">Phân tích tải khám theo chuyên khoa</h4>
+                                <p class="text-muted mb-0">
+                                    Hệ thống phân tích số lượng lịch khám tuần hiện tại so với trung bình lịch sử để phát hiện khoa đang quá tải.
+                                </p>
+                            </div>
+                        </div>
+
+                        @if (Model.SpecialtyLoadInsights != null && Model.SpecialtyLoadInsights.Any())
+                        {
+                            <div class="table-responsive">
+                                <table class="table align-middle">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Chuyên khoa</th>
+                                            <th>Số ca tuần này</th>
+                                            <th>TB tuần lịch sử</th>
+                                            <th>Tỷ lệ tăng</th>
+                                            <th>Trạng thái</th>
+                                            <th>Khuyến nghị</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.SpecialtyLoadInsights)
+                                        {
+                                            <tr>
+                                                <td class="fw-semibold">@item.Specialty</td>
+                                                <td>@item.CurrentWeekCount</td>
+                                                <td>@item.AverageWeeklyCount</td>
+                                                <td>@item.IncreaseRatio x</td>
+                                                <td>
+                                                    @if (item.IsAbnormal)
+                                                    {
+                                                        <span class="badge bg-danger">Tăng bất thường</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge bg-success">Ổn định</span>
+                                                    }
+                                                </td>
+                                                <td>@item.Recommendation</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            @if (Model.SpecialtyLoadInsights.Any(x => x.IsAbnormal))
+                            {
+                                <div class="alert alert-warning rounded-4 mt-3 mb-0">
+                                    <strong>Cảnh báo vận hành:</strong>
+                                    Có chuyên khoa đang tăng lượng bệnh nhân bất thường trong tuần này.
+                                    Bạn nên xem xét tăng ca trực hoặc bổ sung bác sĩ cho các khoa được cảnh báo.
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="alert alert-info rounded-4 mb-0">
+                                Chưa có đủ dữ liệu lịch khám để phân tích tải chuyên khoa.
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>

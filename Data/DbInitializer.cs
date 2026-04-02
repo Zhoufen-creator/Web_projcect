@@ -22,9 +22,7 @@ namespace DoAnWeb.Data
                 }
             }
 
-            // =========================
             // ADMIN
-            // =========================
             var adminUser = await userManager.FindByEmailAsync("admin@gmail.com");
             if (adminUser == null)
             {
@@ -52,9 +50,7 @@ namespace DoAnWeb.Data
                 }
             }
 
-            // =========================
             // DOCTOR
-            // =========================
             var doctorUser = await userManager.FindByEmailAsync("doctor@gmail.com");
             if (doctorUser == null)
             {
@@ -102,9 +98,7 @@ namespace DoAnWeb.Data
                 }
             }
 
-            // =========================
             // EMPLOYEE
-            // =========================
             var employeeUser = await userManager.FindByEmailAsync("employee@gmail.com");
             if (employeeUser == null)
             {
@@ -132,9 +126,7 @@ namespace DoAnWeb.Data
                 }
             }
 
-            // =========================
             // PATIENT
-            // =========================
             var patientUser = await userManager.FindByEmailAsync("patient@gmail.com");
             if (patientUser == null)
             {

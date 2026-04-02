@@ -56,7 +56,10 @@
                 </div>
             </div>
 
-            <form asp-action="Delete" method="post">
+            <form asp-area="Admin" asp-controller="Users" asp-action="Delete" method="post">
+                @* SỬA: thêm AntiForgeryToken vì controller có [ValidateAntiForgeryToken] *@
+                @Html.AntiForgeryToken()
+
                 <input type="hidden" asp-for="Id" />
 
                 <div class="admin-delete-actions">

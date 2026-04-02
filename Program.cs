@@ -1,5 +1,6 @@
 using DoAnWeb.Data;
 using DoAnWeb.Models;
+using DoAnWeb.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,21 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders()
     .AddDefaultUI();
+
+builder.Services.AddScoped<IAppointmentValidationService, AppointmentValidationService>();
+builder.Services.AddScoped<IAppointmentEstimateService, AppointmentEstimateService>();
+builder.Services.AddScoped<ISpecialtyPredictionService, SpecialtyPredictionService>();
+builder.Services.AddScoped<IDoctorAutoAssignmentService, DoctorAutoAssignmentService>();
+
+// SỬA: thêm service phân tích tải khoa
+builder.Services.AddScoped<ISpecialtyLoadAnalysisService, SpecialtyLoadAnalysisService>();
+
+// Email
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddScoped<IEmailService, EmailService>();
+
+// Reminder background service
+builder.Services.AddHostedService<AppointmentReminderBackgroundService>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
