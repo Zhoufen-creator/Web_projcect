@@ -1,0 +1,134 @@
+@model DoAnWeb.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Đăng ký";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/register-hospital.css" asp-append-version="true" />
+}
+
+<div class="auth-page">
+    <section class="auth-hero">
+        <div class="container auth-hero-inner">
+            <div class="auth-brand">
+                <div class="auth-brand-logo">
+                    <i class="bi bi-hospital"></i>
+                </div>
+                <div class="auth-brand-text">
+                    <h1>DoAnWeb</h1>
+                    <p>Hospital Management System</p>
+                </div>
+            </div>
+
+            <div class="auth-hero-content">
+                <h2>Tạo tài khoản bệnh nhân</h2>
+                <p>
+                    Đăng ký tài khoản để đặt lịch khám, theo dõi lịch sử khám bệnh và cập nhật hồ sơ cá nhân
+                    trực tiếp trên hệ thống bệnh viện.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="auth-form-section">
+        <div class="container">
+            <div class="auth-form-card auth-register-card">
+                <div class="auth-card-topbar">
+                    <a asp-controller="Home" asp-action="Index" class="auth-back-home">
+                        <i class="bi bi-arrow-left-short"></i>
+                        <span>Quay về trang chủ</span>
+                    </a>
+                </div>
+
+                <div class="auth-form-header">
+                    <div class="auth-form-icon">
+                        <i class="bi bi-person-plus"></i>
+                    </div>
+                    <h3>Đăng ký tài khoản</h3>
+                    <p>Tài khoản đăng ký tại đây sẽ được tạo với vai trò bệnh nhân</p>
+                </div>
+
+                <form asp-action="Register" method="post" class="auth-form">
+                    <div asp-validation-summary="All" class="validation-summary-errors"></div>
+
+                    <div class="auth-register-grid">
+                        <div class="form-group-custom">
+                            <label asp-for="Name" class="form-label auth-label"></label>
+                            <input asp-for="Name" class="form-control auth-input" placeholder="Nhập họ và tên" />
+                            <span asp-validation-for="Name" class="text-danger field-error"></span>
+                        </div>
+
+                        <div class="form-group-custom">
+                            <label asp-for="Email" class="form-label auth-label"></label>
+                            <input asp-for="Email" class="form-control auth-input" placeholder="Nhập email của bạn" />
+                            <span asp-validation-for="Email" class="text-danger field-error"></span>
+                        </div>
+
+                        <div class="form-group-custom">
+                            <label asp-for="PhoneNumber" class="form-label auth-label"></label>
+                            <input asp-for="PhoneNumber" class="form-control auth-input" placeholder="Nhập số điện thoại" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger field-error"></span>
+                        </div>
+
+                        <div class="form-group-custom">
+                            <label asp-for="Gender" class="form-label auth-label"></label>
+                            <select asp-for="Gender" class="form-control auth-input auth-select">
+                                <option value="">-- Chọn giới tính --</option>
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                                <option value="Khác">Khác</option>
+                            </select>
+                            <span asp-validation-for="Gender" class="text-danger field-error"></span>
+                        </div>
+
+                        <div class="form-group-custom">
+                            <label asp-for="DateOfBirth" class="form-label auth-label"></label>
+                            <input asp-for="DateOfBirth" type="date" class="form-control auth-input" />
+                            <span asp-validation-for="DateOfBirth" class="text-danger field-error"></span>
+                        </div>
+
+                        <div class="form-group-custom auth-register-full">
+                            <label asp-for="Address" class="form-label auth-label"></label>
+                            <input asp-for="Address" class="form-control auth-input" placeholder="Nhập địa chỉ liên hệ" />
+                            <span asp-validation-for="Address" class="text-danger field-error"></span>
+                        </div>
+
+                        <div class="form-group-custom">
+                            <label asp-for="Password" class="form-label auth-label"></label>
+                            <input asp-for="Password" class="form-control auth-input" placeholder="Nhập mật khẩu" />
+                            <span asp-validation-for="Password" class="text-danger field-error"></span>
+                        </div>
+
+                        <div class="form-group-custom">
+                            <label asp-for="ConfirmPassword" class="form-label auth-label"></label>
+                            <input asp-for="ConfirmPassword" class="form-control auth-input" placeholder="Nhập lại mật khẩu" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger field-error"></span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn auth-submit-btn">
+                        <i class="bi bi-person-check me-2"></i>Đăng ký tài khoản
+                    </button>
+                </form>
+
+                <div class="auth-extra-actions">
+                    <a asp-controller="Account" asp-action="Login" class="auth-home-link">
+                        Đã có tài khoản? Đăng nhập tại đây
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="auth-footer">
+        <div class="container text-center">
+            Copyright &copy; 2026 DoAnWeb. Nền tảng quản lý bệnh viện chuyên nghiệp.
+        </div>
+    </footer>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

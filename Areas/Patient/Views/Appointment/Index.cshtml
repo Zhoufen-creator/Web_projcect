@@ -5,135 +5,7 @@
 }
 
 @section Styles {
-    <style>
-        .patient-page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 16px;
-            flex-wrap: wrap;
-            margin-bottom: 22px;
-        }
-
-        .patient-page-header h2 {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #143b73;
-            margin: 0 0 8px;
-        }
-
-        .patient-page-header p {
-            margin: 0;
-            color: #71839a;
-        }
-
-        .patient-page-btn {
-            min-height: 48px;
-            padding: 0 18px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #0f4c97 0%, #2f7fe6 100%);
-            color: #fff;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-weight: 700;
-        }
-
-        .patient-page-btn:hover {
-            color: #fff;
-        }
-
-        .patient-table-card {
-            background: #fff;
-            border: 1px solid #e8eef6;
-            border-radius: 24px;
-            box-shadow: 0 12px 30px rgba(15, 76, 151, 0.06);
-            overflow: hidden;
-        }
-
-        .patient-table-head {
-            padding: 22px 24px 16px;
-            border-bottom: 1px solid #eef3f8;
-        }
-
-        .patient-table-head h3 {
-            margin: 0 0 6px;
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: #163b72;
-        }
-
-        .patient-table-head p {
-            margin: 0;
-            color: #72839a;
-            font-size: 0.94rem;
-        }
-
-        .patient-table-modern {
-            margin-bottom: 0;
-        }
-
-        .patient-table-modern thead th {
-            background: #f3f8fd;
-            color: #2d4e78;
-            font-size: 0.92rem;
-            font-weight: 800;
-            border: none;
-            padding: 15px 16px;
-            white-space: nowrap;
-        }
-
-        .patient-table-modern tbody td {
-            border-color: #eef3f8;
-            padding: 16px;
-            vertical-align: middle;
-            color: #334e72;
-        }
-
-        .patient-status-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 34px;
-            padding: 0 12px;
-            border-radius: 999px;
-            background: #edf5ff;
-            color: #0f4c97;
-            font-size: 0.85rem;
-            font-weight: 800;
-        }
-
-        .patient-checkin-done {
-            background: #e9f9f0;
-            color: #16864f;
-        }
-
-        .patient-checkin-wait {
-            background: #fff4e9;
-            color: #c97a12;
-        }
-
-        .patient-cancel-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 38px;
-            padding: 0 14px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            border: 1px solid #f3d3d6;
-            background: #fff5f6;
-            color: #c53b4b;
-        }
-
-        .patient-cancel-btn:hover {
-            color: #c53b4b;
-            background: #ffeef0;
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/patient/appointment-index.css" asp-append-version="true" />
 }
 
 <div class="patient-page-header">
@@ -216,7 +88,7 @@
                                 }
                                 else if (item.Status == DoAnWeb.Models.AppointmentStatus.Cancelled)
                                 {
-                                    <span class="patient-status-badge" style="background:#fff0f1; color:#c53b4b;">Đã hủy</span>
+                                    <span class="patient-status-badge patient-status-cancelled">Đã hủy</span>
                                 }
                                 else
                                 {

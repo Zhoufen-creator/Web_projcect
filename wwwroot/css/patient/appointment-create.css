@@ -1,0 +1,186 @@
+.patient-form-card {
+    background: #fff;
+    border: 1px solid #e8eef6;
+    border-radius: 26px;
+    box-shadow: 0 12px 30px rgba(15, 76, 151, 0.06);
+    overflow: hidden;
+}
+
+.patient-form-head {
+    padding: 24px 26px;
+    background: linear-gradient(135deg, #0f4c97 0%, #2f7fe6 100%);
+    color: #fff;
+}
+
+.patient-form-head h2 {
+    margin: 0 0 8px;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.patient-form-head p {
+    margin: 0;
+    color: rgba(255,255,255,0.92);
+}
+
+.patient-form-body {
+    padding: 28px 26px;
+}
+
+.patient-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.patient-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.patient-form-group-full {
+    grid-column: 1 / -1;
+}
+
+.patient-label {
+    font-weight: 700;
+    color: #173e75;
+}
+
+.patient-input,
+.patient-select,
+.patient-textarea {
+    width: 100%;
+    min-height: 50px;
+    border-radius: 14px;
+    border: 1px solid #d9e5f2;
+    padding: 12px 14px;
+    box-shadow: none;
+    color: #27466f;
+    background: #fff;
+}
+
+.patient-textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.patient-input:focus,
+.patient-select:focus,
+.patient-textarea:focus {
+    outline: none;
+    border-color: #7daee7;
+    box-shadow: 0 0 0 0.2rem rgba(15, 76, 151, 0.08);
+}
+
+.patient-form-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.patient-btn-primary,
+.patient-btn-light {
+    min-height: 48px;
+    padding: 0 20px;
+    border-radius: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+}
+
+.patient-btn-primary {
+    background: linear-gradient(135deg, #0f4c97 0%, #2f7fe6 100%);
+    color: #fff;
+}
+
+.patient-btn-primary:hover {
+    color: #fff;
+}
+
+.patient-btn-light {
+    background: #fff;
+    color: #1d4f8f;
+    border: 1px solid #dce7f3;
+}
+
+.patient-btn-light:hover {
+    color: #1d4f8f;
+    background: #f8fbff;
+}
+
+.patient-predict-card {
+    margin-top: 22px;
+    padding: 18px;
+    border-radius: 18px;
+    border: 1px solid #dbe9f7;
+    background: #f8fbff;
+}
+
+.patient-predict-card h4 {
+    margin: 0 0 10px;
+    color: #143b73;
+    font-weight: 800;
+}
+
+.patient-predict-row {
+    margin-bottom: 8px;
+    color: #334e72;
+}
+
+.patient-predict-tag {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #e7f1ff;
+    color: #0f4c97;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin: 4px 6px 0 0;
+}
+
+.patient-doctor-suggest-card {
+    margin-top: 18px;
+    padding: 18px;
+    border-radius: 18px;
+    border: 1px solid #dff2e4;
+    background: #f6fff8;
+}
+
+.patient-doctor-suggest-card h4 {
+    margin: 0 0 10px;
+    color: #166534;
+    font-weight: 800;
+}
+
+@media (max-width: 991.98px) {
+    .patient-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .patient-form-group-full {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .patient-form-head,
+    .patient-form-body {
+        padding: 18px;
+    }
+
+    .patient-form-actions {
+        flex-direction: column;
+    }
+
+    .patient-btn-primary,
+    .patient-btn-light {
+        width: 100%;
+    }
+}

@@ -1,0 +1,107 @@
+.patient-cancel-card {
+    background: #fff;
+    border: 1px solid #e8eef6;
+    border-radius: 26px;
+    box-shadow: 0 12px 30px rgba(15, 76, 151, 0.06);
+    overflow: hidden;
+}
+
+.patient-cancel-head {
+    padding: 24px 26px;
+    background: linear-gradient(135deg, #b52f3f 0%, #e05768 100%);
+    color: #fff;
+}
+
+.patient-cancel-head h2 {
+    margin: 0 0 8px;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.patient-cancel-head p {
+    margin: 0;
+    color: rgba(255,255,255,0.92);
+}
+
+.patient-cancel-body {
+    padding: 28px 26px;
+}
+
+.patient-info-box {
+    background: #f8fbff;
+    border: 1px solid #edf3fa;
+    border-radius: 18px;
+    padding: 16px;
+    margin-bottom: 18px;
+}
+
+.patient-info-box .label {
+    color: #7b8ba1;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.patient-info-box .value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #213d67;
+}
+
+.patient-label {
+    font-weight: 700;
+    color: #173e75;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.patient-textarea {
+    width: 100%;
+    min-height: 120px;
+    border-radius: 14px;
+    border: 1px solid #d9e5f2;
+    padding: 12px 14px;
+    color: #27466f;
+    background: #fff;
+    resize: vertical;
+}
+
+.patient-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+}
+
+.patient-danger-btn,
+.patient-light-btn {
+    min-height: 48px;
+    padding: 0 20px;
+    border-radius: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+}
+
+.patient-danger-btn {
+    background: linear-gradient(135deg, #b52f3f 0%, #e05768 100%);
+    color: #fff;
+}
+
+.patient-danger-btn:hover {
+    color: #fff;
+}
+
+.patient-light-btn {
+    background: #fff;
+    color: #1d4f8f;
+    border: 1px solid #dce7f3;
+}
+
+.patient-light-btn:hover {
+    color: #1d4f8f;
+    background: #f8fbff;
+}
