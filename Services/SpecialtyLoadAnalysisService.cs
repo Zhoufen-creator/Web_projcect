@@ -1,7 +1,7 @@
 using DoAnWeb.Data;
 using DoAnWeb.Models;
 using Microsoft.EntityFrameworkCore;
-
+using DoAnWeb.Services.Interface;
 namespace DoAnWeb.Services
 {
     public class SpecialtyLoadAnalysisService : ISpecialtyLoadAnalysisService
@@ -37,7 +37,7 @@ namespace DoAnWeb.Services
             var result = new List<SpecialtyLoadInsight>();
 
             var specialties = appointments
-                .Where(a => !string.IsNullOrWhiteSpace(a.Doctor!.Specialty))
+                .Where(a => !string.IsNullOrWhiteSpace(a.Doctor!.Specialty.Name))
                 .Select(a => a.Doctor!.Specialty!)
                 .Distinct()
                 .ToList();
@@ -91,7 +91,7 @@ namespace DoAnWeb.Services
 
                 result.Add(new SpecialtyLoadInsight
                 {
-                    Specialty = specialty,
+                    Specialty = specialty.Name,
                     CurrentWeekCount = currentWeekCount,
                     AverageWeeklyCount = Math.Round(averageWeeklyCount, 2),
                     IncreaseRatio = Math.Round(increaseRatio, 2),

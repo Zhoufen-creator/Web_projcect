@@ -1,9 +1,21 @@
 using System.Text;
+using DoAnWeb.Services.Interface;
 
 namespace DoAnWeb.Services
 {
     public class SpecialtyPredictionService : ISpecialtyPredictionService
     {
+        private readonly IPhoBertInferenceService _phoBertService;
+        private readonly ILogger<SpecialtyPredictionService> _logger;
+
+        public SpecialtyPredictionService(IPhoBertInferenceService phoBertService, ILogger<SpecialtyPredictionService> logger)
+        {
+            _phoBertService = phoBertService;
+            _logger = logger;
+        }
+
+        // ============= CODE CŨ (SỬ DỤNG TỪ KHÓA) - ĐƯỢC COMMENT LẠI =============
+        /*
         private readonly Dictionary<string, List<string>> _specialtyKeywords = new()
         {
             { "Nội tổng quát", new List<string> { "sot", "ho", "dau hong", "cam", "met moi", "nhuc dau", "kho tho", "viem", "nong", "lanh" } },
@@ -14,7 +26,26 @@ namespace DoAnWeb.Services
             { "Tai mũi họng", new List<string> { "dau hong", "so mui", "nghet mui", "ho", "viem hong", "tai", "mui", "hong", "u tai" } },
             { "Xương khớp", new List<string> { "dau lung", "dau goi", "dau khop", "nhuc xuong", "te tay", "te chan", "cot song", "vai gay" } }
         };
+        */
 
+        // ============= CODE MỚI (SỬ DỤNG PHOBERT MODEL) =============
+        public async Task<SpecialtyPredictionResult> PredictSpecialtyAsync(string? reasonForVisit)
+        {
+            return await _phoBertService.PredictSpecialtyAsync(reasonForVisit);
+        }
+
+        // ============= PHƯƠNG THỨC CŨ DÀNH CHO BACKWARD COMPATIBILITY =============
+        public SpecialtyPredictionResult PredictSpecialty(string? reasonForVisit)
+        {
+            // Gọi phiên bản async một cách synchronous (tạm thời)
+            // Lý tưởng nên sữa các nơi gọi sang dùng PredictSpecialtyAsync
+            var task = PredictSpecialtyAsync(reasonForVisit);
+            task.Wait();
+            return task.Result;
+        }
+
+        /*
+        // ============= PHƯƠNG THỨC TỪ KHÓA - ĐƯỢC COMMENT LẠI =============
         public SpecialtyPredictionResult PredictSpecialty(string? reasonForVisit)
         {
             if (string.IsNullOrWhiteSpace(reasonForVisit))
@@ -104,5 +135,6 @@ namespace DoAnWeb.Services
 
             return builder.ToString();
         }
+        */
     }
 }

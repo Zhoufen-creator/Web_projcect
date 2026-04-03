@@ -16,6 +16,7 @@ namespace DoAnWeb.Data
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Specialty> Specialties { get; set; }
 
         // Nhóm Lịch trình & Khám bệnh
         public DbSet<DoctorSchedule> DoctorSchedules { get; set; }
@@ -45,6 +46,7 @@ namespace DoAnWeb.Data
             builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins");
             builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
             builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
+            builder.Entity<Specialty>().ToTable("Specialties");
 
             // Quan hệ 1-1: User <-> Patient / Doctor / Employee
             builder.Entity<Patient>()

@@ -33,3 +33,5 @@ npm-debug.log*
 tmp/
 temp/
 *.tmp
+final_model_v7-20260403T134236Z-1-001
+.env3.11

@@ -6,6 +6,9 @@ namespace DoAnWeb.Areas.Employee.ViewModels
     {
         public int? Id { get; set; }
 
+        [Required(ErrorMessage = "Vui lòng chọn chuyên khoa")]
+        public int SpecialtyId { get; set; }
+
         [Required(ErrorMessage = "Vui lòng chọn bác sĩ")]
         public int DoctorId { get; set; }
 

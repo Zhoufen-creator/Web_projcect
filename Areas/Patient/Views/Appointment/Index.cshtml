@@ -57,7 +57,7 @@
                         <tr>
                             <td>@item.ScheduledDate.ToString("dd/MM/yyyy HH:mm")</td>
                             <td>@(item.Doctor?.User?.Name ?? "Chưa cập nhật")</td>
-                            <td>@(item.Doctor?.Specialty ?? "Chưa cập nhật")</td>
+                            <td>@(item.Doctor?.Specialty?.Name ?? "Chưa cập nhật")</td>
                             <td>@(string.IsNullOrWhiteSpace(item.ReasonForVisit) ? "Không có ghi chú" : item.ReasonForVisit)</td>
                             <td>
                                 <span class="patient-status-badge">@item.Status</span>

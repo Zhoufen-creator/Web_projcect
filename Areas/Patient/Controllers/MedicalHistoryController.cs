@@ -50,7 +50,7 @@ namespace DoAnWeb.Areas.Patient.Controllers
                 ExaminationId = exam.Id,
                 ExaminationDate = exam.StartTime,
                 DoctorName = exam.Doctor.User.Name,
-                Specialty = exam.Doctor.Specialty,
+                Specialty = exam.Doctor.Specialty?.Name ?? "Chưa cập nhật",
                 Symptoms = exam.Symptoms,
                 Diagnosis = exam.Diagnosis,
                 DoctorAvoid = exam.DoctorAvoid,

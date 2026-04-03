@@ -1,8 +1,12 @@
 using DoAnWeb.Data;
 using DoAnWeb.Models;
 using DoAnWeb.Services;
+using DoAnWeb.Services.Interface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using DotNetEnv;
+
+Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +28,13 @@ builder.Services.AddScoped<IDoctorAutoAssignmentService, DoctorAutoAssignmentSer
 
 // SỬA: thêm service phân tích tải khoa
 builder.Services.AddScoped<ISpecialtyLoadAnalysisService, SpecialtyLoadAnalysisService>();
+
+// SỬA: thêm service tính toán nhân sự
+builder.Services.AddScoped<IStaffingService, StaffingService>();
+
+// SỬA: thêm service PhoBERT inference
+builder.Services.AddScoped<IPhoBertInferenceService, PhoBertInferenceService>();
+builder.Services.AddHttpClient<IPhoBertInferenceService, PhoBertInferenceService>();
 
 // Email
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));

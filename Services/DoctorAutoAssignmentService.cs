@@ -1,7 +1,7 @@
 using DoAnWeb.Data;
 using DoAnWeb.Models;
 using Microsoft.EntityFrameworkCore;
-
+using DoAnWeb.Services.Interface;
 namespace DoAnWeb.Services
 {
     public class DoctorAutoAssignmentService : IDoctorAutoAssignmentService
@@ -26,7 +26,7 @@ namespace DoAnWeb.Services
 
             var doctors = await _context.Doctors
                 .Include(d => d.User)
-                .Where(d => d.Specialty != null && d.Specialty == predictedSpecialty)
+                .Where(d => d.Specialty != null && d.Specialty.Name == predictedSpecialty)
                 .ToListAsync();
 
             if (!doctors.Any())
@@ -79,7 +79,7 @@ namespace DoAnWeb.Services
                 {
                     DoctorId = doctor.Id,
                     DoctorName = doctor.User?.Name ?? "Chưa cập nhật",
-                    Specialty = doctor.Specialty ?? "",
+                    Specialty = doctor.Specialty.Name ?? "",
                     CurrentPatientCount = currentPatientCount,
                     RemainingSlots = schedule.MaxPatient - currentPatientCount,
                     IsAssigned = true,

@@ -29,6 +29,7 @@ namespace DoAnWeb.Areas.Doctor.Controllers
 
             var doctor = await _context.Doctors
                 .Include(d => d.User)
+                .Include(d => d.Specialty)
                 .FirstOrDefaultAsync(d => d.UserId == user.Id);
 
             if (doctor == null)
@@ -42,7 +43,7 @@ namespace DoAnWeb.Areas.Doctor.Controllers
                 Gender = doctor.User.Gender,
                 Address = doctor.User.Address,
                 PhoneNumber = doctor.User.PhoneNumber ?? "",
-                Specialty = doctor.Specialty,
+                Specialty = doctor.Specialty.Name ?? "",
                 LicenseNumber = doctor.LicenseNumber,
                 Qualifications = doctor.Qualifications
             };
@@ -92,7 +93,7 @@ namespace DoAnWeb.Areas.Doctor.Controllers
             }
 
             // SỬA: cập nhật thông tin bảng Doctor
-            doctor.Specialty = vm.Specialty;
+            doctor.Specialty.Name = vm.Specialty;
             doctor.LicenseNumber = vm.LicenseNumber;
             doctor.Qualifications = vm.Qualifications;
 

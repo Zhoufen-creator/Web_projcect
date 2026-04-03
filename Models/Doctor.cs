@@ -7,7 +7,9 @@ public class Doctor
 {
     public int Id { get; set; }
 
-    public string? Specialty { get; set; } // Chuyên khoa
+    public int SpecialtyId { get; set; } // Chuyên khoa
+    [ForeignKey("SpecialtyId")]
+    public Specialty Specialty { get; set; } = null!;
     public string? LicenseNumber { get; set; } // Số chứng chỉ hành nghề
     public string? Qualifications { get; set; } // Trình độ
 

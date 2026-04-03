@@ -2,6 +2,7 @@ using DoAnWeb.Areas.Patient.ViewModels;
 using DoAnWeb.Data;
 using DoAnWeb.Models;
 using DoAnWeb.Services;
+using DoAnWeb.Services.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -58,6 +59,7 @@ namespace DoAnWeb.Areas.Patient.Controllers
         {
             var doctors = await _context.Doctors
                 .Include(d => d.User)
+                .Include(d => d.Specialty)
                 .ToListAsync();
 
             var model = new AppointmentCreateViewModel
@@ -66,8 +68,8 @@ namespace DoAnWeb.Areas.Patient.Controllers
                 Doctors = doctors.Select(d => new DoctorSelectViewModel
                 {
                     Id = d.Id,
-                    Name = d.User.Name,
-                    Specialty = d.Specialty
+                    Name = d.User?.Name,
+                    Specialty = d.Specialty?.Name
                 }).ToList()
             };
 
@@ -80,13 +82,14 @@ namespace DoAnWeb.Areas.Patient.Controllers
         {
             var doctors = await _context.Doctors
                 .Include(d => d.User)
+                .Include(d => d.Specialty)
                 .ToListAsync();
 
             model.Doctors = doctors.Select(d => new DoctorSelectViewModel
             {
                 Id = d.Id,
                 Name = d.User.Name,
-                Specialty = d.Specialty
+                Specialty = d.Specialty.Name
             }).ToList();
 
             var prediction = _specialtyPredictionService.PredictSpecialty(model.ReasonForVisit);
@@ -262,7 +265,7 @@ namespace DoAnWeb.Areas.Patient.Controllers
                 Id = appointment.Id,
                 ScheduledDate = appointment.ScheduledDate,
                 DoctorName = appointment.Doctor?.User?.Name ?? "Chưa cập nhật",
-                Specialty = appointment.Doctor?.Specialty,
+                Specialty = appointment.Doctor?.Specialty?.Name ?? "Chưa cập nhật",
                 ReasonForVisit = appointment.ReasonForVisit
             };
 

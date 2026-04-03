@@ -89,7 +89,7 @@ namespace DoAnWeb.Data
                     context.Doctors.Add(new Doctor
                     {
                         UserId = doctorUser.Id,
-                        Specialty = "Nội tổng quát",
+                        SpecialtyId = 1, // Giả sử có một chuyên khoa nội tổng quát với Id là 1
                         LicenseNumber = "BS001",
                         Qualifications = "Bác sĩ đa khoa"
                     });

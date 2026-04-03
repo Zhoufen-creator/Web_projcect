@@ -1,6 +1,7 @@
 using DoAnWeb.Data;
 using DoAnWeb.Models;
 using Microsoft.EntityFrameworkCore;
+using DoAnWeb.Services.Interface;
 
 namespace DoAnWeb.Services
 {
@@ -92,7 +93,7 @@ namespace DoAnWeb.Services
 
                         <p><strong>Thời gian khám:</strong> {appointment.ScheduledDate:dd/MM/yyyy HH:mm}</p>
                         <p><strong>Bác sĩ:</strong> {doctorUser?.Name ?? "Chưa cập nhật"}</p>
-                        <p><strong>Chuyên khoa:</strong> {appointment.Doctor?.Specialty ?? "Chưa cập nhật"}</p>
+                        <p><strong>Chuyên khoa:</strong> {appointment.Doctor?.Specialty.Name ?? "Chưa cập nhật"}</p>
                         <p><strong>Lý do khám:</strong> {(string.IsNullOrWhiteSpace(appointment.ReasonForVisit) ? "Không có ghi chú" : appointment.ReasonForVisit)}</p>
 
                         <hr />
@@ -172,7 +173,7 @@ namespace DoAnWeb.Services
 
                         <p><strong>Thời gian khám:</strong> {appointment.ScheduledDate:dd/MM/yyyy HH:mm}</p>
                         <p><strong>Bác sĩ:</strong> {doctorUser?.Name ?? "Chưa cập nhật"}</p>
-                        <p><strong>Chuyên khoa:</strong> {appointment.Doctor?.Specialty ?? "Chưa cập nhật"}</p>
+                        <p><strong>Chuyên khoa:</strong> {appointment.Doctor?.Specialty.Name ?? "Chưa cập nhật"}</p>
                         <p><strong>Lý do khám:</strong> {(string.IsNullOrWhiteSpace(appointment.ReasonForVisit) ? "Không có ghi chú" : appointment.ReasonForVisit)}</p>
 
                         <hr />

@@ -34,7 +34,7 @@ namespace DoAnWeb.Areas.Employee.Controllers
         // GET: Create
         public async Task<IActionResult> Create()
         {
-            await LoadDoctors();
+            await LoadSpecialties();
             return View();
         }
 
@@ -50,7 +50,7 @@ namespace DoAnWeb.Areas.Employee.Controllers
 
             if (!ModelState.IsValid)
             {
-                await LoadDoctors(vm.DoctorId);
+                await LoadSpecialties(vm.SpecialtyId);
                 return View(vm);
             }
 
@@ -72,19 +72,22 @@ namespace DoAnWeb.Areas.Employee.Controllers
         // GET: Edit
         public async Task<IActionResult> Edit(int id)
         {
-            var schedule = await _context.DoctorSchedules.FindAsync(id);
-            if (schedule == null) return NotFound();
+            var schedule = await _context.DoctorSchedules
+                .Include(ds => ds.Doctor)
+                .FirstOrDefaultAsync(ds => ds.Id == id);
+            if (schedule == null || schedule.Doctor == null) return NotFound();
 
             var vm = new DoctorScheduleVM
             {
                 Id = schedule.Id,
                 DoctorId = schedule.DoctorId,
+                SpecialtyId = schedule.Doctor.SpecialtyId,
                 StartTime = schedule.StartTime,
                 EndTime = schedule.EndTime,
                 MaxPatient = schedule.MaxPatient
             };
 
-            await LoadDoctors(vm.DoctorId);
+            await LoadSpecialties(vm.SpecialtyId);
             return View(vm);
         }
 
@@ -102,7 +105,7 @@ namespace DoAnWeb.Areas.Employee.Controllers
 
             if (!ModelState.IsValid)
             {
-                await LoadDoctors(vm.DoctorId);
+                await LoadSpecialties(vm.SpecialtyId);
                 return View(vm);
             }
 
@@ -149,14 +152,53 @@ namespace DoAnWeb.Areas.Employee.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // API: Tìm bác sĩ theo chuyên khoa và tên
+        [HttpGet]
+        public async Task<IActionResult> SearchDoctors(int specialtyId, string searchName = "")
+        {
+            var doctors = await _context.Doctors
+                .Where(d => d.SpecialtyId == specialtyId)
+                .Include(d => d.User)
+                .AsNoTracking()
+                .ToListAsync();
+
+            // Lọc theo tên nếu có
+            if (!string.IsNullOrWhiteSpace(searchName))
+            {
+                doctors = doctors.Where(d => d.User != null && 
+                                     d.User.Name.Contains(searchName, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            // Trả về JSON
+            var result = doctors.Select(d => new
+            {
+                id = d.Id,
+                name = d.User?.Name ??  "Bác sĩ ẩn danh",
+            }).ToList();
+
+            return Json(result);
+        }
+
+        private async Task LoadSpecialties(int? selectedSpecialtyId = null)
+        {
+            var specialties = await _context.Specialties
+                .OrderBy(s => s.Name)
+                .Select(s => new { s.Id, s.Name })
+                .ToListAsync();
+
+            ViewBag.SpecialtyId = new SelectList(specialties, "Id", "Name", selectedSpecialtyId);
+        }
+
         private async Task LoadDoctors(int? selectedDoctorId = null)
         {
             var doctors = await _context.Doctors
                 .Include(d => d.User)
+                .Include(d => d.Specialty)
                 .Select(d => new
                 {
                     d.Id,
-                    Name = d.User.Name + " - " + d.Specialty
+                    Name = (d.User != null ? d.User.Name : "Bác sĩ ẩn danh") + " - " + 
+                            (d.Specialty != null ? d.Specialty.Name : "Chưa rõ khoa")
                 })
                 .ToListAsync();
 
