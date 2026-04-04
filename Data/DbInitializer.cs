@@ -13,6 +13,16 @@ namespace DoAnWeb.Data
             var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
 
             string[] roles = { "Admin", "Doctor", "Employee", "Patient" };
+            string[] defaultSpecialties =
+            {
+                "Noi tong quat",
+                "Tieu hoa",
+                "Tim mach",
+                "Da lieu",
+                "Mat",
+                "Tai mui hong",
+                "Xuong khop"
+            };
 
             foreach (var role in roles)
             {
@@ -22,7 +32,26 @@ namespace DoAnWeb.Data
                 }
             }
 
-            // ADMIN
+            foreach (var specialtyName in defaultSpecialties)
+            {
+                if (!await context.Specialties.AnyAsync(s => s.Name == specialtyName))
+                {
+                    context.Specialties.Add(new Specialty
+                    {
+                        Name = specialtyName,
+                        AveragePatientLoad = 0,
+                        MaxPatientsPerWeek = 100
+                    });
+                }
+            }
+
+            await context.SaveChangesAsync();
+
+            var defaultSpecialtyId = await context.Specialties
+                .Where(s => s.Name == "Noi tong quat")
+                .Select(s => s.Id)
+                .FirstAsync();
+
             var adminUser = await userManager.FindByEmailAsync("admin@gmail.com");
             if (adminUser == null)
             {
@@ -30,8 +59,8 @@ namespace DoAnWeb.Data
                 {
                     UserName = "admin@gmail.com",
                     Email = "admin@gmail.com",
-                    Name = "Quản trị viên",
-                    Gender = "Khác",
+                    Name = "Quan tri vien",
+                    Gender = "Khac",
                     CreateAt = DateTime.Now,
                     EmailConfirmed = true
                 };
@@ -42,15 +71,11 @@ namespace DoAnWeb.Data
                     await userManager.AddToRoleAsync(adminUser, "Admin");
                 }
             }
-            else
+            else if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
             {
-                if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
-                {
-                    await userManager.AddToRoleAsync(adminUser, "Admin");
-                }
+                await userManager.AddToRoleAsync(adminUser, "Admin");
             }
 
-            // DOCTOR
             var doctorUser = await userManager.FindByEmailAsync("doctor@gmail.com");
             if (doctorUser == null)
             {
@@ -58,7 +83,7 @@ namespace DoAnWeb.Data
                 {
                     UserName = "doctor@gmail.com",
                     Email = "doctor@gmail.com",
-                    Name = "Bác sĩ mẫu",
+                    Name = "Bac si mau",
                     Gender = "Nam",
                     CreateAt = DateTime.Now,
                     EmailConfirmed = true
@@ -70,15 +95,11 @@ namespace DoAnWeb.Data
                     await userManager.AddToRoleAsync(doctorUser, "Doctor");
                 }
             }
-            else
+            else if (!await userManager.IsInRoleAsync(doctorUser, "Doctor"))
             {
-                if (!await userManager.IsInRoleAsync(doctorUser, "Doctor"))
-                {
-                    await userManager.AddToRoleAsync(doctorUser, "Doctor");
-                }
+                await userManager.AddToRoleAsync(doctorUser, "Doctor");
             }
 
-            // Tạo hồ sơ Doctor nếu chưa có
             if (doctorUser != null)
             {
                 var doctorProfile = await context.Doctors
@@ -89,16 +110,15 @@ namespace DoAnWeb.Data
                     context.Doctors.Add(new Doctor
                     {
                         UserId = doctorUser.Id,
-                        SpecialtyId = 1, // Giả sử có một chuyên khoa nội tổng quát với Id là 1
+                        SpecialtyId = defaultSpecialtyId,
                         LicenseNumber = "BS001",
-                        Qualifications = "Bác sĩ đa khoa"
+                        Qualifications = "Bac si da khoa"
                     });
 
                     await context.SaveChangesAsync();
                 }
             }
 
-            // EMPLOYEE
             var employeeUser = await userManager.FindByEmailAsync("employee@gmail.com");
             if (employeeUser == null)
             {
@@ -106,8 +126,8 @@ namespace DoAnWeb.Data
                 {
                     UserName = "employee@gmail.com",
                     Email = "employee@gmail.com",
-                    Name = "Nhân viên mẫu",
-                    Gender = "Nữ",
+                    Name = "Nhan vien mau",
+                    Gender = "Nu",
                     CreateAt = DateTime.Now,
                     EmailConfirmed = true
                 };
@@ -118,15 +138,11 @@ namespace DoAnWeb.Data
                     await userManager.AddToRoleAsync(employeeUser, "Employee");
                 }
             }
-            else
+            else if (!await userManager.IsInRoleAsync(employeeUser, "Employee"))
             {
-                if (!await userManager.IsInRoleAsync(employeeUser, "Employee"))
-                {
-                    await userManager.AddToRoleAsync(employeeUser, "Employee");
-                }
+                await userManager.AddToRoleAsync(employeeUser, "Employee");
             }
 
-            // PATIENT
             var patientUser = await userManager.FindByEmailAsync("patient@gmail.com");
             if (patientUser == null)
             {
@@ -134,8 +150,8 @@ namespace DoAnWeb.Data
                 {
                     UserName = "patient@gmail.com",
                     Email = "patient@gmail.com",
-                    Name = "Bệnh nhân mẫu",
-                    Gender = "Nữ",
+                    Name = "Benh nhan mau",
+                    Gender = "Nu",
                     CreateAt = DateTime.Now,
                     EmailConfirmed = true
                 };
@@ -146,12 +162,9 @@ namespace DoAnWeb.Data
                     await userManager.AddToRoleAsync(patientUser, "Patient");
                 }
             }
-            else
+            else if (!await userManager.IsInRoleAsync(patientUser, "Patient"))
             {
-                if (!await userManager.IsInRoleAsync(patientUser, "Patient"))
-                {
-                    await userManager.AddToRoleAsync(patientUser, "Patient");
-                }
+                await userManager.AddToRoleAsync(patientUser, "Patient");
             }
         }
     }

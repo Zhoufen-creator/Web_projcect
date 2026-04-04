@@ -66,6 +66,8 @@ app.MapControllerRoute(
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+    var dbContext = services.GetRequiredService<ApplicationDbContext>();
+    await dbContext.Database.MigrateAsync();
     await DbInitializer.SeedRolesAndAdminAsync(services);
 }
 
