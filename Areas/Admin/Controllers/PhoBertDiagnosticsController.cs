@@ -57,7 +57,7 @@ namespace DoAnWeb.Areas.Admin.Controllers
         {
             if (string.IsNullOrWhiteSpace(text))
             {
-                return BadRequest(new { error = "Text khong duoc de trong." });
+                return BadRequest(new { error = "Text không được để trống." });
             }
 
             var result = _specialtyPredictionService.PredictSpecialty(text);

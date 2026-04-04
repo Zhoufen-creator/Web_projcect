@@ -220,10 +220,12 @@ namespace DoAnWeb.Areas.Employee.Controllers
         {
             var doctors = await _context.Doctors
                 .Include(d => d.User)
+                .Include(d => d.Specialty)
                 .Select(d => new
                 {
                     d.Id,
-                    Name = d.User.Name + " - " + d.Specialty
+                    Name = (d.User != null ? d.User.Name : "Bác sĩ ẩn danh") + " - " +
+                           (d.Specialty != null ? d.Specialty.Name : "Chưa rõ khoa")
                 })
                 .ToListAsync();
 

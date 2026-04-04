@@ -13,16 +13,6 @@ namespace DoAnWeb.Data
             var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
 
             string[] roles = { "Admin", "Doctor", "Employee", "Patient" };
-            string[] defaultSpecialties =
-            {
-                "Noi tong quat",
-                "Tieu hoa",
-                "Tim mach",
-                "Da lieu",
-                "Mat",
-                "Tai mui hong",
-                "Xuong khop"
-            };
 
             foreach (var role in roles)
             {
@@ -32,25 +22,17 @@ namespace DoAnWeb.Data
                 }
             }
 
-            foreach (var specialtyName in defaultSpecialties)
+            if (!await context.Specialties.AnyAsync())
             {
-                if (!await context.Specialties.AnyAsync(s => s.Name == specialtyName))
-                {
-                    context.Specialties.Add(new Specialty
-                    {
-                        Name = specialtyName,
-                        AveragePatientLoad = 0,
-                        MaxPatientsPerWeek = 100
-                    });
-                }
+                context.Specialties.AddRange(
+                    new Specialty { Name = "Noi tong quat", AveragePatientLoad = 12, MaxPatientsPerWeek = 100 },
+                    new Specialty { Name = "Tai mui hong", AveragePatientLoad = 10, MaxPatientsPerWeek = 90 },
+                    new Specialty { Name = "Tim mach", AveragePatientLoad = 8, MaxPatientsPerWeek = 80 },
+                    new Specialty { Name = "Da lieu", AveragePatientLoad = 9, MaxPatientsPerWeek = 85 }
+                );
+
+                await context.SaveChangesAsync();
             }
-
-            await context.SaveChangesAsync();
-
-            var defaultSpecialtyId = await context.Specialties
-                .Where(s => s.Name == "Noi tong quat")
-                .Select(s => s.Id)
-                .FirstAsync();
 
             var adminUser = await userManager.FindByEmailAsync("admin@gmail.com");
             if (adminUser == null)
@@ -83,7 +65,7 @@ namespace DoAnWeb.Data
                 {
                     UserName = "doctor@gmail.com",
                     Email = "doctor@gmail.com",
-                    Name = "Bac si mau",
+                    Name = "Bác sĩ mẫu",
                     Gender = "Nam",
                     CreateAt = DateTime.Now,
                     EmailConfirmed = true
@@ -105,14 +87,19 @@ namespace DoAnWeb.Data
                 var doctorProfile = await context.Doctors
                     .FirstOrDefaultAsync(d => d.UserId == doctorUser.Id);
 
-                if (doctorProfile == null)
+                var existingSpecialtyId = await context.Specialties
+                    .OrderBy(s => s.Id)
+                    .Select(s => (int?)s.Id)
+                    .FirstOrDefaultAsync();
+
+                if (doctorProfile == null && existingSpecialtyId.HasValue)
                 {
                     context.Doctors.Add(new Doctor
                     {
                         UserId = doctorUser.Id,
-                        SpecialtyId = defaultSpecialtyId,
+                        SpecialtyId = existingSpecialtyId.Value,
                         LicenseNumber = "BS001",
-                        Qualifications = "Bac si da khoa"
+                        Qualifications = "Bác sĩ đa khoa"
                     });
 
                     await context.SaveChangesAsync();
@@ -126,7 +113,7 @@ namespace DoAnWeb.Data
                 {
                     UserName = "employee@gmail.com",
                     Email = "employee@gmail.com",
-                    Name = "Nhan vien mau",
+                    Name = "Nhân viên mẫu",
                     Gender = "Nu",
                     CreateAt = DateTime.Now,
                     EmailConfirmed = true
@@ -150,7 +137,7 @@ namespace DoAnWeb.Data
                 {
                     UserName = "patient@gmail.com",
                     Email = "patient@gmail.com",
-                    Name = "Benh nhan mau",
+                    Name = "Bệnh nhân mẫu",
                     Gender = "Nu",
                     CreateAt = DateTime.Now,
                     EmailConfirmed = true

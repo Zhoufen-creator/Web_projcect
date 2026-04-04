@@ -27,6 +27,7 @@ namespace DoAnWeb.Areas.Doctor.Controllers
 
             var doctor = await _context.Doctors
                 .Include(d => d.User)
+                .Include(d => d.Specialty)
                 .FirstOrDefaultAsync(d => d.UserId == user.Id);
 
             if (doctor == null)

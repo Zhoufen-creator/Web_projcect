@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity
 @using DoAnWeb.Models
 
 <!DOCTYPE html>
@@ -22,6 +22,7 @@
         var currentArea = ViewContext.RouteData.Values["area"]?.ToString();
         var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
         var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+        var isAuthenticated = User.Identity != null && User.Identity.IsAuthenticated;
     }
 
     <header class="hospital-header">
@@ -50,16 +51,31 @@
                     </div>
                     <div class="brand-content">
                         <h1>An Phúc Hospital</h1>
-                        <p>Bệnh viện Đa khoa An Phúc</p>
+                        <p>Nền tảng vận hành bệnh viện trực quan và đồng bộ</p>
                     </div>
                 </a>
 
+                <div class="header-portal-strip">
+                    <span class="header-portal-chip">
+                        <i class="bi bi-calendar2-check"></i>
+                        Đặt lịch nhanh
+                    </span>
+                    <span class="header-portal-chip">
+                        <i class="bi bi-file-earmark-medical"></i>
+                        Hồ sơ tập trung
+                    </span>
+                    <span class="header-portal-chip">
+                        <i class="bi bi-shield-check"></i>
+                        Phân quyền an toàn
+                    </span>
+                </div>
+
                 <div class="header-right">
-                    @if (User.Identity != null && User.Identity.IsAuthenticated)
+                    @if (isAuthenticated)
                     {
                         <div class="user-badge">
                             <i class="bi bi-person-circle"></i>
-                            <span>@User.Identity.Name</span>
+                            <span>@User.Identity!.Name</span>
                         </div>
 
                         <a class="btn header-btn header-btn-danger"
@@ -69,6 +85,11 @@
                     }
                     else
                     {
+                        <a class="btn header-btn header-btn-soft"
+                           href="@Url.Action("Register", "Account", new { area = "" })">
+                            <i class="bi bi-person-plus me-2"></i>Đăng ký
+                        </a>
+
                         <a class="btn header-btn header-btn-primary"
                            href="@Url.Action("Login", "Account", new { area = "" })">
                             <i class="bi bi-box-arrow-in-right me-2"></i>Đăng nhập
@@ -100,7 +121,7 @@
                             </a>
                         </li>
 
-                        @if (User.Identity != null && User.Identity.IsAuthenticated)
+                        @if (isAuthenticated)
                         {
                             @if (User.IsInRole("Admin"))
                             {
@@ -114,7 +135,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link @((currentArea == "Admin" && currentController == "Users") ? "active" : "")"
                                        href="@Url.Action("Index", "Users", new { area = "Admin" })">
-                                        Quản lý tài khoản
+                                        Tài khoản
                                     </a>
                                 </li>
                             }
@@ -133,7 +154,7 @@
                             {
                                 <li class="nav-item">
                                     <a class="nav-link @(currentArea == "Patient" ? "active" : "")"
-                                       href="/Patient/Dashboard/Index">
+                                       href="@Url.Action("Index", "Dashboard", new { area = "Patient" })">
                                         Bệnh nhân
                                     </a>
                                 </li>
@@ -160,26 +181,30 @@
     </main>
 
     <footer class="hospital-footer">
-        <div class="container-xxl footer-grid">
-            <div>
-                <div class="footer-title">Bệnh viện Đa khoa An Phúc</div>
-                <p class="footer-text">
-                    Địa chỉ: 86 Nguyễn Tri Phương, Phường 9, Quận 5, TP. Hồ Chí Minh.
-                    Hệ thống quản lý bệnh viện trực quan, đồng bộ và sẵn sàng mở rộng theo mô hình vận hành thực tế.
-                </p>
-            </div>
+        <div class="container-xxl">
+            <div class="footer-grid">
+                <div class="footer-panel">
+                    <div class="footer-title">Bệnh viện Đa khoa An Phúc</div>
+                    <p class="footer-text">
+                        Trung tâm khám chữa bệnh đa chuyên khoa với định hướng số hóa quy trình tiếp nhận,
+                        điều phối lịch khám, hồ sơ y khoa và phối hợp liên bộ phận trên cùng một nền tảng.
+                    </p>
+                </div>
 
-            <div>
-                <div class="footer-heading">Điều hướng</div>
-                <a href="@Url.Action("Index", "Home", new { area = "" })" class="footer-link">Trang chủ</a>
-                <a href="@Url.Action("Privacy", "Home", new { area = "" })" class="footer-link">Giới thiệu</a>
-            </div>
+                <div class="footer-panel footer-panel-soft">
+                    <div class="footer-heading">Truy cập nhanh</div>
+                    <a href="@Url.Action("Index", "Home", new { area = "" })" class="footer-link">Trang chủ</a>
+                    <a href="@Url.Action("Privacy", "Home", new { area = "" })" class="footer-link">Giới thiệu</a>
+                    <a href="@Url.Action("Login", "Account", new { area = "" })" class="footer-link">Đăng nhập hệ thống</a>
+                </div>
 
-            <div>
-                <div class="footer-heading">Liên hệ</div>
-                <p class="footer-text mb-1">Hotline: 1900 6868</p>
-                <p class="footer-text mb-1">Cấp cứu 24/7: 028 3888 9999</p>
-                <p class="footer-text mb-0">Email: cskh@anphuchospital.vn</p>
+                <div class="footer-panel footer-panel-soft">
+                    <div class="footer-heading">Liên hệ</div>
+                    <p class="footer-text mb-1">86 Nguyễn Tri Phương, Phường 9, Quận 5, TP. Hồ Chí Minh</p>
+                    <p class="footer-text mb-1">Hotline: 1900 6868</p>
+                    <p class="footer-text mb-1">Cấp cứu 24/7: 028 3888 9999</p>
+                    <p class="footer-text mb-0">Email: cskh@anphuchospital.vn</p>
+                </div>
             </div>
         </div>
     </footer>

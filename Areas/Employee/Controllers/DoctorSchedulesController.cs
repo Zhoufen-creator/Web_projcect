@@ -25,20 +25,21 @@ namespace DoAnWeb.Areas.Employee.Controllers
             var schedules = await _context.DoctorSchedules
                 .Include(ds => ds.Doctor)
                 .ThenInclude(d => d.User)
+                .Include(ds => ds.Doctor)
+                .ThenInclude(d => d.Specialty)
                 .OrderBy(ds => ds.StartTime)
                 .ToListAsync();
 
             return View(schedules);
         }
 
-        // GET: Create
         public async Task<IActionResult> Create()
         {
             await LoadSpecialties();
+            await LoadDoctors();
             return View();
         }
 
-        // POST: Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(DoctorScheduleVM vm)
@@ -51,6 +52,7 @@ namespace DoAnWeb.Areas.Employee.Controllers
             if (!ModelState.IsValid)
             {
                 await LoadSpecialties(vm.SpecialtyId);
+                await LoadDoctors(vm.SpecialtyId, vm.DoctorId);
                 return View(vm);
             }
 
@@ -69,13 +71,16 @@ namespace DoAnWeb.Areas.Employee.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Edit
         public async Task<IActionResult> Edit(int id)
         {
             var schedule = await _context.DoctorSchedules
                 .Include(ds => ds.Doctor)
                 .FirstOrDefaultAsync(ds => ds.Id == id);
-            if (schedule == null || schedule.Doctor == null) return NotFound();
+
+            if (schedule == null || schedule.Doctor == null)
+            {
+                return NotFound();
+            }
 
             var vm = new DoctorScheduleVM
             {
@@ -88,15 +93,18 @@ namespace DoAnWeb.Areas.Employee.Controllers
             };
 
             await LoadSpecialties(vm.SpecialtyId);
+            await LoadDoctors(vm.SpecialtyId, vm.DoctorId);
             return View(vm);
         }
 
-        // POST: Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, DoctorScheduleVM vm)
         {
-            if (id != vm.Id) return NotFound();
+            if (id != vm.Id)
+            {
+                return NotFound();
+            }
 
             if (vm.EndTime <= vm.StartTime)
             {
@@ -106,11 +114,15 @@ namespace DoAnWeb.Areas.Employee.Controllers
             if (!ModelState.IsValid)
             {
                 await LoadSpecialties(vm.SpecialtyId);
+                await LoadDoctors(vm.SpecialtyId, vm.DoctorId);
                 return View(vm);
             }
 
             var schedule = await _context.DoctorSchedules.FindAsync(id);
-            if (schedule == null) return NotFound();
+            if (schedule == null)
+            {
+                return NotFound();
+            }
 
             schedule.DoctorId = vm.DoctorId;
             schedule.StartTime = vm.StartTime;
@@ -124,26 +136,32 @@ namespace DoAnWeb.Areas.Employee.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Delete
         public async Task<IActionResult> Delete(int id)
         {
             var schedule = await _context.DoctorSchedules
                 .Include(ds => ds.Doctor)
                 .ThenInclude(d => d.User)
+                .Include(ds => ds.Doctor)
+                .ThenInclude(d => d.Specialty)
                 .FirstOrDefaultAsync(ds => ds.Id == id);
 
-            if (schedule == null) return NotFound();
+            if (schedule == null)
+            {
+                return NotFound();
+            }
 
             return View(schedule);
         }
 
-        // POST: Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var schedule = await _context.DoctorSchedules.FindAsync(id);
-            if (schedule == null) return NotFound();
+            if (schedule == null)
+            {
+                return NotFound();
+            }
 
             _context.DoctorSchedules.Remove(schedule);
             await _context.SaveChangesAsync();
@@ -152,7 +170,6 @@ namespace DoAnWeb.Areas.Employee.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // API: Tìm bác sĩ theo chuyên khoa và tên
         [HttpGet]
         public async Task<IActionResult> SearchDoctors(int specialtyId, string searchName = "")
         {
@@ -162,18 +179,17 @@ namespace DoAnWeb.Areas.Employee.Controllers
                 .AsNoTracking()
                 .ToListAsync();
 
-            // Lọc theo tên nếu có
             if (!string.IsNullOrWhiteSpace(searchName))
             {
-                doctors = doctors.Where(d => d.User != null && 
-                                     d.User.Name.Contains(searchName, StringComparison.OrdinalIgnoreCase)).ToList();
+                doctors = doctors
+                    .Where(d => d.User != null && d.User.Name.Contains(searchName, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
             }
 
-            // Trả về JSON
             var result = doctors.Select(d => new
             {
                 id = d.Id,
-                name = d.User?.Name ??  "Bác sĩ ẩn danh",
+                name = d.User?.Name ?? "Bác sĩ ẩn danh"
             }).ToList();
 
             return Json(result);
@@ -189,16 +205,28 @@ namespace DoAnWeb.Areas.Employee.Controllers
             ViewBag.SpecialtyId = new SelectList(specialties, "Id", "Name", selectedSpecialtyId);
         }
 
-        private async Task LoadDoctors(int? selectedDoctorId = null)
+        private async Task LoadDoctors(int? specialtyId = null, int? selectedDoctorId = null)
         {
-            var doctors = await _context.Doctors
+            var doctorsQuery = _context.Doctors
                 .Include(d => d.User)
-                .Include(d => d.Specialty)
+                .AsNoTracking()
+                .AsQueryable();
+
+            if (specialtyId.HasValue && specialtyId.Value > 0)
+            {
+                doctorsQuery = doctorsQuery.Where(d => d.SpecialtyId == specialtyId.Value);
+            }
+            else
+            {
+                doctorsQuery = doctorsQuery.Where(d => false);
+            }
+
+            var doctors = await doctorsQuery
+                .OrderBy(d => d.User != null ? d.User.Name : string.Empty)
                 .Select(d => new
                 {
                     d.Id,
-                    Name = (d.User != null ? d.User.Name : "Bác sĩ ẩn danh") + " - " + 
-                            (d.Specialty != null ? d.Specialty.Name : "Chưa rõ khoa")
+                    Name = d.User != null ? d.User.Name : "Bác sĩ ẩn danh"
                 })
                 .ToListAsync();
 

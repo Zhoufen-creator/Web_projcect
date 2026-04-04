@@ -43,7 +43,7 @@ namespace DoAnWeb.Services
                 {
                     PredictedSpecialty = string.Empty,
                     MatchScore = 0,
-                    Message = "Chua co mo ta trieu chung de du doan chuyen khoa."
+                    Message = "Chưa có mô tả triệu chứng để dự đoán chuyên khoa."
                 };
             }
 
@@ -74,10 +74,10 @@ namespace DoAnWeb.Services
             {
                 return new SpecialtyPredictionResult
                 {
-                    PredictedSpecialty = "Noi tong quat",
+                    PredictedSpecialty = "Nội tổng quát",
                     MatchScore = 0,
                     MatchedKeywords = new List<string>(),
-                    Message = "Khong du tu khoa ro rang. He thong tam goi y Noi tong quat."
+                    Message = "Không đủ từ khóa rõ ràng. Hệ thống tạm gợi ý Nội tổng quát."
                 };
             }
 
@@ -86,7 +86,7 @@ namespace DoAnWeb.Services
                 PredictedSpecialty = bestSpecialty,
                 MatchScore = bestScore,
                 MatchedKeywords = bestMatchedKeywords,
-                Message = $"He thong goi y chuyen khoa: {bestSpecialty}."
+                Message = $"Hệ thống gợi ý chuyên khoa: {bestSpecialty}."
             };
         }
 

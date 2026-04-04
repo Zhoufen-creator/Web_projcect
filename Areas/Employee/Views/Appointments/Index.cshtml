@@ -27,7 +27,7 @@
 <div class="employee-table-card">
     <div class="employee-table-head">
         <h3>Lịch hẹn bệnh nhân</h3>
-        <p>Theo dõi, xử lý và cập nhật thông tin lịch hẹn khám trong hệ thống.</p>
+        <p>Theo dõi, xử lý và cập nhật trạng thái lịch hẹn trên một bảng gọn và dễ nhìn.</p>
     </div>
 
     <div class="employee-table-wrap">
@@ -40,7 +40,7 @@
                     <th>Lý do khám</th>
                     <th>Trạng thái</th>
                     <th>Check-in</th>
-                    <th width="220">Thao tác</th>
+                    <th>Thao tác</th>
                 </tr>
             </thead>
             <tbody>
@@ -74,36 +74,20 @@
                             </td>
                             <td>
                                 <div class="employee-table-actions">
-                                    <a asp-area="Employee"
-                                       asp-controller="Appointments"
-                                       asp-action="Edit"
-                                       asp-route-id="@item.Id"
-                                       class="employee-action-btn employee-action-warning">
+                                    <a asp-area="Employee" asp-controller="Appointments" asp-action="Edit" asp-route-id="@item.Id" class="employee-action-btn employee-action-warning">
                                         <i class="bi bi-pencil-square"></i>
                                         Xử lý
                                     </a>
 
                                     @if (!item.IsCheckedIn && item.Status != DoAnWeb.Models.AppointmentStatus.Cancelled)
                                     {
-                                        <form asp-area="Employee"
-                                              asp-controller="Appointments"
-                                              asp-action="CheckIn"
-                                              asp-route-id="@item.Id"
-                                              method="post"
-                                              style="display:inline;">
+                                        <form asp-area="Employee" asp-controller="Appointments" asp-action="CheckIn" asp-route-id="@item.Id" method="post" style="display:inline;">
                                             @Html.AntiForgeryToken()
                                             <button type="submit" class="employee-action-btn employee-action-success">
                                                 <i class="bi bi-check2-circle"></i>
                                                 Check-in
                                             </button>
                                         </form>
-                                    }
-                                    else if (item.IsCheckedIn)
-                                    {
-                                        <span class="employee-action-btn employee-action-success" style="opacity: .8; cursor: default;">
-                                            <i class="bi bi-check-circle-fill"></i>
-                                            Đã check-in
-                                        </span>
                                     }
                                 </div>
                             </td>

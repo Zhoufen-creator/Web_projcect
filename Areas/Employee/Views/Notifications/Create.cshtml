@@ -23,37 +23,43 @@
     <form asp-area="Employee" asp-controller="Notifications" asp-action="Create" method="post" class="employee-form-body">
         <div asp-validation-summary="All" class="alert alert-danger employee-validation"></div>
 
-        <div class="employee-form-grid">
-            <div class="employee-form-group employee-form-group-full">
-                <label class="employee-label">Bệnh nhân</label>
-                <select asp-for="UserId" asp-items="ViewBag.UserId" class="employee-select">
-                    <option value="">-- Chọn bệnh nhân --</option>
-                </select>
-                <span asp-validation-for="UserId" class="text-danger"></span>
+        <div class="row g-3">
+            <div class="col-12">
+                <div class="employee-form-group">
+                    <label class="employee-label">Bệnh nhân</label>
+                    <select asp-for="UserId" asp-items="ViewBag.UserId" class="employee-select">
+                        <option value="">-- Chọn bệnh nhân --</option>
+                    </select>
+                    <span asp-validation-for="UserId" class="text-danger"></span>
+                </div>
             </div>
 
-            <div class="employee-form-group employee-form-group-full">
-                <label class="employee-label">Tiêu đề</label>
-                <input asp-for="Title" class="employee-input" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+            <div class="col-12">
+                <div class="employee-form-group">
+                    <label class="employee-label">Tiêu đề</label>
+                    <input asp-for="Title" class="employee-input" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
             </div>
 
-            <div class="employee-form-group employee-form-group-full">
-                <label class="employee-label">Nội dung</label>
-                <textarea asp-for="Message" class="employee-textarea" rows="6"></textarea>
-                <span asp-validation-for="Message" class="text-danger"></span>
+            <div class="col-12">
+                <div class="employee-form-group">
+                    <label class="employee-label">Nội dung</label>
+                    <textarea asp-for="Message" class="employee-textarea" rows="6"></textarea>
+                    <span asp-validation-for="Message" class="text-danger"></span>
+                </div>
             </div>
+        </div>
 
-            <div class="employee-form-actions">
-                <button type="submit" class="employee-primary-btn">
-                    <i class="bi bi-send"></i>
-                    Gửi thông báo
-                </button>
+        <div class="employee-form-actions">
+            <button type="submit" class="employee-primary-btn">
+                <i class="bi bi-send"></i>
+                Gửi thông báo
+            </button>
 
-                <a asp-area="Employee" asp-controller="Notifications" asp-action="Index" class="employee-secondary-btn">
-                    Quay lại
-                </a>
-            </div>
+            <a asp-area="Employee" asp-controller="Notifications" asp-action="Index" class="employee-secondary-btn">
+                Quay lại
+            </a>
         </div>
     </form>
 </div>

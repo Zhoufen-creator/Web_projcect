@@ -37,22 +37,22 @@
                 <div class="admin-form-grid">
                     <div class="admin-feature-card">
                         <h4>API Enabled</h4>
-                        <p class="mb-0 fw-semibold">@(Model.Health?.Enabled == true ? "Dang bat" : "Dang tat")</p>
+                        <p class="mb-0 fw-semibold">@(Model.Health?.Enabled == true ? "Đang bật" : "Đang tắt")</p>
                     </div>
 
                     <div class="admin-feature-card">
                         <h4>Health</h4>
-                        <p class="mb-0 fw-semibold">@(Model.Health?.IsHealthy == true ? "San sang" : "Chua san sang")</p>
+                        <p class="mb-0 fw-semibold">@(Model.Health?.IsHealthy == true ? "Sẵn sàng" : "Chưa sẵn sàng")</p>
                     </div>
 
                     <div class="admin-feature-card admin-form-group-full">
                         <h4>URL</h4>
                         <p class="mb-2">@Model.Health?.Url</p>
-                        <div class="small text-muted">Timeout: @Model.Health?.TimeoutSeconds giay</div>
+                        <div class="small text-muted">Timeout: @Model.Health?.TimeoutSeconds giây</div>
                     </div>
 
                     <div class="admin-feature-card admin-form-group-full">
-                        <h4>Thong diep</h4>
+                        <h4>Thông điệp</h4>
                         <p class="mb-0">@Model.Health?.Message</p>
                     </div>
                 </div>
@@ -60,10 +60,10 @@
 
             <div class="admin-form-card mt-4">
                 <div class="admin-form-card-head">
-                    <h3>Thu du doan chuyen khoa</h3>
+                    <h3>Thử dự đoán chuyên khoa</h3>
                     <p>
-                        Neu PhoBERT API dang bat va hoat dong, he thong se uu tien AI.
-                        Neu khong, he thong se tu fallback ve rule-based.
+                        Nếu PhoBERT API đang bật và hoạt động, hệ thống sẽ ưu tiên AI.
+                        Nếu không, hệ thống sẽ tự fallback về rule-based.
                     </p>
                 </div>
 
@@ -71,14 +71,14 @@
                     @Html.AntiForgeryToken()
 
                     <div class="admin-form-group admin-form-group-full">
-                        <label asp-for="InputText" class="fw-semibold">Mo ta trieu chung</label>
-                        <textarea asp-for="InputText" class="admin-input" placeholder="Vi du: Toi bi dau bung, day hoi va buon non sau khi an"></textarea>
+                        <label asp-for="InputText" class="fw-semibold">Mô tả triệu chứng</label>
+                        <textarea asp-for="InputText" class="admin-input" placeholder="Ví dụ: Tôi bị đau bụng, đầy hơi và buồn nôn sau khi ăn"></textarea>
                     </div>
 
                     <div class="admin-form-actions">
                         <button type="submit" class="admin-primary-btn">
                             <i class="bi bi-magic"></i>
-                            Du doan ngay
+                            Dự đoán ngay
                         </button>
                     </div>
                 </form>
@@ -88,23 +88,23 @@
             {
                 <div class="admin-form-card mt-4">
                     <div class="admin-form-card-head">
-                        <h3>Ket qua du doan</h3>
-                        <p>Ket qua nay di qua dung luong `ISpecialtyPredictionService` cua he thong.</p>
+                        <h3>Kết quả dự đoán</h3>
+                        <p>Kết quả này đi qua đúng luồng `ISpecialtyPredictionService` của hệ thống.</p>
                     </div>
 
                     <div class="admin-form-grid">
                         <div class="admin-feature-card">
-                            <h4>Chuyen khoa goi y</h4>
+                            <h4>Chuyên khoa gợi ý</h4>
                             <p class="mb-0 fw-semibold">@Model.Prediction.PredictedSpecialty</p>
                         </div>
 
                         <div class="admin-feature-card">
-                            <h4>Diem / do tin cay</h4>
+                            <h4>Điểm / độ tin cậy</h4>
                             <p class="mb-0 fw-semibold">@Model.Prediction.MatchScore</p>
                         </div>
 
                         <div class="admin-feature-card admin-form-group-full">
-                            <h4>Thong diep</h4>
+                            <h4>Thông điệp</h4>
                             <p class="mb-0">@Model.Prediction.Message</p>
                         </div>
 
@@ -121,7 +121,7 @@
                             }
                             else
                             {
-                                <p class="mb-0 text-muted">Khong co du lieu bo sung.</p>
+                                <p class="mb-0 text-muted">Không có dữ liệu bổ sung.</p>
                             }
                         </div>
                     </div>

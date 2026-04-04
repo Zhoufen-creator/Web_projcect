@@ -20,7 +20,7 @@
     </div>
 
     <h3>Bạn chắc chắn muốn xóa ca làm này?</h3>
-    <p>Thao tác này sẽ xóa ca trực khỏi hệ thống quản lý. Hãy kiểm tra kỹ trước khi xác nhận.</p>
+    <p>Ca trực này sẽ bị gỡ khỏi hệ thống. Hãy kiểm tra lại bác sĩ và khung giờ trước khi xác nhận.</p>
 
     <div class="employee-delete-info">
         <div class="employee-delete-row">
@@ -30,7 +30,7 @@
 
         <div class="employee-delete-row">
             <span>Chuyên khoa</span>
-            <strong>@Model.Doctor.Specialty</strong>
+            <strong>@Model.Doctor.Specialty?.Name</strong>
         </div>
 
         <div class="employee-delete-row">
@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <form asp-area="Employee" asp-controller="DoctorSchedules" asp-action="Delete" method="post" class="employee-delete-actions">
+    <form asp-area="Employee" asp-controller="DoctorSchedules" asp-action="Delete" method="post" class="employee-delete-actions justify-content-center">
         <input type="hidden" asp-for="Id" />
 
         <button type="submit" class="employee-danger-btn">

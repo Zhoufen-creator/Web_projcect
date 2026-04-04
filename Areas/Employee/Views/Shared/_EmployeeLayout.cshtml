@@ -1,6 +1,5 @@
 @{
     var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
-    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
     var userName = User?.Identity?.Name ?? "Nhân viên";
 }
 
@@ -34,41 +33,34 @@
                 </div>
                 <div class="employee-user-info">
                     <strong>@userName</strong>
-                    <span>Nhân viên hành chính</span>
+                    <span>Nhân viên điều phối</span>
                 </div>
             </div>
 
             <nav class="employee-nav">
-                <a asp-area="Employee"
-                   asp-controller="Dashboard"
-                   asp-action="Index"
-                   class="employee-nav-link @(currentController == "Dashboard" ? "active" : "")">
+                <a asp-area="Employee" asp-controller="Dashboard" asp-action="Index" class="employee-nav-link @(currentController == "Dashboard" ? "active" : "")">
                     <i class="bi bi-grid-1x2-fill"></i>
                     <span>Tổng quan</span>
                 </a>
 
-                <a asp-area="Employee"
-                   asp-controller="DoctorSchedules"
-                   asp-action="Index"
-                   class="employee-nav-link @(currentController == "DoctorSchedules" ? "active" : "")">
+                <a asp-area="Employee" asp-controller="StaffingAlerts" asp-action="Index" class="employee-nav-link @(currentController == "StaffingAlerts" ? "active" : "")">
+                    <i class="bi bi-activity"></i>
+                    <span>Cảnh báo tải khoa</span>
+                </a>
+
+                <a asp-area="Employee" asp-controller="DoctorSchedules" asp-action="Index" class="employee-nav-link @(currentController == "DoctorSchedules" ? "active" : "")">
                     <i class="bi bi-calendar2-week-fill"></i>
                     <span>Ca làm bác sĩ</span>
                 </a>
 
-                <a asp-area="Employee"
-                   asp-controller="Appointments"
-                   asp-action="Index"
-                   class="employee-nav-link @(currentController == "Appointments" ? "active" : "")">
+                <a asp-area="Employee" asp-controller="Appointments" asp-action="Index" class="employee-nav-link @(currentController == "Appointments" ? "active" : "")">
                     <i class="bi bi-journal-medical"></i>
                     <span>Lịch hẹn khám</span>
                 </a>
 
-                <a asp-area="Employee"
-                   asp-controller="Notifications"
-                   asp-action="Index"
-                   class="employee-nav-link @(currentController == "Notifications" ? "active" : "")">
+                <a asp-area="Employee" asp-controller="Notifications" asp-action="Index" class="employee-nav-link @(currentController == "Notifications" ? "active" : "")">
                     <i class="bi bi-bell-fill"></i>
-                    <span>Thông báo bệnh nhân</span>
+                    <span>Thông báo</span>
                 </a>
             </nav>
 

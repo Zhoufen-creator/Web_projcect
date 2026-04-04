@@ -33,7 +33,7 @@ namespace DoAnWeb.Services
                 return new DoctorAutoAssignResult
                 {
                     IsAssigned = false,
-                    Message = "Chua co chuyen khoa du doan de goi y bac si."
+                    Message = "Chưa có chuyên khoa dự đoán để gợi ý bác sĩ."
                 };
             }
 
@@ -53,7 +53,7 @@ namespace DoAnWeb.Services
                 return new DoctorAutoAssignResult
                 {
                     IsAssigned = false,
-                    Message = $"Khong tim thay bac si thuoc chuyen khoa {predictedSpecialty}."
+                    Message = $"Không tìm thấy bác sĩ thuộc chuyên khoa {predictedSpecialty}."
                 };
             }
 
@@ -97,12 +97,12 @@ namespace DoAnWeb.Services
                 availableDoctors.Add(new DoctorAutoAssignResult
                 {
                     DoctorId = doctor.Id,
-                    DoctorName = doctor.User?.Name ?? "Chua cap nhat",
+                    DoctorName = doctor.User?.Name ?? "Chưa cập nhật",
                     Specialty = doctor.Specialty?.Name ?? string.Empty,
                     CurrentPatientCount = currentPatientCount,
                     RemainingSlots = schedule.MaxPatient - currentPatientCount,
                     IsAssigned = true,
-                    Message = $"He thong goi y bac si {doctor.User?.Name} thuoc khoa {doctor.Specialty?.Name}."
+                    Message = $"Hệ thống gợi ý bác sĩ {doctor.User?.Name} thuộc khoa {doctor.Specialty?.Name}."
                 });
             }
 
@@ -111,7 +111,7 @@ namespace DoAnWeb.Services
                 return new DoctorAutoAssignResult
                 {
                     IsAssigned = false,
-                    Message = $"Hien chua co bac si phu hop thuoc khoa {predictedSpecialty} con trong lich o khung gio nay."
+                    Message = $"Hiện chưa có bác sĩ phù hợp thuộc khoa {predictedSpecialty} còn trong lịch ở khung giờ này."
                 };
             }
 

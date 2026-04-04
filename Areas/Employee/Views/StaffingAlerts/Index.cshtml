@@ -1,0 +1,117 @@
+@model IReadOnlyList<DoAnWeb.Services.SeasonalStaffingAlert>
+
+@{
+    ViewData["Title"] = "Cảnh báo tải khoa";
+    var totalAlerts = Model?.Count ?? 0;
+    var totalSuggestedDoctors = Model?.Sum(x => x.SuggestedExtraDoctors) ?? 0;
+}
+
+<div class="employee-page-top">
+    <div>
+        <div class="employee-topbar-badge">
+            <i class="bi bi-activity"></i>
+            Cảnh báo tải khoa
+        </div>
+        <h1 class="employee-topbar-title">Tổng hợp cảnh báo tải khám theo khoa</h1>
+    </div>
+
+    <a asp-area="Employee" asp-controller="DoctorSchedules" asp-action="Index" class="employee-topbar-btn employee-topbar-btn-primary">
+        <i class="bi bi-calendar2-plus"></i>
+        Đi đến phân ca trực
+    </a>
+</div>
+
+<section class="employee-stats-grid">
+    <div class="employee-stat-card">
+        <div class="employee-stat-icon">
+            <i class="bi bi-exclamation-circle-fill"></i>
+        </div>
+        <div class="employee-stat-text">
+            <strong>@totalAlerts khoa đang cảnh báo</strong>
+            <span>Danh sách được cập nhật từ mô hình phát hiện bất thường theo tuần.</span>
+        </div>
+    </div>
+
+    <div class="employee-stat-card">
+        <div class="employee-stat-icon">
+            <i class="bi bi-person-plus-fill"></i>
+        </div>
+        <div class="employee-stat-text">
+            <strong>Đề xuất thêm @totalSuggestedDoctors bác sĩ</strong>
+            <span>Số lượng đề xuất dựa trên chênh lệch tải hiện tại và baseline gần nhất.</span>
+        </div>
+    </div>
+
+    <div class="employee-stat-card">
+        <div class="employee-stat-icon">
+            <i class="bi bi-bell-fill"></i>
+        </div>
+        <div class="employee-stat-text">
+            <strong>Thông báo nội bộ đã tạo</strong>
+            <span>Mỗi khoa bất thường sẽ được gửi thông báo vào khu vực thông báo của nhân viên.</span>
+        </div>
+    </div>
+</section>
+
+<div class="employee-table-card">
+    <div class="employee-table-head">
+        <h3>Chi tiết các khoa có dấu hiệu tăng tải</h3>
+        <p>Hệ thống đánh giá theo số ca theo tuần, baseline gần nhất và điểm anomaly từ mô hình Isolation Forest.</p>
+    </div>
+
+    <div class="employee-table-wrap">
+        <table class="table employee-table mb-0">
+            <thead>
+                <tr>
+                    <th>Khoa</th>
+                    <th>Tuần hiện tại</th>
+                    <th>Baseline</th>
+                    <th>Điểm anomaly</th>
+                    <th>Bác sĩ hiện có</th>
+                    <th>Đề xuất tăng thêm</th>
+                    <th>Khuyến nghị</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="employee-alert-specialty">
+                                    <strong>@item.SpecialtyName</strong>
+                                    <span>@item.WeekStart.ToString("dd/MM") - @item.WeekEnd.ToString("dd/MM")</span>
+                                </div>
+                            </td>
+                            <td><span class="employee-limit-badge">@item.CurrentWeekCases ca</span></td>
+                            <td>@item.BaselineCases.ToString("0.##") ca</td>
+                            <td><span class="employee-status-badge employee-status-danger">@item.AnomalyScore.ToString("0.000")</span></td>
+                            <td>@item.CurrentDoctors bác sĩ</td>
+                            <td><span class="employee-status-badge employee-status-success">+@item.SuggestedExtraDoctors</span></td>
+                            <td>
+                                <div class="employee-alert-reason">
+                                    <span>@item.Reason</span>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7">
+                            <div class="employee-empty">
+                                <div class="employee-empty-icon">
+                                    <i class="bi bi-shield-check"></i>
+                                </div>
+                                <h4>Chưa có khoa nào bị cảnh báo</h4>
+                                <p>Hiện tại mô hình chưa phát hiện khoa nào vượt ngưỡng tải khám bất thường trong tuần này.</p>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

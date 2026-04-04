@@ -78,7 +78,6 @@
 </section>
 
 <form asp-area="Doctor" asp-controller="Profile" asp-action="Index" method="post">
-    @* SỬA: token chống giả mạo *@
     @Html.AntiForgeryToken()
 
     <input type="hidden" asp-for="DoctorId" />
@@ -130,7 +129,8 @@
 
                 <div class="doctor-form-group">
                     <label asp-for="Specialty" class="doctor-label">Chuyên khoa</label>
-                    <input asp-for="Specialty" class="doctor-input" />
+                    <input asp-for="Specialty" class="doctor-input" readonly />
+                    <small class="text-muted">Chuyên khoa được quản lý bởi hệ thống và nhân viên.</small>
                     <span asp-validation-for="Specialty" class="text-danger"></span>
                 </div>
 

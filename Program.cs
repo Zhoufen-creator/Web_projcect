@@ -28,6 +28,8 @@ builder.Services.AddHttpClient<IPhoBertInferenceService, PhoBertInferenceService
 builder.Services.AddScoped<IDoctorAutoAssignmentService, DoctorAutoAssignmentService>();
 builder.Services.AddScoped<ISpecialtyLoadAnalysisService, SpecialtyLoadAnalysisService>();
 builder.Services.AddScoped<IStaffingService, StaffingService>();
+builder.Services.Configure<SeasonalAnomalyDetectionOptions>(builder.Configuration.GetSection("SeasonalAnomalyDetection"));
+builder.Services.AddScoped<ISeasonalStaffingDetectionService, SeasonalStaffingDetectionService>();
 
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddScoped<IEmailService, EmailService>();

@@ -27,7 +27,7 @@
 <div class="employee-table-card">
     <div class="employee-table-head">
         <h3>Lịch làm việc bác sĩ</h3>
-        <p>Quản lý các ca trực và thời gian làm việc của đội ngũ bác sĩ.</p>
+        <p>Quản lý nhanh ca trực theo bác sĩ, chuyên khoa và thời gian làm việc.</p>
     </div>
 
     <div class="employee-table-wrap">
@@ -39,7 +39,7 @@
                     <th>Bắt đầu</th>
                     <th>Kết thúc</th>
                     <th>Số BN tối đa</th>
-                    <th width="220">Thao tác</th>
+                    <th>Thao tác</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,12 +49,10 @@
                     {
                         <tr>
                             <td>@item.Doctor.User.Name</td>
-                            <td>@item.Doctor.Specialty</td>
+                            <td>@item.Doctor.Specialty?.Name</td>
                             <td>@item.StartTime.ToString("dd/MM/yyyy HH:mm")</td>
                             <td>@item.EndTime.ToString("dd/MM/yyyy HH:mm")</td>
-                            <td>
-                                <span class="employee-limit-badge">@item.MaxPatient bệnh nhân</span>
-                            </td>
+                            <td><span class="employee-limit-badge">@item.MaxPatient bệnh nhân</span></td>
                             <td>
                                 <div class="employee-table-actions">
                                     <a asp-area="Employee" asp-controller="DoctorSchedules" asp-action="Edit" asp-route-id="@item.Id" class="employee-action-btn employee-action-warning">
@@ -79,7 +77,7 @@
                                     <i class="bi bi-calendar-minus"></i>
                                 </div>
                                 <h4>Chưa có ca làm nào</h4>
-                                <p>Bạn có thể tạo mới ca làm cho bác sĩ từ nút “Thêm ca làm”.</p>
+                                <p>Bạn có thể tạo mới ca làm cho bác sĩ từ nút "Thêm ca làm".</p>
                             </div>
                         </td>
                     </tr>

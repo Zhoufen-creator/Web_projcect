@@ -20,14 +20,15 @@
 
         <p>
             Theo dõi lịch hẹn, mở phiếu khám, quản lý hồ sơ bệnh nhân và xử lý nghiệp vụ khám chữa bệnh
-            trên một giao diện thống nhất. Thiết kế ưu tiên sự trực quan để bác sĩ tập trung vào chuyên môn.
+            trên một giao diện thống nhất. Bố cục được tinh gọn để bác sĩ tập trung vào chuyên môn.
         </p>
     </section>
 
     <aside class="doctor-highlight-card">
         <h3>Ưu tiên trong ca làm việc</h3>
         <p>
-            Các chức năng được gom theo luồng xử lý thực tế để hạn chế thao tác rườm rà và giảm thời gian chuyển màn hình.
+            Các chức năng được gom theo luồng xử lý thực tế để giảm thao tác rườm rà
+            và giúp bác sĩ chuyển việc nhanh hơn trong ngày.
         </p>
 
         <div class="doctor-highlight-list">
@@ -43,7 +44,7 @@
                 <i class="bi bi-file-earmark-medical"></i>
                 <div>
                     <strong>Phiếu khám điện tử</strong>
-                    <span>Nhập triệu chứng, chẩn đoán, lời dặn, thuốc và dịch vụ ngay trong một biểu mẫu.</span>
+                    <span>Nhập triệu chứng, chẩn đoán, thuốc và chỉ định ngay trên một biểu mẫu.</span>
                 </div>
             </div>
 
@@ -123,7 +124,7 @@
                         <i class="bi bi-heart-pulse"></i>
                         <div>
                             <strong>Chuyên khoa</strong>
-                            <span>@doctor.Specialty</span>
+                            <span>@doctor.Specialty?.Name</span>
                         </div>
                     </div>
 
@@ -184,7 +185,7 @@
                     </div>
                     <div>
                         <h4>Danh sách phiếu khám</h4>
-                        <p>Kiểm tra các phiếu khám đã lập và truy cập lịch sử khám của bệnh nhân.</p>
+                        <p>Kiểm tra các phiếu khám đã lập và truy cập lịch sử điều trị của bệnh nhân.</p>
                         <a asp-area="Doctor" asp-controller="MedicalExamination" asp-action="Index" class="doctor-inline-link">
                             Mở danh sách phiếu khám
                         </a>

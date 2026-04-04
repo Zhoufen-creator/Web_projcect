@@ -6,78 +6,72 @@
     <div>
         <div class="employee-topbar-badge">
             <i class="bi bi-shield-check"></i>
-            Hệ thống hỗ trợ điều phối bệnh viện
+            Điều phối vận hành bệnh viện
         </div>
         <h1 class="employee-topbar-title">Bảng điều khiển nhân viên</h1>
     </div>
 </div>
 
-<div class="employee-hero employee-hero-dashboard">
-    <div class="employee-hero-main employee-hero-main-compact">
+<section class="employee-hero employee-hero-dashboard">
+    <div class="employee-hero-main">
         <div class="employee-page-badge">
             <i class="bi bi-briefcase-fill"></i>
-            Trung tâm điều phối hành chính
+            Trung tâm điều phối
         </div>
-
-        <h2>Không gian làm việc dành cho nhân viên với thao tác rõ ràng, nhanh và chuyên nghiệp</h2>
-        <p>
-            Theo dõi lịch hẹn, phân công ca làm cho bác sĩ và gửi thông báo đến bệnh nhân
-            trên một giao diện trực quan, đồng bộ và dễ thao tác hơn trong quá trình vận hành.
-        </p>
+        <h2>Không gian làm việc gọn, rõ và đủ nhanh cho các thao tác trong ngày</h2>
+        <p>Theo dõi lịch hẹn, phân công ca làm cho bác sĩ, xem cảnh báo tải khoa và gửi thông báo nội bộ trên một giao diện trực quan, nhẹ mắt và dễ thao tác.</p>
     </div>
 
-    <div class="employee-highlight-card">
-        <h3>Ưu tiên trong ca làm việc</h3>
-        <p>
-            Tập trung xử lý các tác vụ quan trọng trong ngày để hạn chế sai sót và giảm thời gian thao tác.
-        </p>
+    <div class="employee-summary-card">
+        <h3>Ưu tiên hôm nay</h3>
+        <p>Tập trung vào các đầu việc cần xử lý nhanh để luồng tiếp nhận và điều phối luôn thông suốt.</p>
 
-        <div class="employee-highlight-list">
-            <div class="employee-highlight-item">
+        <div class="employee-summary-list">
+            <div class="employee-summary-item">
+                <i class="bi bi-activity"></i>
+                <div>
+                    <strong>Cảnh báo tải khoa</strong>
+                    <span>Theo dõi khoa có dấu hiệu tăng tải bất thường trong tuần hiện tại.</span>
+                </div>
+            </div>
+
+            <div class="employee-summary-item">
                 <i class="bi bi-calendar2-week"></i>
                 <div>
                     <strong>Ca làm bác sĩ</strong>
-                    <span>Thiết lập lịch trực theo khung giờ và khả năng tiếp nhận.</span>
+                    <span>Thiết lập lịch trực gọn gàng theo khung giờ và chuyên khoa.</span>
                 </div>
             </div>
 
-            <div class="employee-highlight-item">
-                <i class="bi bi-journal-check"></i>
-                <div>
-                    <strong>Lịch hẹn khám</strong>
-                    <span>Phân công bác sĩ và cập nhật thời gian khám phù hợp.</span>
-                </div>
-            </div>
-
-            <div class="employee-highlight-item">
+            <div class="employee-summary-item">
                 <i class="bi bi-bell"></i>
                 <div>
-                    <strong>Thông báo bệnh nhân</strong>
-                    <span>Gửi nhắc lịch và thông tin cần thiết nhanh chóng, rõ ràng.</span>
+                    <strong>Thông báo</strong>
+                    <span>Nhận cảnh báo nội bộ và gửi cập nhật thông tin cần thiết thật nhanh.</span>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
-<div class="employee-stats-grid">
+<section class="employee-stats-grid">
+    <div class="employee-stat-card">
+        <div class="employee-stat-icon">
+            <i class="bi bi-activity"></i>
+        </div>
+        <div class="employee-stat-text">
+            <strong>Cảnh báo tải khoa</strong>
+            <span>Phát hiện khoa có lượng khám tăng bất thường để điều phối sớm.</span>
+        </div>
+    </div>
+
     <div class="employee-stat-card">
         <div class="employee-stat-icon">
             <i class="bi bi-calendar2-week-fill"></i>
         </div>
         <div class="employee-stat-text">
-            <strong>Ca làm bác sĩ</strong>
-            <span>Thiết lập và cập nhật ca trực thuận tiện theo lịch vận hành.</span>
-        </div>
-    </div>
-
-    <div class="employee-stat-card">
-        <div class="employee-stat-icon">
-            <i class="bi bi-clipboard2-pulse-fill"></i>
-        </div>
-        <div class="employee-stat-text">
-            <strong>Lịch hẹn khám</strong>
-            <span>Theo dõi, xác nhận và điều phối lịch khám trong ngày.</span>
+            <strong>Phân ca trực</strong>
+            <span>Thiết lập và điều chỉnh ca làm nhanh theo lịch vận hành.</span>
         </div>
     </div>
 
@@ -86,20 +80,31 @@
             <i class="bi bi-envelope-paper-fill"></i>
         </div>
         <div class="employee-stat-text">
-            <strong>Thông báo</strong>
-            <span>Gửi thông tin đến bệnh nhân nhanh và đúng đối tượng.</span>
+            <strong>Thông báo nội bộ</strong>
+            <span>Cảnh báo được đẩy vào web để nhân viên xử lý ngay.</span>
         </div>
     </div>
-</div>
+</section>
 
-<div class="employee-quick-grid">
+<section class="employee-quick-grid">
+    <a href="@Url.Action("Index", "StaffingAlerts", new { area = "Employee" })" class="employee-quick-card">
+        <div class="employee-quick-icon">
+            <i class="bi bi-activity"></i>
+        </div>
+        <div class="employee-quick-content">
+            <h3>Xem cảnh báo tải khoa</h3>
+            <p>Theo dõi khoa nào tăng tải, baseline gần nhất và số bác sĩ đề xuất bổ sung.</p>
+            <span>Mở cảnh báo tải khoa <i class="bi bi-arrow-right-short"></i></span>
+        </div>
+    </a>
+
     <a href="@Url.Action("Index", "DoctorSchedules", new { area = "Employee" })" class="employee-quick-card">
         <div class="employee-quick-icon">
             <i class="bi bi-calendar-plus"></i>
         </div>
         <div class="employee-quick-content">
-            <h3>Phân công ca làm cho bác sĩ</h3>
-            <p>Quản lý lịch trực, thời gian làm việc và số lượng bệnh nhân tối đa.</p>
+            <h3>Quản lý ca làm bác sĩ</h3>
+            <p>Sắp xếp ca trực, thời gian làm việc và số lượng bệnh nhân tối đa.</p>
             <span>Mở danh sách ca làm <i class="bi bi-arrow-right-short"></i></span>
         </div>
     </a>
@@ -109,8 +114,8 @@
             <i class="bi bi-journal-check"></i>
         </div>
         <div class="employee-quick-content">
-            <h3>Duyệt và sắp lịch hẹn khám</h3>
-            <p>Gán bác sĩ, chỉnh thời gian khám và cập nhật trạng thái lịch hẹn.</p>
+            <h3>Xử lý lịch hẹn khám</h3>
+            <p>Gán bác sĩ, cập nhật trạng thái và chỉnh lại thời gian khám khi cần.</p>
             <span>Đi tới lịch hẹn <i class="bi bi-arrow-right-short"></i></span>
         </div>
     </a>
@@ -120,9 +125,9 @@
             <i class="bi bi-send-check"></i>
         </div>
         <div class="employee-quick-content">
-            <h3>Gửi thông báo cho bệnh nhân</h3>
-            <p>Tạo thông báo nhanh để nhắc lịch hoặc cập nhật thông tin cần thiết.</p>
+            <h3>Xem thông báo nội bộ</h3>
+            <p>Kiểm tra cảnh báo và các thông tin điều phối được gửi trong hệ thống.</p>
             <span>Mở thông báo <i class="bi bi-arrow-right-short"></i></span>
         </div>
     </a>
-</div>
+</section>

@@ -1,6 +1,7 @@
 using DoAnWeb.Areas.Employee.ViewModels;
 using DoAnWeb.Data;
 using DoAnWeb.Models;
+using DoAnWeb.Services.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,15 +14,20 @@ namespace DoAnWeb.Areas.Employee.Controllers
     public class NotificationsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ISeasonalStaffingDetectionService _seasonalStaffingDetectionService;
 
-        public NotificationsController(ApplicationDbContext context)
+        public NotificationsController(
+            ApplicationDbContext context,
+            ISeasonalStaffingDetectionService seasonalStaffingDetectionService)
         {
             _context = context;
+            _seasonalStaffingDetectionService = seasonalStaffingDetectionService;
         }
 
-        // Danh sách thông báo
         public async Task<IActionResult> Index()
         {
+            await _seasonalStaffingDetectionService.DetectAndNotifyEmployeesAsync();
+
             var notifications = await _context.Notifications
                 .Include(n => n.User)
                 .OrderByDescending(n => n.CreatedAt)
@@ -30,14 +36,12 @@ namespace DoAnWeb.Areas.Employee.Controllers
             return View(notifications);
         }
 
-        // GET: Create
         public async Task<IActionResult> Create()
         {
             await LoadPatients();
             return View();
         }
 
-        // POST: Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(SendNotificationVM vm)

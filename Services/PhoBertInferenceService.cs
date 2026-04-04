@@ -68,7 +68,7 @@ namespace DoAnWeb.Services
                     MatchedKeywords = result.TopK?
                         .Select(item => $"{item.Label}:{item.Probability:0.000}")
                         .ToList() ?? new List<string>(),
-                    Message = $"PhoBERT goi y chuyen khoa: {result.PredictedLabel}."
+                    Message = $"PhoBERT gợi ý chuyên khoa: {result.PredictedLabel}."
                 };
             }
             catch (Exception ex)
@@ -90,7 +90,7 @@ namespace DoAnWeb.Services
             if (!_options.Enabled)
             {
                 result.IsHealthy = false;
-                result.Message = "PhoBERT API dang tat trong appsettings.";
+                result.Message = "PhoBERT API đang tắt trong appsettings.";
                 return result;
             }
 
@@ -104,18 +104,18 @@ namespace DoAnWeb.Services
                 if (!response.IsSuccessStatusCode)
                 {
                     result.IsHealthy = false;
-                    result.Message = $"PhoBERT API tra ve status code {(int)response.StatusCode}.";
+                    result.Message = $"PhoBERT API trả về status code {(int)response.StatusCode}.";
                     return result;
                 }
 
                 result.IsHealthy = true;
-                result.Message = "PhoBERT API dang san sang.";
+                result.Message = "PhoBERT API đang sẵn sàng.";
                 return result;
             }
             catch (Exception ex)
             {
                 result.IsHealthy = false;
-                result.Message = $"Khong the ket noi PhoBERT API: {ex.Message}";
+                result.Message = $"Không thể kết nối PhoBERT API: {ex.Message}";
                 return result;
             }
         }

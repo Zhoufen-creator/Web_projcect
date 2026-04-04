@@ -25,7 +25,9 @@ namespace DoAnWeb.Areas.Doctor.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
+            {
                 return RedirectToAction("Login", "Account", new { area = "" });
+            }
 
             var doctor = await _context.Doctors
                 .Include(d => d.User)
@@ -33,7 +35,15 @@ namespace DoAnWeb.Areas.Doctor.Controllers
                 .FirstOrDefaultAsync(d => d.UserId == user.Id);
 
             if (doctor == null)
+            {
                 return NotFound();
+            }
+
+            if (doctor.User == null || doctor.Specialty == null)
+            {
+                TempData["Error"] = "Hồ sơ bác sĩ chưa đủ dữ liệu để hiển thị.";
+                return RedirectToAction("Index", "Dashboard", new { area = "Doctor" });
+            }
 
             var vm = new DoctorProfileViewModel
             {
@@ -42,8 +52,8 @@ namespace DoAnWeb.Areas.Doctor.Controllers
                 DateOfBirth = doctor.User.DateOfBirth,
                 Gender = doctor.User.Gender,
                 Address = doctor.User.Address,
-                PhoneNumber = doctor.User.PhoneNumber ?? "",
-                Specialty = doctor.Specialty.Name ?? "",
+                PhoneNumber = doctor.User.PhoneNumber ?? string.Empty,
+                Specialty = doctor.Specialty.Name,
                 LicenseNumber = doctor.LicenseNumber,
                 Qualifications = doctor.Qualifications
             };
@@ -62,22 +72,30 @@ namespace DoAnWeb.Areas.Doctor.Controllers
 
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
+            {
                 return RedirectToAction("Login", "Account", new { area = "" });
+            }
 
             var doctor = await _context.Doctors
                 .Include(d => d.User)
+                .Include(d => d.Specialty)
                 .FirstOrDefaultAsync(d => d.UserId == user.Id);
 
             if (doctor == null)
             {
-                ModelState.AddModelError("", "Không tìm thấy hồ sơ bác sĩ.");
+                ModelState.AddModelError(string.Empty, "Không tìm thấy hồ sơ bác sĩ.");
                 return View(vm);
             }
 
-            // SỬA: cập nhật thông tin User bằng UserManager để ổn định hơn
+            if (doctor.User == null)
+            {
+                ModelState.AddModelError(string.Empty, "Hồ sơ người dùng của bác sĩ chưa sẵn sàng.");
+                return View(vm);
+            }
+
             doctor.User.Name = vm.Name;
             doctor.User.DateOfBirth = vm.DateOfBirth;
-            doctor.User.Gender = vm.Gender ?? "";
+            doctor.User.Gender = vm.Gender ?? string.Empty;
             doctor.User.Address = vm.Address;
             doctor.User.PhoneNumber = vm.PhoneNumber;
 
@@ -86,14 +104,12 @@ namespace DoAnWeb.Areas.Doctor.Controllers
             {
                 foreach (var error in userUpdateResult.Errors)
                 {
-                    ModelState.AddModelError("", error.Description);
+                    ModelState.AddModelError(string.Empty, error.Description);
                 }
 
                 return View(vm);
             }
 
-            // SỬA: cập nhật thông tin bảng Doctor
-            doctor.Specialty.Name = vm.Specialty;
             doctor.LicenseNumber = vm.LicenseNumber;
             doctor.Qualifications = vm.Qualifications;
 
