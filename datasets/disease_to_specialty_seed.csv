@@ -1,0 +1,16 @@
+disease_name_vi,disease_name_ascii,specialty_name_vi,mapping_basis,confidence,review_status,notes
+Cam cum,cam_cum,Noi tong quat,common_clinical_mapping,medium,needs_medical_review,Dung lam seed khoi tao
+Viem hong,viem_hong,Tai mui hong,common_clinical_mapping,medium,needs_medical_review,Dung lam seed khoi tao
+Viem xoang,viem_xoang,Tai mui hong,common_clinical_mapping,medium,needs_medical_review,Dung lam seed khoi tao
+Viem tai giua,viem_tai_giua,Tai mui hong,common_clinical_mapping,medium,needs_medical_review,Dung lam seed khoi tao
+Viem da day,viem_da_day,Tieu hoa,common_clinical_mapping,medium,needs_medical_review,Dung lam seed khoi tao
+Trao nguoc da day,trao_nguoc_da_day,Tieu hoa,common_clinical_mapping,medium,needs_medical_review,Dung lam seed khoi tao
+Roi loan tieu hoa,roi_loan_tieu_hoa,Tieu hoa,common_clinical_mapping,medium,needs_medical_review,Dung lam seed khoi tao
+Tang huyet ap,tang_huyet_ap,Tim mach,common_clinical_mapping,medium,needs_medical_review,Dung lam seed khoi tao
+Dau that nguc,dau_that_nguc,Tim mach,common_clinical_mapping,medium,needs_medical_review,Dung lam seed khoi tao
+Viem da co dia,viem_da_co_dia,Da lieu,common_clinical_mapping,medium,needs_medical_review,Dung lam seed khoi tao
+Di ung da,di_ung_da,Da lieu,common_clinical_mapping,medium,needs_medical_review,Dung lam seed khoi tao
+Viem ket mac,viem_ket_mac,Mat,common_clinical_mapping,medium,needs_medical_review,Dung lam seed khoi tao
+Kho mat,kho_mat,Mat,common_clinical_mapping,low,needs_medical_review,Dung lam seed khoi tao
+Thoai hoa khop,thoai_hoa_khop,Xuong khop,common_clinical_mapping,medium,needs_medical_review,Dung lam seed khoi tao
+Dau cot song that lung,dau_cot_song_that_lung,Xuong khop,common_clinical_mapping,medium,needs_medical_review,Dung lam seed khoi tao

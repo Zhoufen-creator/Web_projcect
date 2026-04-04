@@ -1,7 +1,7 @@
 @model DoAnWeb.Areas.Patient.ViewModels.AppointmentCreateViewModel
 
 @{
-    ViewData["Title"] = "Đặt lịch khám";
+    ViewData["Title"] = "Dat lich kham";
 }
 
 @section Styles {
@@ -10,8 +10,8 @@
 
 <div class="patient-form-card">
     <div class="patient-form-head">
-        <h2>Đăng ký lịch hẹn khám</h2>
-        <p>Chọn bác sĩ, thời gian phù hợp và gửi yêu cầu đặt lịch trực tiếp trên hệ thống.</p>
+        <h2>Dang ky lich hen kham</h2>
+        <p>Nhap thoi gian va mo ta trieu chung. He thong se tu dong goi y chuyen khoa va sap xep bac si phu hop.</p>
     </div>
 
     <div class="patient-form-body">
@@ -20,28 +20,14 @@
 
             <div class="patient-form-grid">
                 <div class="patient-form-group">
-                    <label asp-for="DoctorId" class="patient-label">Chọn bác sĩ</label>
-                    <select asp-for="DoctorId" class="patient-select">
-                        <option value="">-- Chọn bác sĩ phụ trách --</option>
-                        @foreach (var doctor in Model.Doctors)
-                        {
-                            <option value="@doctor.Id" selected="@(doctor.Id == Model.DoctorId)">
-                                @doctor.Name - @doctor.Specialty
-                            </option>
-                        }
-                    </select>
-                    <span asp-validation-for="DoctorId" class="text-danger"></span>
-                </div>
-
-                <div class="patient-form-group">
-                    <label asp-for="ScheduledDate" class="patient-label">Ngày giờ khám</label>
+                    <label asp-for="ScheduledDate" class="patient-label">Ngay gio kham</label>
                     <input asp-for="ScheduledDate" type="datetime-local" class="patient-input" />
                     <span asp-validation-for="ScheduledDate" class="text-danger"></span>
                 </div>
 
                 <div class="patient-form-group patient-form-group-full">
-                    <label asp-for="ReasonForVisit" class="patient-label">Lý do khám</label>
-                    <textarea asp-for="ReasonForVisit" class="patient-textarea" placeholder="Mô tả triệu chứng hoặc nhu cầu khám của bạn..."></textarea>
+                    <label asp-for="ReasonForVisit" class="patient-label">Ly do kham</label>
+                    <textarea asp-for="ReasonForVisit" class="patient-textarea" placeholder="Mo ta trieu chung hoac nhu cau kham cua ban..."></textarea>
                     <span asp-validation-for="ReasonForVisit" class="text-danger"></span>
                 </div>
             </div>
@@ -49,24 +35,24 @@
             @if (!string.IsNullOrWhiteSpace(Model.PredictedSpecialty))
             {
                 <div class="patient-predict-card">
-                    <h4>Gợi ý chuyên khoa từ mô tả bệnh nhân</h4>
+                    <h4>Goi y chuyen khoa tu mo ta benh nhan</h4>
 
                     <div class="patient-predict-row">
-                        <strong>Chuyên khoa gợi ý:</strong> @Model.PredictedSpecialty
+                        <strong>Chuyen khoa goi y:</strong> @Model.PredictedSpecialty
                     </div>
 
                     <div class="patient-predict-row">
-                        <strong>Điểm khớp:</strong> @Model.PredictionScore
+                        <strong>Diem khop:</strong> @Model.PredictionScore
                     </div>
 
                     <div class="patient-predict-row">
-                        <strong>Nhận xét:</strong> @(string.IsNullOrWhiteSpace(Model.PredictionMessage) ? "Không có nhận xét." : Model.PredictionMessage)
+                        <strong>Nhan xet:</strong> @(string.IsNullOrWhiteSpace(Model.PredictionMessage) ? "Khong co nhan xet." : Model.PredictionMessage)
                     </div>
 
                     @if (Model.MatchedKeywords != null && Model.MatchedKeywords.Any())
                     {
                         <div class="patient-predict-row">
-                            <strong>Từ khóa hệ thống nhận diện:</strong><br />
+                            <strong>Tu khoa he thong nhan dien:</strong><br />
                             @foreach (var keyword in Model.MatchedKeywords)
                             {
                                 <span class="patient-predict-tag">@keyword</span>
@@ -79,20 +65,20 @@
             @if (!string.IsNullOrWhiteSpace(Model.SuggestedDoctorMessage))
             {
                 <div class="patient-doctor-suggest-card">
-                    <h4>Gợi ý bác sĩ tự động</h4>
+                    <h4>He thong tu dong sap xep bac si</h4>
 
                     <div class="patient-predict-row">
-                        <strong>Thông báo:</strong> @Model.SuggestedDoctorMessage
+                        <strong>Thong bao:</strong> @Model.SuggestedDoctorMessage
                     </div>
 
                     @if (!string.IsNullOrWhiteSpace(Model.SuggestedDoctorName))
                     {
                         <div class="patient-predict-row">
-                            <strong>Bác sĩ được gợi ý:</strong> @Model.SuggestedDoctorName
+                            <strong>Bac si duoc sap xep:</strong> @Model.SuggestedDoctorName
                         </div>
 
                         <div class="patient-predict-row">
-                            <strong>Số chỗ còn lại trong ca:</strong> @Model.SuggestedRemainingSlots
+                            <strong>So cho con lai trong ca:</strong> @Model.SuggestedRemainingSlots
                         </div>
                     }
                 </div>
@@ -101,12 +87,12 @@
             <div class="patient-form-actions">
                 <button type="submit" class="patient-btn-primary">
                     <i class="fa-solid fa-paper-plane"></i>
-                    Gửi yêu cầu đặt lịch
+                    Gui yeu cau dat lich
                 </button>
 
                 <a href="/Patient/Appointment/Index" class="patient-btn-light">
                     <i class="fa-solid fa-arrow-left"></i>
-                    Quay lại danh sách
+                    Quay lai danh sach
                 </a>
             </div>
         </form>

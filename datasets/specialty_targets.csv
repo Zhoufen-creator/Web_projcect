@@ -1,0 +1,8 @@
+specialty_id,specialty_name_vi,specialty_name_ascii,notes
+1,Noi tong quat,noi_tong_quat,Khoa fallback cho truong hop chua ro chuyen khoa
+2,Tieu hoa,tieu_hoa,Cac van de lien quan da day ruot tieu hoa
+3,Tim mach,tim_mach,Cac van de lien quan tim va huyet ap
+4,Da lieu,da_lieu,Cac van de da, di ung, phat ban
+5,Mat,mat,Cac van de mat, thi luc, do mat
+6,Tai mui hong,tai_mui_hong,Cac van de tai mui hong
+7,Xuong khop,xuong_khop,Cac van de co xuong khop, dau khop

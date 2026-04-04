@@ -3,6 +3,7 @@
 ========================================= */
 
 :root {
+    --employee-font-sans: "Segoe UI", Tahoma, Geneva, Verdana, Arial, sans-serif;
     --employee-primary: #0f5cc0;
     --employee-primary-dark: #0b4692;
     --employee-primary-soft: #eaf3ff;
@@ -27,6 +28,8 @@
 .employee-page-section {
     background: linear-gradient(180deg, #f7fbff 0%, #edf5ff 100%);
     min-height: calc(100vh - 240px);
+    font-family: var(--employee-font-sans);
+    letter-spacing: 0.01em;
 }
 
 .employee-shell {
@@ -787,11 +790,12 @@
         linear-gradient(180deg, #f6fbff 0%, #edf5ff 100%);
     color: var(--employee-text);
     min-height: 100vh;
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI Variable", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--employee-font-sans);
     line-height: 1.65;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.01em;
 }
 
 .employee-dashboard-shell {

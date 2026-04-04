@@ -1,3 +1,4 @@
+using DoAnWeb.Services;
 namespace DoAnWeb.Services.Interface
 {
     public interface ISpecialtyPredictionService

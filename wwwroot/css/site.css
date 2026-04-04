@@ -1,4 +1,5 @@
 :root {
+    --font-sans: "Segoe UI", Tahoma, Geneva, Verdana, Arial, sans-serif;
     --primary: #0f5cc0;
     --primary-dark: #0b4692;
     --primary-soft: #eaf3ff;
@@ -31,13 +32,32 @@ html {
 
 body {
     margin: 0;
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI Variable", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--font-sans);
     background: #f7fbff;
     color: var(--text-main);
     line-height: 1.65;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.01em;
+}
+
+button,
+input,
+select,
+textarea,
+table {
+    font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-sans);
+    letter-spacing: -0.015em;
 }
 
 a {

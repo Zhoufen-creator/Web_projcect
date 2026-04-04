@@ -1,0 +1,132 @@
+@model DoAnWeb.Areas.Admin.ViewModels.PhoBertDiagnosticsViewModel
+
+@{
+    ViewData["Title"] = "PhoBERT Diagnostics";
+}
+
+<section class="admin-page-section">
+    <div class="container-xxl">
+        <div class="admin-form-wrapper">
+            <div class="admin-page-header">
+                <div>
+                    <span class="admin-page-badge">
+                        <i class="bi bi-cpu"></i>
+                        PhoBERT Diagnostics
+                    </span>
+                    <h1>Kiểm tra kết nối PhoBERT</h1>
+                    <p>
+                        Trang này giúp admin kiểm tra trạng thái PhoBERT API và thử dự đoán chuyên khoa
+                        ngay từ trong hệ thống ASP.NET Core.
+                    </p>
+                </div>
+
+                <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="admin-outline-btn">
+                    <i class="bi bi-arrow-left"></i>
+                    Quay lại Dashboard
+                </a>
+            </div>
+
+            <div class="admin-form-card">
+                <div class="admin-form-card-head">
+                    <h3>Trạng thái dịch vụ</h3>
+                    <p>
+                        Kiểm tra nhanh cấu hình `PhoBertApi` trong ứng dụng và khả năng kết nối tới API Python.
+                    </p>
+                </div>
+
+                <div class="admin-form-grid">
+                    <div class="admin-feature-card">
+                        <h4>API Enabled</h4>
+                        <p class="mb-0 fw-semibold">@(Model.Health?.Enabled == true ? "Dang bat" : "Dang tat")</p>
+                    </div>
+
+                    <div class="admin-feature-card">
+                        <h4>Health</h4>
+                        <p class="mb-0 fw-semibold">@(Model.Health?.IsHealthy == true ? "San sang" : "Chua san sang")</p>
+                    </div>
+
+                    <div class="admin-feature-card admin-form-group-full">
+                        <h4>URL</h4>
+                        <p class="mb-2">@Model.Health?.Url</p>
+                        <div class="small text-muted">Timeout: @Model.Health?.TimeoutSeconds giay</div>
+                    </div>
+
+                    <div class="admin-feature-card admin-form-group-full">
+                        <h4>Thong diep</h4>
+                        <p class="mb-0">@Model.Health?.Message</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-form-card mt-4">
+                <div class="admin-form-card-head">
+                    <h3>Thu du doan chuyen khoa</h3>
+                    <p>
+                        Neu PhoBERT API dang bat va hoat dong, he thong se uu tien AI.
+                        Neu khong, he thong se tu fallback ve rule-based.
+                    </p>
+                </div>
+
+                <form asp-area="Admin" asp-controller="PhoBertDiagnostics" asp-action="Index" method="post" class="admin-form-grid">
+                    @Html.AntiForgeryToken()
+
+                    <div class="admin-form-group admin-form-group-full">
+                        <label asp-for="InputText" class="fw-semibold">Mo ta trieu chung</label>
+                        <textarea asp-for="InputText" class="admin-input" placeholder="Vi du: Toi bi dau bung, day hoi va buon non sau khi an"></textarea>
+                    </div>
+
+                    <div class="admin-form-actions">
+                        <button type="submit" class="admin-primary-btn">
+                            <i class="bi bi-magic"></i>
+                            Du doan ngay
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            @if (Model.Prediction != null)
+            {
+                <div class="admin-form-card mt-4">
+                    <div class="admin-form-card-head">
+                        <h3>Ket qua du doan</h3>
+                        <p>Ket qua nay di qua dung luong `ISpecialtyPredictionService` cua he thong.</p>
+                    </div>
+
+                    <div class="admin-form-grid">
+                        <div class="admin-feature-card">
+                            <h4>Chuyen khoa goi y</h4>
+                            <p class="mb-0 fw-semibold">@Model.Prediction.PredictedSpecialty</p>
+                        </div>
+
+                        <div class="admin-feature-card">
+                            <h4>Diem / do tin cay</h4>
+                            <p class="mb-0 fw-semibold">@Model.Prediction.MatchScore</p>
+                        </div>
+
+                        <div class="admin-feature-card admin-form-group-full">
+                            <h4>Thong diep</h4>
+                            <p class="mb-0">@Model.Prediction.Message</p>
+                        </div>
+
+                        <div class="admin-feature-card admin-form-group-full">
+                            <h4>Matched Keywords / Top K</h4>
+                            @if (Model.Prediction.MatchedKeywords != null && Model.Prediction.MatchedKeywords.Any())
+                            {
+                                <div class="admin-chip-list">
+                                    @foreach (var item in Model.Prediction.MatchedKeywords)
+                                    {
+                                        <span class="admin-chip">@item</span>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="mb-0 text-muted">Khong co du lieu bo sung.</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

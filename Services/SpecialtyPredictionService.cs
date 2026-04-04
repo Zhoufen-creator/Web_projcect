@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text;
 using DoAnWeb.Services.Interface;
 
@@ -5,48 +6,36 @@ namespace DoAnWeb.Services
 {
     public class SpecialtyPredictionService : ISpecialtyPredictionService
     {
-        private readonly IPhoBertInferenceService _phoBertService;
-        private readonly ILogger<SpecialtyPredictionService> _logger;
+        private readonly IPhoBertInferenceService _phoBertInferenceService;
 
-        public SpecialtyPredictionService(IPhoBertInferenceService phoBertService, ILogger<SpecialtyPredictionService> logger)
-        {
-            _phoBertService = phoBertService;
-            _logger = logger;
-        }
-
-        // ============= CODE CŨ (SỬ DỤNG TỪ KHÓA) - ĐƯỢC COMMENT LẠI =============
-        /*
         private readonly Dictionary<string, List<string>> _specialtyKeywords = new()
         {
-            { "Nội tổng quát", new List<string> { "sot", "ho", "dau hong", "cam", "met moi", "nhuc dau", "kho tho", "viem", "nong", "lanh" } },
-            { "Tiêu hóa", new List<string> { "dau bung", "tieu chay", "tao bon", "non", "oi", "da day", "kho tieu", "day hoi", "buon non" } },
-            { "Tim mạch", new List<string> { "dau nguc", "hoi hop", "tim dap nhanh", "kho tho", "cao huyet ap", "tuc nguc", "met tim" } },
-            { "Da liễu", new List<string> { "ngua", "noi man", "di ung", "da", "mun", "phat ban", "man do", "viem da", "nam da" } },
-            { "Mắt", new List<string> { "mo mat", "do mat", "ngua mat", "cay mat", "dau mat", "chay nuoc mat", "nhin mo" } },
-            { "Tai mũi họng", new List<string> { "dau hong", "so mui", "nghet mui", "ho", "viem hong", "tai", "mui", "hong", "u tai" } },
-            { "Xương khớp", new List<string> { "dau lung", "dau goi", "dau khop", "nhuc xuong", "te tay", "te chan", "cot song", "vai gay" } }
+            { "Noi tong quat", new List<string> { "sot", "ho", "dau hong", "cam", "met moi", "nhuc dau", "kho tho", "viem", "nong", "lanh" } },
+            { "Tieu hoa", new List<string> { "dau bung", "tieu chay", "tao bon", "non", "oi", "da day", "kho tieu", "day hoi", "buon non" } },
+            { "Tim mach", new List<string> { "dau nguc", "hoi hop", "tim dap nhanh", "kho tho", "cao huyet ap", "tuc nguc", "met tim" } },
+            { "Da lieu", new List<string> { "ngua", "noi man", "di ung", "da", "mun", "phat ban", "man do", "viem da", "nam da" } },
+            { "Mat", new List<string> { "mo mat", "do mat", "ngua mat", "cay mat", "dau mat", "chay nuoc mat", "nhin mo" } },
+            { "Tai mui hong", new List<string> { "dau hong", "so mui", "nghet mui", "ho", "viem hong", "tai", "mui", "hong", "u tai" } },
+            { "Xuong khop", new List<string> { "dau lung", "dau goi", "dau khop", "nhuc xuong", "te tay", "te chan", "cot song", "vai gay" } }
         };
-        */
 
-        // ============= CODE MỚI (SỬ DỤNG PHOBERT MODEL) =============
-        public async Task<SpecialtyPredictionResult> PredictSpecialtyAsync(string? reasonForVisit)
+        public SpecialtyPredictionService(IPhoBertInferenceService phoBertInferenceService)
         {
-            return await _phoBertService.PredictSpecialtyAsync(reasonForVisit);
+            _phoBertInferenceService = phoBertInferenceService;
         }
 
-        // ============= PHƯƠNG THỨC CŨ DÀNH CHO BACKWARD COMPATIBILITY =============
         public SpecialtyPredictionResult PredictSpecialty(string? reasonForVisit)
         {
-            // Gọi phiên bản async một cách synchronous (tạm thời)
-            // Lý tưởng nên sữa các nơi gọi sang dùng PredictSpecialtyAsync
-            var task = PredictSpecialtyAsync(reasonForVisit);
-            task.Wait();
-            return task.Result;
+            var phoBertResult = _phoBertInferenceService.TryPredictSpecialty(reasonForVisit);
+            if (phoBertResult != null)
+            {
+                return phoBertResult;
+            }
+
+            return PredictByRules(reasonForVisit);
         }
 
-        /*
-        // ============= PHƯƠNG THỨC TỪ KHÓA - ĐƯỢC COMMENT LẠI =============
-        public SpecialtyPredictionResult PredictSpecialty(string? reasonForVisit)
+        private SpecialtyPredictionResult PredictByRules(string? reasonForVisit)
         {
             if (string.IsNullOrWhiteSpace(reasonForVisit))
             {
@@ -54,7 +43,7 @@ namespace DoAnWeb.Services
                 {
                     PredictedSpecialty = string.Empty,
                     MatchScore = 0,
-                    Message = "Chưa có mô tả triệu chứng để dự đoán chuyên khoa."
+                    Message = "Chua co mo ta trieu chung de du doan chuyen khoa."
                 };
             }
 
@@ -85,10 +74,10 @@ namespace DoAnWeb.Services
             {
                 return new SpecialtyPredictionResult
                 {
-                    PredictedSpecialty = "Nội tổng quát",
+                    PredictedSpecialty = "Noi tong quat",
                     MatchScore = 0,
                     MatchedKeywords = new List<string>(),
-                    Message = "Không đủ từ khóa rõ ràng. Hệ thống tạm gợi ý Nội tổng quát."
+                    Message = "Khong du tu khoa ro rang. He thong tam goi y Noi tong quat."
                 };
             }
 
@@ -97,44 +86,26 @@ namespace DoAnWeb.Services
                 PredictedSpecialty = bestSpecialty,
                 MatchScore = bestScore,
                 MatchedKeywords = bestMatchedKeywords,
-                Message = $"Hệ thống gợi ý chuyên khoa: {bestSpecialty}."
+                Message = $"He thong goi y chuyen khoa: {bestSpecialty}."
             };
         }
 
         private static string NormalizeText(string input)
         {
-            input = input.ToLowerInvariant().Trim();
+            input = input.ToLowerInvariant().Trim().Replace('đ', 'd');
 
-            var replacements = new Dictionary<string, string>
+            var normalized = input.Normalize(NormalizationForm.FormD);
+            var builder = new StringBuilder(normalized.Length);
+
+            foreach (var c in normalized)
             {
-                { "á", "a" }, { "à", "a" }, { "ả", "a" }, { "ã", "a" }, { "ạ", "a" },
-                { "ă", "a" }, { "ắ", "a" }, { "ằ", "a" }, { "ẳ", "a" }, { "ẵ", "a" }, { "ặ", "a" },
-                { "â", "a" }, { "ấ", "a" }, { "ầ", "a" }, { "ẩ", "a" }, { "ẫ", "a" }, { "ậ", "a" },
-
-                { "é", "e" }, { "è", "e" }, { "ẻ", "e" }, { "ẽ", "e" }, { "ẹ", "e" },
-                { "ê", "e" }, { "ế", "e" }, { "ề", "e" }, { "ể", "e" }, { "ễ", "e" }, { "ệ", "e" },
-
-                { "í", "i" }, { "ì", "i" }, { "ỉ", "i" }, { "ĩ", "i" }, { "ị", "i" },
-
-                { "ó", "o" }, { "ò", "o" }, { "ỏ", "o" }, { "õ", "o" }, { "ọ", "o" },
-                { "ô", "o" }, { "ố", "o" }, { "ồ", "o" }, { "ổ", "o" }, { "ỗ", "o" }, { "ộ", "o" },
-                { "ơ", "o" }, { "ớ", "o" }, { "ờ", "o" }, { "ở", "o" }, { "ỡ", "o" }, { "ợ", "o" },
-
-                { "ú", "u" }, { "ù", "u" }, { "ủ", "u" }, { "ũ", "u" }, { "ụ", "u" },
-                { "ư", "u" }, { "ứ", "u" }, { "ừ", "u" }, { "ử", "u" }, { "ữ", "u" }, { "ự", "u" },
-
-                { "ý", "y" }, { "ỳ", "y" }, { "ỷ", "y" }, { "ỹ", "y" }, { "ỵ", "y" },
-                { "đ", "d" }
-            };
-
-            var builder = new StringBuilder(input);
-            foreach (var replacement in replacements)
-            {
-                builder.Replace(replacement.Key, replacement.Value);
+                if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                {
+                    builder.Append(c);
+                }
             }
 
-            return builder.ToString();
+            return builder.ToString().Normalize(NormalizationForm.FormC);
         }
-        */
     }
 }

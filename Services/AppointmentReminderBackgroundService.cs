@@ -1,5 +1,6 @@
 using DoAnWeb.Data;
 using DoAnWeb.Models;
+using DoAnWeb.Services.Interface;
 using Microsoft.EntityFrameworkCore;
 using DoAnWeb.Services.Interface;
 
@@ -51,6 +52,7 @@ namespace DoAnWeb.Services
                     !a.IsCheckedIn &&
                     !a.IsReminder24hSent &&
                     a.ScheduledDate > now &&
+                    a.ScheduledDate > next2Hours &&
                     a.ScheduledDate <= next24Hours)
                 .ToListAsync(stoppingToken);
 

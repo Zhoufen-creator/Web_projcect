@@ -1,0 +1,61 @@
+﻿combined_id,dataset_origin,source_id,text,label,label_id,disease_name_vi,source_name,source_url,review_status
+1,seed,1,Toi bi sot ho dau hong va met moi toi nay,Noi tong quat,0,Cam cum,internal_rule_seed,,needs_medical_review
+10,seed,10,Toi noi mun va viem da o mat va lung,Da lieu,3,Viem da co dia,internal_rule_seed,,needs_medical_review
+11,seed,11,Tay toi bi man do va rat ngua sau khi an hai san,Da lieu,3,Di ung da,internal_rule_seed,,needs_medical_review
+12,seed,12,Mat toi bi do cay va nhin mo tu sang,Mat,4,Viem ket mac,internal_rule_seed,,needs_medical_review
+13,seed,13,Toi hay chay nuoc mat va dau mat khi doc sach,Mat,4,Kho mat,internal_rule_seed,,needs_medical_review
+14,seed,14,Em bi mo mat kem ngua mat va do mat,Mat,4,Viem ket mac,internal_rule_seed,,needs_medical_review
+15,seed,15,Toi bi dau hong so mui va nghet mui lien tuc,Tai mui hong,5,Viem hong,internal_rule_seed,,needs_medical_review
+16,seed,16,Tai toi u va hong bi rat khi nuot,Tai mui hong,5,Viem hong,internal_rule_seed,,needs_medical_review
+17,seed,17,Toi ho nghet mui va dau o vung xoang,Tai mui hong,5,Viem xoang,internal_rule_seed,,needs_medical_review
+18,seed,18,Lung toi dau am i va nhuc xuong sau khi khieng nang,Xuong khop,6,Dau cot song that lung,internal_rule_seed,,needs_medical_review
+19,seed,19,Toi bi dau goi va dau khop khi di cau thang,Xuong khop,6,Thoai hoa khop,internal_rule_seed,,needs_medical_review
+2,seed,2,Toi cam thay kho tho nhe kem nhuc dau,Noi tong quat,0,Cam cum,internal_rule_seed,,needs_medical_review
+20,seed,20,Em hay te tay te chan va dau vung cot song,Xuong khop,6,Dau cot song that lung,internal_rule_seed,,needs_medical_review
+21,seed,21,Toi bi vai gay va nhuc khop vai khi xoay tay,Xuong khop,6,Thoai hoa khop,internal_rule_seed,,needs_medical_review
+22,seed,22,Toi bi sot nhe kem ho khan va nguoi met moai,Noi tong quat,0,Cam cum,internal_rule_seed,,needs_medical_review
+23,seed,23,Em thay dau hong va lanh nguoi tu hom qua,Noi tong quat,0,Cam cum,internal_rule_seed,,needs_medical_review
+24,seed,24,Toi ho nhieu kem nhuc dau va met moi,Noi tong quat,0,Cam cum,internal_rule_seed,,needs_medical_review
+25,seed,25,May ngay nay toi sot va kho tho nhe khi van dong,Noi tong quat,0,Cam cum,internal_rule_seed,,needs_medical_review
+26,seed,26,Toi bi cam kem nong lanh va dau dau,Noi tong quat,0,Cam cum,internal_rule_seed,,needs_medical_review
+29,seed,29,Toi dau bung tung con sau bua an va hay buon non,Tieu hoa,1,Viem da day,internal_rule_seed,,needs_medical_review
+3,seed,3,Em bi dau bung non va day hoi sau khi an,Tieu hoa,1,Viem da day,internal_rule_seed,,needs_medical_review
+30,seed,30,Em day hoi kho tieu va non nao vao buoi toi,Tieu hoa,1,Viem da day,internal_rule_seed,,needs_medical_review
+31,seed,31,Toi dau da day kem buon non moi khi an do la,Tieu hoa,1,Viem da day,internal_rule_seed,,needs_medical_review
+32,seed,32,Gan day toi tieu chay va dau bung nhieu lan trong ngay,Tieu hoa,1,Roi loan tieu hoa,internal_rule_seed,,needs_medical_review
+33,seed,33,Toi thuong xuyen tao bon kem cam giac day bung,Tieu hoa,1,Roi loan tieu hoa,internal_rule_seed,,needs_medical_review
+34,seed,34,Em bi non oi va kho tieu sau khi an,Tieu hoa,1,Viem da day,internal_rule_seed,,needs_medical_review
+35,seed,35,Toi hay dau bung tren va day hoi vao ban dem,Tieu hoa,1,Trao nguoc da day,internal_rule_seed,,needs_medical_review
+36,seed,36,Toi thay tuc nguc va tim dap nhanh khi lam viec nang,Tim mach,2,Dau that nguc,internal_rule_seed,,needs_medical_review
+37,seed,37,Em bi hoi hop va kho tho khi leo cau thang,Tim mach,2,Dau that nguc,internal_rule_seed,,needs_medical_review
+38,seed,38,Toi dau nguc thoang qua kem met tim va choang vang,Tim mach,2,Dau that nguc,internal_rule_seed,,needs_medical_review
+39,seed,39,Toi co cam giac tim dap nhanh va tuc o nguc,Tim mach,2,Dau that nguc,internal_rule_seed,,needs_medical_review
+40,seed,40,Huyet ap toi hay cao va nguoi rat met,Tim mach,2,Tang huyet ap,internal_rule_seed,,needs_medical_review
+41,seed,41,Toi hay kho tho va hoi hop vao buoi dem,Tim mach,2,Dau that nguc,internal_rule_seed,,needs_medical_review
+42,seed,42,Em dau nguc nhe nhung tim dap nhanh bat thuong,Tim mach,2,Dau that nguc,internal_rule_seed,,needs_medical_review
+43,seed,43,Da toi noi nhieu man do va ngua khap tay chan,Da lieu,3,Di ung da,internal_rule_seed,,needs_medical_review
+44,seed,44,Toi bi di ung da va phat ban sau khi dung my pham,Da lieu,3,Di ung da,internal_rule_seed,,needs_medical_review
+45,seed,45,Em co vung da bi viem va noi mun nho,Da lieu,3,Viem da co dia,internal_rule_seed,,needs_medical_review
+46,seed,46,Toi rat ngua da vao ban dem va co vet man do,Da lieu,3,Di ung da,internal_rule_seed,,needs_medical_review
+47,seed,47,Da mat toi len nhieu mun va bi do keo dai,Da lieu,3,Viem da co dia,internal_rule_seed,,needs_medical_review
+50,seed,50,Mat toi cay va do nhieu khi ngoi dieu hoa,Mat,4,Kho mat,internal_rule_seed,,needs_medical_review
+51,seed,51,Toi nhin mo va chay nuoc mat vao buoi sang,Mat,4,Viem ket mac,internal_rule_seed,,needs_medical_review
+52,seed,52,Em bi do mat va dau mat nhe khi hoc bai,Mat,4,Viem ket mac,internal_rule_seed,,needs_medical_review
+53,seed,53,Toi hay ngua mat va cay mat khi ra duong,Mat,4,Kho mat,internal_rule_seed,,needs_medical_review
+54,seed,54,Mat toi mo va rat kho chiu kem chay nuoc mat,Mat,4,Viem ket mac,internal_rule_seed,,needs_medical_review
+55,seed,55,Toi bi dau vung quanh mat va nhin hoi mo,Mat,4,Viem ket mac,internal_rule_seed,,needs_medical_review
+57,seed,57,Toi nghet mui ho va dau hong suot may ngay nay,Tai mui hong,5,Viem hong,internal_rule_seed,,needs_medical_review
+58,seed,58,Em bi so mui kem viem hong va kho nuot,Tai mui hong,5,Viem hong,internal_rule_seed,,needs_medical_review
+59,seed,59,Toi thay tai u va mui nghep vao buoi toi,Tai mui hong,5,Viem xoang,internal_rule_seed,,needs_medical_review
+60,seed,60,Toi dau hong nghet mui va hay ho ve dem,Tai mui hong,5,Viem hong,internal_rule_seed,,needs_medical_review
+61,seed,61,Em bi viem hong nhe kem so mui va khan tieng,Tai mui hong,5,Viem hong,internal_rule_seed,,needs_medical_review
+64,seed,64,Lung duoi cua toi dau khi dung lau va khom nguoi,Xuong khop,6,Dau cot song that lung,internal_rule_seed,,needs_medical_review
+65,seed,65,Toi nhuc khop goi va di lai thay cung kho,Xuong khop,6,Thoai hoa khop,internal_rule_seed,,needs_medical_review
+66,seed,66,Em bi te chan va dau khop sau khi ngoi lau,Xuong khop,6,Dau cot song that lung,internal_rule_seed,,needs_medical_review
+67,seed,67,Toi dau vai gay va xoay co rat kho,Xuong khop,6,Thoai hoa khop,internal_rule_seed,,needs_medical_review
+74,sourced,4,Toi bi dau nguc kem choang vang va van mo hoi,Tim mach,2,Dau nguc,MedlinePlus,https://medlineplus.gov/chestpain.html,manual_paraphrase_from_official_source
+75,sourced,5,Toi bi dau hong va nuot rat dau,Tai mui hong,5,Viem hong,MedlinePlus,https://medlineplus.gov/sorethroat.html,manual_paraphrase_from_official_source
+78,sourced,8,Toi bi mui nghep kem gote mui sau va ho nhe,Tai mui hong,5,Nghet mui,MedlinePlus,https://medlineplus.gov/ency/article/003049.htm,manual_paraphrase_from_official_source
+79,sourced,9,Da toi bi noi ban do va ngua rat nhieu,Da lieu,3,Phat ban,MedlinePlus,https://medlineplus.gov/rashes.html,manual_paraphrase_from_official_source
+81,sourced,11,Toi bi dau khop va thay khop bi cung khi cu dong,Xuong khop,6,Dau khop,MedlinePlus,https://medlineplus.gov/ency/article/003261.htm,manual_paraphrase_from_official_source
+85,sourced,15,Toi thay mat cay rat va nhu co cat trong mat,Mat,4,Kho mat,MedlinePlus,https://medlineplus.gov/ency/article/000426.htm,manual_paraphrase_from_official_source

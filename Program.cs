@@ -2,15 +2,14 @@ using DoAnWeb.Data;
 using DoAnWeb.Models;
 using DoAnWeb.Services;
 using DoAnWeb.Services.Interface;
+using DotNetEnv;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using DotNetEnv;
 
 Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -24,23 +23,14 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 builder.Services.AddScoped<IAppointmentValidationService, AppointmentValidationService>();
 builder.Services.AddScoped<IAppointmentEstimateService, AppointmentEstimateService>();
 builder.Services.AddScoped<ISpecialtyPredictionService, SpecialtyPredictionService>();
+builder.Services.Configure<PhoBertApiOptions>(builder.Configuration.GetSection("PhoBertApi"));
+builder.Services.AddHttpClient<IPhoBertInferenceService, PhoBertInferenceService>();
 builder.Services.AddScoped<IDoctorAutoAssignmentService, DoctorAutoAssignmentService>();
-
-// SỬA: thêm service phân tích tải khoa
 builder.Services.AddScoped<ISpecialtyLoadAnalysisService, SpecialtyLoadAnalysisService>();
-
-// SỬA: thêm service tính toán nhân sự
 builder.Services.AddScoped<IStaffingService, StaffingService>();
 
-// SỬA: thêm service PhoBERT inference
-builder.Services.AddScoped<IPhoBertInferenceService, PhoBertInferenceService>();
-builder.Services.AddHttpClient<IPhoBertInferenceService, PhoBertInferenceService>();
-
-// Email
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddScoped<IEmailService, EmailService>();
-
-// Reminder background service
 builder.Services.AddHostedService<AppointmentReminderBackgroundService>();
 
 builder.Services.ConfigureApplicationCookie(options =>
@@ -51,7 +41,6 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 var app = builder.Build();
 
-// Middleware
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -66,12 +55,10 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Route cho Area
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
 
-// Route mặc định
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -1,0 +1,220 @@
+{
+  "test_file": "D:\\Web\\Nhom3_DoAnLTW\\Web_projcect\\datasets\\processed_phobert_v1\\test.jsonl",
+  "sample_count": 13,
+  "rule_based": {
+    "metrics": {
+      "accuracy": 0.692308,
+      "macro_precision": 0.702381,
+      "macro_recall": 0.714286,
+      "macro_f1": 0.647619,
+      "per_label": {
+        "Da lieu": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2
+        },
+        "Mat": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 2
+        },
+        "Noi tong quat": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "support": 1
+        },
+        "Tai mui hong": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2
+        },
+        "Tieu hoa": {
+          "precision": 0.666667,
+          "recall": 1.0,
+          "f1": 0.8,
+          "support": 2
+        },
+        "Tim mach": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.666667,
+          "support": 2
+        },
+        "Xuong khop": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.666667,
+          "support": 2
+        }
+      }
+    },
+    "predictions": [
+      {
+        "combined_id": 28,
+        "text": "Toi met moi ho va co cam giac sot am i",
+        "true_label": "Noi tong quat",
+        "predicted_label": "Noi tong quat",
+        "correct": true,
+        "match_score": 4,
+        "matched_keywords": [
+          "cam",
+          "ho",
+          "met moi",
+          "sot"
+        ]
+      },
+      {
+        "combined_id": 49,
+        "text": "Em thay da bi kich ung va phat ban sau khi an la",
+        "true_label": "Da lieu",
+        "predicted_label": "Da lieu",
+        "correct": true,
+        "match_score": 2,
+        "matched_keywords": [
+          "da",
+          "phat ban"
+        ]
+      },
+      {
+        "combined_id": 5,
+        "text": "Gan day toi tieu chay va dau bung am i",
+        "true_label": "Tieu hoa",
+        "predicted_label": "Tieu hoa",
+        "correct": true,
+        "match_score": 3,
+        "matched_keywords": [
+          "dau bung",
+          "oi",
+          "tieu chay"
+        ]
+      },
+      {
+        "combined_id": 56,
+        "text": "Em thay mat do va cay sau khi dung may tinh lau",
+        "true_label": "Mat",
+        "predicted_label": "Noi tong quat",
+        "correct": false,
+        "match_score": 0,
+        "matched_keywords": []
+      },
+      {
+        "combined_id": 63,
+        "text": "Toi ho dau hong va thay mui hong rat kho chiu",
+        "true_label": "Tai mui hong",
+        "predicted_label": "Tai mui hong",
+        "correct": true,
+        "match_score": 4,
+        "matched_keywords": [
+          "dau hong",
+          "ho",
+          "hong",
+          "mui"
+        ]
+      },
+      {
+        "combined_id": 69,
+        "text": "Em thay cot song va lung rat moi sau khi ngoi may tinh",
+        "true_label": "Xuong khop",
+        "predicted_label": "Tieu hoa",
+        "correct": false,
+        "match_score": 1,
+        "matched_keywords": [
+          "oi"
+        ]
+      },
+      {
+        "combined_id": 70,
+        "text": "Toi dau khop nhieu o dau goi va te tay nhe",
+        "true_label": "Xuong khop",
+        "predicted_label": "Xuong khop",
+        "correct": true,
+        "match_score": 3,
+        "matched_keywords": [
+          "dau goi",
+          "dau khop",
+          "te tay"
+        ]
+      },
+      {
+        "combined_id": 72,
+        "text": "Toi dau bung kem day hoi va kho chiu o vung da day",
+        "true_label": "Tieu hoa",
+        "predicted_label": "Tieu hoa",
+        "correct": true,
+        "match_score": 4,
+        "matched_keywords": [
+          "da day",
+          "dau bung",
+          "day hoi",
+          "oi"
+        ]
+      },
+      {
+        "combined_id": 73,
+        "text": "Toi bi dau nguc nhu bi de nang va kho tho",
+        "true_label": "Tim mach",
+        "predicted_label": "Noi tong quat",
+        "correct": false,
+        "match_score": 2,
+        "matched_keywords": [
+          "ho",
+          "kho tho"
+        ]
+      },
+      {
+        "combined_id": 77,
+        "text": "Toi bi nghet mui va chay nuoc mui lien tuc",
+        "true_label": "Tai mui hong",
+        "predicted_label": "Tai mui hong",
+        "correct": true,
+        "match_score": 2,
+        "matched_keywords": [
+          "mui",
+          "nghet mui"
+        ]
+      },
+      {
+        "combined_id": 8,
+        "text": "Toi co tien su cao huyet ap va hay met tim",
+        "true_label": "Tim mach",
+        "predicted_label": "Tim mach",
+        "correct": true,
+        "match_score": 2,
+        "matched_keywords": [
+          "cao huyet ap",
+          "met tim"
+        ]
+      },
+      {
+        "combined_id": 84,
+        "text": "Toi bi do mat kem dau va hoi mo tam nhin",
+        "true_label": "Mat",
+        "predicted_label": "Noi tong quat",
+        "correct": false,
+        "match_score": 1,
+        "matched_keywords": [
+          "ho"
+        ]
+      },
+      {
+        "combined_id": 9,
+        "text": "Da toi bi ngua noi man do va phat ban",
+        "true_label": "Da lieu",
+        "predicted_label": "Da lieu",
+        "correct": true,
+        "match_score": 5,
+        "matched_keywords": [
+          "da",
+          "man do",
+          "ngua",
+          "noi man",
+          "phat ban"
+        ]
+      }
+    ]
+  }
+}

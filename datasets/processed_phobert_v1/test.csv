@@ -1,0 +1,14 @@
+﻿combined_id,dataset_origin,source_id,text,label,label_id,disease_name_vi,source_name,source_url,review_status
+28,seed,28,Toi met moi ho va co cam giac sot am i,Noi tong quat,0,Cam cum,internal_rule_seed,,needs_medical_review
+49,seed,49,Em thay da bi kich ung va phat ban sau khi an la,Da lieu,3,Di ung da,internal_rule_seed,,needs_medical_review
+5,seed,5,Gan day toi tieu chay va dau bung am i,Tieu hoa,1,Roi loan tieu hoa,internal_rule_seed,,needs_medical_review
+56,seed,56,Em thay mat do va cay sau khi dung may tinh lau,Mat,4,Kho mat,internal_rule_seed,,needs_medical_review
+63,seed,63,Toi ho dau hong va thay mui hong rat kho chiu,Tai mui hong,5,Viem hong,internal_rule_seed,,needs_medical_review
+69,seed,69,Em thay cot song va lung rat moi sau khi ngoi may tinh,Xuong khop,6,Dau cot song that lung,internal_rule_seed,,needs_medical_review
+70,seed,70,Toi dau khop nhieu o dau goi va te tay nhe,Xuong khop,6,Thoai hoa khop,internal_rule_seed,,needs_medical_review
+72,sourced,2,Toi dau bung kem day hoi va kho chiu o vung da day,Tieu hoa,1,Kho tieu,MedlinePlus,https://medlineplus.gov/abdominalpain.html,manual_paraphrase_from_official_source
+73,sourced,3,Toi bi dau nguc nhu bi de nang va kho tho,Tim mach,2,Dau nguc,MedlinePlus,https://medlineplus.gov/chestpain.html,manual_paraphrase_from_official_source
+77,sourced,7,Toi bi nghet mui va chay nuoc mui lien tuc,Tai mui hong,5,Nghet mui,MedlinePlus,https://medlineplus.gov/ency/article/003049.htm,manual_paraphrase_from_official_source
+8,seed,8,Toi co tien su cao huyet ap va hay met tim,Tim mach,2,Tang huyet ap,internal_rule_seed,,needs_medical_review
+84,sourced,14,Toi bi do mat kem dau va hoi mo tam nhin,Mat,4,Dau mat,MedlinePlus,https://medlineplus.gov/ency/article/003031.htm,manual_paraphrase_from_official_source
+9,seed,9,Da toi bi ngua noi man do va phat ban,Da lieu,3,Di ung da,internal_rule_seed,,needs_medical_review

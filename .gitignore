@@ -23,6 +23,13 @@ Thumbs.db
 dist/
 build/
 .next/
+bin/
+obj/
+
+# Python caches and model artifacts
+__pycache__/
+*.pyc
+datasets/phobert_runs/
 
 # Logs
 logs/

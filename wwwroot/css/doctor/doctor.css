@@ -30,11 +30,12 @@
         linear-gradient(180deg, #f6fbff 0%, #edf5ff 100%);
     color: var(--doctor-text);
     min-height: 100vh;
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI Variable", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, Arial, sans-serif;
     line-height: 1.65;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.01em;
 }
 
 .doctor-shell {

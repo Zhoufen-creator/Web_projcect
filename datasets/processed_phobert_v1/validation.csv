@@ -1,0 +1,14 @@
+﻿combined_id,dataset_origin,source_id,text,label,label_id,disease_name_vi,source_name,source_url,review_status
+27,seed,27,Em thay nhuc dau va viem hong nhe kem met,Noi tong quat,0,Cam cum,internal_rule_seed,,needs_medical_review
+4,seed,4,Toi hay buon non kho tieu va dau vung da day,Tieu hoa,1,Viem da day,internal_rule_seed,,needs_medical_review
+48,seed,48,Toi bi nam da nhe kem ngua va bong troc,Da lieu,3,Viem da co dia,internal_rule_seed,,needs_medical_review
+6,seed,6,Toi bi dau nguc hoi hop va tim dap nhanh,Tim mach,2,Dau that nguc,internal_rule_seed,,needs_medical_review
+62,seed,62,Toi nghet mui keo dai kem dau vung tran,Tai mui hong,5,Viem xoang,internal_rule_seed,,needs_medical_review
+68,seed,68,Toi bi dau khop co tay va nhuc xuong khi troi lanh,Xuong khop,6,Thoai hoa khop,internal_rule_seed,,needs_medical_review
+7,seed,7,Toi thuong xuyen tuc nguc va kho tho khi di nhanh,Tim mach,2,Dau that nguc,internal_rule_seed,,needs_medical_review
+71,sourced,1,Toi bi dau bung va dau o vung bung duoi sau bua an,Tieu hoa,1,Dau bung,MedlinePlus,https://medlineplus.gov/abdominalpain.html,manual_paraphrase_from_official_source
+76,sourced,6,Toi bi rat hong kem khan tieng va kho chiu o co hong,Tai mui hong,5,Viem hong,MedlinePlus,https://medlineplus.gov/sorethroat.html,manual_paraphrase_from_official_source
+80,sourced,10,Toi co vung da bi kich ung sung do va ran rat,Da lieu,3,Viem da,MedlinePlus,https://medlineplus.gov/rashes.html,manual_paraphrase_from_official_source
+82,sourced,12,Toi bi dau khop kem sung nong va do quanh khop,Xuong khop,6,Dau khop,MedlinePlus,https://medlineplus.gov/ency/article/003261.htm,manual_paraphrase_from_official_source
+83,sourced,13,Mat toi bi do va ngua kem co ghe o mat,Mat,4,Do mat,MedlinePlus,https://medlineplus.gov/ency/article/003031.htm,manual_paraphrase_from_official_source
+86,sourced,16,Mat toi kho kem nong ran va do nhe,Mat,4,Kho mat,MedlinePlus,https://medlineplus.gov/ency/article/000426.htm,manual_paraphrase_from_official_source

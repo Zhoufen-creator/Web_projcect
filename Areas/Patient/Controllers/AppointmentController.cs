@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace DoAnWeb.Areas.Patient.Controllers
 {
@@ -57,20 +58,9 @@ namespace DoAnWeb.Areas.Patient.Controllers
 
         public async Task<IActionResult> Create()
         {
-            var doctors = await _context.Doctors
-                .Include(d => d.User)
-                .Include(d => d.Specialty)
-                .ToListAsync();
-
             var model = new AppointmentCreateViewModel
             {
-                ScheduledDate = DateTime.Now.AddDays(1),
-                Doctors = doctors.Select(d => new DoctorSelectViewModel
-                {
-                    Id = d.Id,
-                    Name = d.User?.Name,
-                    Specialty = d.Specialty?.Name
-                }).ToList()
+                ScheduledDate = DateTime.Now.AddDays(1)
             };
 
             return View(model);
@@ -80,18 +70,6 @@ namespace DoAnWeb.Areas.Patient.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AppointmentCreateViewModel model)
         {
-            var doctors = await _context.Doctors
-                .Include(d => d.User)
-                .Include(d => d.Specialty)
-                .ToListAsync();
-
-            model.Doctors = doctors.Select(d => new DoctorSelectViewModel
-            {
-                Id = d.Id,
-                Name = d.User.Name,
-                Specialty = d.Specialty.Name
-            }).ToList();
-
             var prediction = _specialtyPredictionService.PredictSpecialty(model.ReasonForVisit);
             model.PredictedSpecialty = prediction.PredictedSpecialty;
             model.PredictionScore = prediction.MatchScore;
@@ -162,32 +140,37 @@ namespace DoAnWeb.Areas.Patient.Controllers
                 return View(model);
             }
 
-            var validationResult = await _appointmentValidationService.ValidateAppointmentAsync(
-                model.DoctorId,
-                model.ScheduledDate);
-
-            if (!validationResult.IsValid)
+            Appointment appointment;
+            await using (var transaction = await _context.Database.BeginTransactionAsync(IsolationLevel.Serializable))
             {
-                foreach (var error in validationResult.Errors)
+                var validationResult = await _appointmentValidationService.ValidateAppointmentAsync(
+                    model.DoctorId,
+                    model.ScheduledDate);
+
+                if (!validationResult.IsValid)
                 {
-                    ModelState.AddModelError("", error);
+                    foreach (var error in validationResult.Errors)
+                    {
+                        ModelState.AddModelError("", error);
+                    }
+
+                    return View(model);
                 }
 
-                return View(model);
+                appointment = new Appointment
+                {
+                    PatientId = patient.Id,
+                    DoctorId = model.DoctorId,
+                    CreatedAt = DateTime.Now,
+                    ScheduledDate = model.ScheduledDate,
+                    ReasonForVisit = model.ReasonForVisit,
+                    Status = AppointmentStatus.Pending
+                };
+
+                _context.Appointments.Add(appointment);
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
             }
-
-            var appointment = new Appointment
-            {
-                PatientId = patient.Id,
-                DoctorId = model.DoctorId,
-                CreatedAt = DateTime.Now,
-                ScheduledDate = model.ScheduledDate,
-                ReasonForVisit = model.ReasonForVisit,
-                Status = AppointmentStatus.Pending
-            };
-
-            _context.Appointments.Add(appointment);
-            await _context.SaveChangesAsync();
 
             var doctor = await _context.Doctors
                 .Include(d => d.User)

@@ -1,0 +1,50 @@
+{
+  "totals": {
+    "train": 60,
+    "validation": 13,
+    "test": 13
+  },
+  "label_distribution": {
+    "train": {
+      "Noi tong quat": 7,
+      "Da lieu": 8,
+      "Mat": 10,
+      "Tai mui hong": 10,
+      "Xuong khop": 9,
+      "Tieu hoa": 8,
+      "Tim mach": 8
+    },
+    "validation": {
+      "Noi tong quat": 1,
+      "Tieu hoa": 2,
+      "Da lieu": 2,
+      "Tim mach": 2,
+      "Tai mui hong": 2,
+      "Xuong khop": 2,
+      "Mat": 2
+    },
+    "test": {
+      "Noi tong quat": 1,
+      "Da lieu": 2,
+      "Tieu hoa": 2,
+      "Mat": 2,
+      "Tai mui hong": 2,
+      "Xuong khop": 2,
+      "Tim mach": 2
+    }
+  },
+  "origin_distribution": {
+    "train": {
+      "seed": 54,
+      "sourced": 6
+    },
+    "validation": {
+      "seed": 7,
+      "sourced": 6
+    },
+    "test": {
+      "seed": 9,
+      "sourced": 4
+    }
+  }
+}

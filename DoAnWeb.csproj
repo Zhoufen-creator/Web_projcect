@@ -24,6 +24,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="temp_obj\**\*.cs" />
+    <Compile Remove="temp_obj2\**\*.cs" />
+    <Compile Remove="temp_bin\**\*.cs" />
+    <Compile Remove="bin\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />

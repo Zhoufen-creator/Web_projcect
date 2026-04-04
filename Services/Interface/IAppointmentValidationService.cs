@@ -1,4 +1,3 @@
-//kiem tra tinh hop le cua lich hen
 namespace DoAnWeb.Services.Interface
 {
     public interface IAppointmentValidationService
